@@ -1,2 +1,2 @@
-# remy-moview
+# remy-movie
 Movie Info App
