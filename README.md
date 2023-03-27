@@ -1,2 +1,2 @@
-# moview-gallry
-Movie Gallary App
+# remy-moview
+Movie Info App
