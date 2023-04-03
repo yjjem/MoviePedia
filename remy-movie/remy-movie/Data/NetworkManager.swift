@@ -62,6 +62,7 @@ final class NetworkManager: Networkable {
         
         let session = session.uploadTask(with: request, from: data) {
             [weak self] _, response, error in
+            
             completion(self?.checkSessionValidity(error: error, response: response))
         }
         
