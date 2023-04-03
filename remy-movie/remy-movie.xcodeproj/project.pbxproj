@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF5BA80929DA989C00C96823 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA80829DA989C00C96823 /* HTTPMethod.swift */; };
 		DF82076029D1635200E6854A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82075F29D1635200E6854A /* AppDelegate.swift */; };
 		DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076129D1635200E6854A /* SceneDelegate.swift */; };
 		DF82076429D1635200E6854A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076329D1635200E6854A /* ViewController.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DF5BA80829DA989C00C96823 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		DF82075C29D1635200E6854A /* remy-movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "remy-movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF82075F29D1635200E6854A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF82076129D1635200E6854A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,6 +37,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF5BA80729DA988F00C96823 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DF5BA80829DA989C00C96823 /* HTTPMethod.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		DF82075329D1635200E6854A = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +66,7 @@
 			children = (
 				DF82077329D1637500E6854A /* Application */,
 				DF82077529D1639100E6854A /* Scene */,
+				DF5BA80729DA988F00C96823 /* Data */,
 				DF82077429D1637E00E6854A /* Resources */,
 			);
 			path = "remy-movie";
@@ -158,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF5BA80929DA989C00C96823 /* HTTPMethod.swift in Sources */,
 				DF82076429D1635200E6854A /* ViewController.swift in Sources */,
 				DF82076029D1635200E6854A /* AppDelegate.swift in Sources */,
 				DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */,
