@@ -7,12 +7,16 @@
 
 import Foundation
 
-struct NetworkManager: Networkable {
+final class NetworkManager: Networkable {
     
     private let session: URLSession
     
     init(session: URLSession) {
         self.session = session
+    }
+    
+    deinit {
+        session.invalidateAndCancel()
     }
     
     func load(
@@ -23,9 +27,10 @@ struct NetworkManager: Networkable {
         
         guard let request = makeRequest(url: url, method: method) else { return nil }
         
-        let session = session.dataTask(with: request) { data, response, error in
+        let session = session.dataTask(with: request) {
+            [weak self] data, response, error in
             
-            if let notValid = checkSessionValidity(error: error, response: response) {
+            if let notValid = self?.checkSessionValidity(error: error, response: response) {
                 completion(.failure(notValid))
                 return
             }
@@ -55,8 +60,9 @@ struct NetworkManager: Networkable {
             return nil
         }
         
-        let session = session.uploadTask(with: request, from: data) { _, response, error in
-            completion(checkSessionValidity(error: error, response: response))
+        let session = session.uploadTask(with: request, from: data) {
+            [weak self] _, response, error in
+            completion(self?.checkSessionValidity(error: error, response: response))
         }
         
         session.resume()
