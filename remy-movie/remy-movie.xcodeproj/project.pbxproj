@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DF5BA80929DA989C00C96823 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA80829DA989C00C96823 /* HTTPMethod.swift */; };
 		DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA80A29DA996800C96823 /* NetworkError.swift */; };
+		DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA81029DAA16700C96823 /* Networkable.swift */; };
 		DF82076029D1635200E6854A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82075F29D1635200E6854A /* AppDelegate.swift */; };
 		DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076129D1635200E6854A /* SceneDelegate.swift */; };
 		DF82076429D1635200E6854A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076329D1635200E6854A /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		DF5BA80829DA989C00C96823 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		DF5BA80A29DA996800C96823 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		DF5BA81029DAA16700C96823 /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
 		DF82075C29D1635200E6854A /* remy-movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "remy-movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF82075F29D1635200E6854A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF82076129D1635200E6854A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 			children = (
 				DF5BA80829DA989C00C96823 /* HTTPMethod.swift */,
 				DF5BA80A29DA996800C96823 /* NetworkError.swift */,
+				DF5BA81029DAA16700C96823 /* Networkable.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 				DF82076429D1635200E6854A /* ViewController.swift in Sources */,
 				DF82076029D1635200E6854A /* AppDelegate.swift in Sources */,
 				DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */,
+				DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */,
 				DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
