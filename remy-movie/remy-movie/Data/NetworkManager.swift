@@ -3,7 +3,7 @@
 //  remy-movie
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
-    
+
 
 import Foundation
 
@@ -25,18 +25,8 @@ struct NetworkManager: Networkable {
         
         let session = session.dataTask(with: request) { data, response, error in
             
-            if let error = error {
-                completion(.failure(.requestFailed(error)))
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse else {
-                completion(.failure(.notHTTPURLResponse))
-                return
-            }
-            
-            guard (200...299) ~= response.statusCode else {
-                completion(.failure(.badResponse(response.statusCode)))
+            if let notValid = checkSessionValidity(error: error, response: response) {
+                completion(.failure(notValid))
                 return
             }
             
@@ -60,28 +50,13 @@ struct NetworkManager: Networkable {
         completion: @escaping (NetworkError?) -> Void
     ) -> URLSessionUploadTask? {
         
-        
         guard let request = makeRequest(url: url, method: method) else {
             completion(.badURL)
             return nil
         }
         
         let session = session.uploadTask(with: request, from: data) { _, response, error in
-            
-            if let error = error {
-                completion(.requestFailed(error))
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse else {
-                completion(.notHTTPURLResponse)
-                return
-            }
-            
-            guard (200...299) ~= response.statusCode else {
-                completion(.badResponse(response.statusCode))
-                return
-            }
+            completion(checkSessionValidity(error: error, response: response))
         }
         
         session.resume()
@@ -97,5 +72,22 @@ struct NetworkManager: Networkable {
         request.httpMethod = method.name
         
         return request
+    }
+    
+    private func checkSessionValidity(error: Error?, response: URLResponse?) -> NetworkError? {
+        
+        if let error = error {
+            return .requestFailed(error)
+        }
+        
+        guard let response = response as? HTTPURLResponse else {
+            return .notHTTPURLResponse
+        }
+        
+        guard (200...299) ~= response.statusCode else {
+            return .badResponse(response.statusCode)
+        }
+        
+        return nil
     }
 }
