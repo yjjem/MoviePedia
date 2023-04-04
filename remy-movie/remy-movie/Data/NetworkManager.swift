@@ -30,8 +30,10 @@ final class NetworkManager: Networkable {
         let session = session.dataTask(with: request) {
             [weak self] data, response, error in
             
-            if let notValid = self?.checkSessionValidity(error: error, response: response) {
-                completion(.failure(notValid))
+            let sessionValidation = self?.tryValidateSession(error: error, response: response)
+            
+            if case let .failure(validationFailed) = sessionValidation {
+                completion(.failure(validationFailed))
                 return
             }
             
@@ -63,7 +65,12 @@ final class NetworkManager: Networkable {
         let session = session.uploadTask(with: request, from: data) {
             [weak self] _, response, error in
             
-            completion(self?.checkSessionValidity(error: error, response: response))
+            let sessionValidation = self?.tryValidateSession(error: error, response: response)
+            
+            if case let .failure(validationFailed) = sessionValidation {
+                completion(validationFailed)
+                return
+            }
         }
         
         session.resume()
@@ -81,20 +88,23 @@ final class NetworkManager: Networkable {
         return request
     }
     
-    private func checkSessionValidity(error: Error?, response: URLResponse?) -> NetworkError? {
+    private func tryValidateSession(
+        error: Error?,
+        response: URLResponse?
+    ) -> Result<Int, NetworkError> {
         
         if let error = error {
-            return .requestFailed(error)
+            return .failure(.requestFailed(error))
         }
         
         guard let response = response as? HTTPURLResponse else {
-            return .notHTTPURLResponse
+            return .failure(.notHTTPURLResponse)
         }
         
         guard (200...299) ~= response.statusCode else {
-            return .badResponse(response.statusCode)
+            return .failure(.badResponse(response.statusCode))
         }
         
-        return nil
+        return .success(response.statusCode)
     }
 }
