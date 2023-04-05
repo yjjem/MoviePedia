@@ -12,6 +12,7 @@
 		DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA81029DAA16700C96823 /* Networkable.swift */; };
 		DF5BA81329DAA23100C96823 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA81229DAA23100C96823 /* NetworkManager.swift */; };
 		DF62498B29DC7800002C82A8 /* NetwokrPlatformTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF62498A29DC7800002C82A8 /* NetwokrPlatformTest.swift */; };
+		DF62499229DC7902002C82A8 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF62499129DC7902002C82A8 /* MockURLProtocol.swift */; };
 		DF82076029D1635200E6854A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82075F29D1635200E6854A /* AppDelegate.swift */; };
 		DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076129D1635200E6854A /* SceneDelegate.swift */; };
 		DF82076429D1635200E6854A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076329D1635200E6854A /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 		DF5BA81229DAA23100C96823 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DF62498829DC7800002C82A8 /* NetwokrPlatformTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetwokrPlatformTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF62498A29DC7800002C82A8 /* NetwokrPlatformTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwokrPlatformTest.swift; sourceTree = "<group>"; };
+		DF62499129DC7902002C82A8 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		DF82075C29D1635200E6854A /* remy-movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "remy-movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF82075F29D1635200E6854A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF82076129D1635200E6854A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,9 +79,18 @@
 		DF62498929DC7800002C82A8 /* NetwokrPlatformTest */ = {
 			isa = PBXGroup;
 			children = (
+				DF62499B29DD6979002C82A8 /* Helpers */,
 				DF62498A29DC7800002C82A8 /* NetwokrPlatformTest.swift */,
 			);
 			path = NetwokrPlatformTest;
+			sourceTree = "<group>";
+		};
+		DF62499B29DD6979002C82A8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DF62499129DC7902002C82A8 /* MockURLProtocol.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		DF82075329D1635200E6854A = {
@@ -239,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF62498B29DC7800002C82A8 /* NetwokrPlatformTest.swift in Sources */,
+				DF62499229DC7902002C82A8 /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
