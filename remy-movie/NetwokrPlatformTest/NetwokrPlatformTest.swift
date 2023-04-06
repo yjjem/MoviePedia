@@ -35,7 +35,6 @@ final class NetwokrPlatformTest: XCTestCase {
         // Arrange
         
         let dummyURL = try XCTUnwrap(URL(string: "test.com"))
-        let dummyData = Data()
         let dummyResponse = HTTPURLResponse(
             url: dummyURL,
             statusCode: 300,
@@ -65,5 +64,34 @@ final class NetwokrPlatformTest: XCTestCase {
         }
         
         wait(for: [loadExpectation], timeout: 5)
+    }
+    
+    func test_request_생성_실패시_requestFailed_오류를_반환하는지() throws {
+        
+        // Arrange
+        
+        let dummyURL = try XCTUnwrap(URL(string: "test.com"))
+        
+        MockURLProtocol.requestHandler = { request in
+            throw NSError(domain: "fail request", code: 0)
+        }
+        
+        // Act and Assert
+        
+        let loadExpectation = expectation(description: "load")
+        let errorExpectation = expectation(description: "request failure")
+        
+        sut.load(url: dummyURL, method: .get) { response in
+            
+            loadExpectation.fulfill()
+            
+            if case .failure(.requestFailed) = response {
+                errorExpectation.fulfill()
+            } else {
+                XCTFail("not expected: \(response)")
+            }
+        }
+        
+        wait(for: [loadExpectation, errorExpectation], timeout: 2)
     }
 }

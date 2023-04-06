@@ -9,14 +9,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DF62498729DC7800002C82A8"
-               BuildableName = "NetwokrPlatformTest.xctest"
-               BlueprintName = "NetwokrPlatformTest"
+               BlueprintIdentifier = "DF82075B29D1635200E6854A"
+               BuildableName = "remy-movie.app"
+               BlueprintName = "remy-movie"
                ReferencedContainer = "container:remy-movie.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -51,6 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "DF82075B29D1635200E6854A"
+            BuildableName = "remy-movie.app"
+            BlueprintName = "remy-movie"
+            ReferencedContainer = "container:remy-movie.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -58,6 +68,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "DF82075B29D1635200E6854A"
+            BuildableName = "remy-movie.app"
+            BlueprintName = "remy-movie"
+            ReferencedContainer = "container:remy-movie.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
