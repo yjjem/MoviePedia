@@ -3,7 +3,7 @@
 //  remy-movie
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
-    
+
 
 import Foundation
 
@@ -18,7 +18,7 @@ final class MockURLProtocol: URLProtocol {
     override class func canonicalRequest(for request: URLRequest) -> URLRequest {
         return request
     }
-
+    
     override func startLoading() {
         
         guard let requestHandler = MockURLProtocol.requestHandler else {
@@ -27,12 +27,13 @@ final class MockURLProtocol: URLProtocol {
         
         do {
             let (data, response) = try requestHandler(request)
-            print(data, response)
+            
             client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
             if let data = data {
                 client?.urlProtocol(self, didLoad: data)
             }
             client?.urlProtocolDidFinishLoading(self)
+            
         } catch {
             client?.urlProtocol(self, didFailWithError: error)
             client?.urlProtocolDidFinishLoading(self)
