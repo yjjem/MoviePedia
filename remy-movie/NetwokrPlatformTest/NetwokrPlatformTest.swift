@@ -28,7 +28,7 @@ final class NetwokrPlatformTest: XCTestCase {
         sut = nil
     }
     
-    // MARK: Test Cases
+    // MARK: Load Test Cases
     
     func test_서버_responseCode가_300일때_badResponse와_code를_올바르게_반환하는지() throws {
         
@@ -130,5 +130,37 @@ final class NetwokrPlatformTest: XCTestCase {
         }
         
         wait(for: [loadExpectation, successExpectation], timeout: 2)
+    }
+    
+    // MARK: Upload Test Cases
+    
+    func test_성공적으로_upload시_에러반환을_안하는지() throws {
+        
+        // Arrange
+        
+        let dummyURL = try XCTUnwrap(URL(string: "test.com"))
+        let dummyData = Data()
+        let dummyResponse = HTTPURLResponse(
+            url: dummyURL,
+            statusCode: 200,
+            httpVersion: "2.0",
+            headerFields: nil
+        )
+        
+        MockURLProtocol.requestHandler = { request in
+            return (nil, try XCTUnwrap(dummyResponse))
+            
+        }
+        
+        // Act and Assert
+        
+        let didCatchNoError = expectation(description: "upload error")
+        didCatchNoError.isInverted = true
+        
+        sut.upload(data: dummyData, url: dummyURL, method: .post) { error in
+            didCatchNoError.fulfill()
+        }
+        
+        wait(for: [didCatchNoError], timeout: 2)
     }
 }
