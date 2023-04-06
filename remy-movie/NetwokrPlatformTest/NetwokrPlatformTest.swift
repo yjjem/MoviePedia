@@ -63,7 +63,7 @@ final class NetwokrPlatformTest: XCTestCase {
             }
         }
         
-        wait(for: [loadExpectation], timeout: 5)
+        wait(for: [loadExpectation], timeout: 2)
     }
     
     func test_request_생성_실패시_requestFailed_오류를_반환하는지() throws {
@@ -124,6 +124,8 @@ final class NetwokrPlatformTest: XCTestCase {
             if case let .success(data) = response {
                 successExpectation.fulfill()
                 XCTAssertNotNil(data)
+            } else {
+                XCTFail("not expected: \(response)")
             }
         }
         
