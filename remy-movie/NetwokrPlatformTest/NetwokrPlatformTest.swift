@@ -197,4 +197,32 @@ final class NetwokrPlatformTest: XCTestCase {
         
         wait(for: [didCatchError], timeout: 2)
     }
+    
+    func test_upload_requestFaild시_에러를_올바르게_반환하는지() throws {
+        
+        // Arrange
+        
+        let dummyURL = try XCTUnwrap(URL(string: "test.com"))
+        let dummyData = Data()
+        
+        MockURLProtocol.requestHandler = { request in
+            throw NSError(domain: "fail request", code: 0)
+        }
+        
+        // Act and Assert
+        
+        let didCatchErrorExpectation = expectation(description: "catch error")
+        let requestFailedExpectation = expectation(description: "request failed")
+        
+        sut.upload(data: dummyData, url: dummyURL, method: .post) { error in
+            
+            didCatchErrorExpectation.fulfill()
+            
+            if case .requestFailed = error {
+                requestFailedExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [didCatchErrorExpectation, requestFailedExpectation], timeout: 2)
+    }
 }
