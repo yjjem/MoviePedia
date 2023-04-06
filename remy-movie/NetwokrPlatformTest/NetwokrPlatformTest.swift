@@ -94,4 +94,39 @@ final class NetwokrPlatformTest: XCTestCase {
         
         wait(for: [loadExpectation, errorExpectation], timeout: 2)
     }
+    
+    func test_response_200일시_success와_데이터를_반환하는지() throws {
+        
+        // Arrange
+        
+        let dummyURL = try XCTUnwrap(URL(string: "test.com"))
+        let dummyData = Data()
+        let dummyResponse = HTTPURLResponse(
+            url: dummyURL,
+            statusCode: 200,
+            httpVersion: "2.0",
+            headerFields: nil
+        )
+        
+        MockURLProtocol.requestHandler = { request in
+            return (dummyData, try XCTUnwrap(dummyResponse))
+        }
+        
+        // Act and Assert
+        
+        let loadExpectation = expectation(description: "load")
+        let successExpectation = expectation(description: "load succeed")
+        
+        sut.load(url: dummyURL, method: .get) { response in
+            
+            loadExpectation.fulfill()
+            
+            if case let .success(data) = response {
+                successExpectation.fulfill()
+                XCTAssertNotNil(data)
+            }
+        }
+        
+        wait(for: [loadExpectation, successExpectation], timeout: 2)
+    }
 }
