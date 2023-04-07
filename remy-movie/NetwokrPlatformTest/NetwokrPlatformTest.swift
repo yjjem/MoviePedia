@@ -50,7 +50,7 @@ final class NetwokrPlatformTest: XCTestCase {
         let loadExpectation = expectation(description: "load")
         let expectedCode = 300
         
-        sut.load(url: url, method: .get) { response in
+        let _ = sut.load(url: url, method: .get) { response in
             
             loadExpectation.fulfill()
             
@@ -80,7 +80,7 @@ final class NetwokrPlatformTest: XCTestCase {
         let loadExpectation = expectation(description: "load")
         let errorExpectation = expectation(description: "request failure")
         
-        sut.load(url: url, method: .get) { response in
+        let _ = sut.load(url: url, method: .get) { response in
             
             loadExpectation.fulfill()
             
@@ -116,7 +116,7 @@ final class NetwokrPlatformTest: XCTestCase {
         let loadExpectation = expectation(description: "load")
         let successExpectation = expectation(description: "load succeed")
         
-        sut.load(url: url, method: .get) { response in
+        let _ = sut.load(url: url, method: .get) { response in
             
             loadExpectation.fulfill()
             
@@ -155,7 +155,7 @@ final class NetwokrPlatformTest: XCTestCase {
         let didCatchNoError = expectation(description: "upload error")
         didCatchNoError.isInverted = true
         
-        sut.upload(data: data, url: url, method: .post) { error in
+        let _ = sut.upload(data: data, url: url, method: .post) { error in
             didCatchNoError.fulfill()
             XCTFail("unexpected error: \(error.debugDescription)")
         }
@@ -185,7 +185,7 @@ final class NetwokrPlatformTest: XCTestCase {
         let didCatchError = expectation(description: "uploadError")
         let expectedResponseCode = 300
         
-        sut.upload(data: data, url: url, method: .post) { error in
+        let _ = sut.upload(data: data, url: url, method: .post) { error in
             
             didCatchError.fulfill()
             
@@ -213,7 +213,7 @@ final class NetwokrPlatformTest: XCTestCase {
         let didCatchErrorExpectation = expectation(description: "catch error")
         let requestFailedExpectation = expectation(description: "request failed")
         
-        sut.upload(data: data, url: url, method: .post) { error in
+        let _ = sut.upload(data: data, url: url, method: .post) { error in
             
             didCatchErrorExpectation.fulfill()
             
