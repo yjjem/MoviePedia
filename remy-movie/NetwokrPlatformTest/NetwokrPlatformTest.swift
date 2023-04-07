@@ -4,13 +4,12 @@
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
 
-@testable
-import remy_movie
+@testable import remy_movie
 import XCTest
 
 final class NetwokrPlatformTest: XCTestCase {
     
-    var sut: NetworkManager!
+    private var sut: NetworkManager!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -34,16 +33,16 @@ final class NetwokrPlatformTest: XCTestCase {
         
         // Arrange
         
-        let dummyURL = try XCTUnwrap(URL(string: "test.com"))
-        let dummyResponse = HTTPURLResponse(
-            url: dummyURL,
+        let url = try XCTUnwrap(URL(string: "test.com"))
+        let stubResponse = HTTPURLResponse(
+            url: url,
             statusCode: 300,
             httpVersion: "2.0",
             headerFields: nil
         )
         
         MockURLProtocol.requestHandler = { request in
-            return (nil, try XCTUnwrap(dummyResponse))
+            return (nil, try XCTUnwrap(stubResponse))
         }
         
         // Act and Assert
@@ -51,7 +50,7 @@ final class NetwokrPlatformTest: XCTestCase {
         let loadExpectation = expectation(description: "load")
         let expectedCode = 300
         
-        sut.load(url: dummyURL, method: .get) { response in
+        sut.load(url: url, method: .get) { response in
             
             loadExpectation.fulfill()
             
@@ -70,7 +69,7 @@ final class NetwokrPlatformTest: XCTestCase {
         
         // Arrange
         
-        let dummyURL = try XCTUnwrap(URL(string: "test.com"))
+        let url = try XCTUnwrap(URL(string: "test.com"))
         
         MockURLProtocol.requestHandler = { request in
             throw NSError(domain: "fail request", code: 0)
@@ -81,7 +80,7 @@ final class NetwokrPlatformTest: XCTestCase {
         let loadExpectation = expectation(description: "load")
         let errorExpectation = expectation(description: "request failure")
         
-        sut.load(url: dummyURL, method: .get) { response in
+        sut.load(url: url, method: .get) { response in
             
             loadExpectation.fulfill()
             
@@ -99,17 +98,17 @@ final class NetwokrPlatformTest: XCTestCase {
         
         // Arrange
         
-        let dummyURL = try XCTUnwrap(URL(string: "test.com"))
-        let dummyData = Data()
-        let dummyResponse = HTTPURLResponse(
-            url: dummyURL,
+        let url = try XCTUnwrap(URL(string: "test.com"))
+        let stubData = Data()
+        let stubResponse = HTTPURLResponse(
+            url: url,
             statusCode: 200,
             httpVersion: "2.0",
             headerFields: nil
         )
         
         MockURLProtocol.requestHandler = { request in
-            return (dummyData, try XCTUnwrap(dummyResponse))
+            return (stubData, try XCTUnwrap(stubResponse))
         }
         
         // Act and Assert
@@ -117,7 +116,7 @@ final class NetwokrPlatformTest: XCTestCase {
         let loadExpectation = expectation(description: "load")
         let successExpectation = expectation(description: "load succeed")
         
-        sut.load(url: dummyURL, method: .get) { response in
+        sut.load(url: url, method: .get) { response in
             
             loadExpectation.fulfill()
             
@@ -138,18 +137,17 @@ final class NetwokrPlatformTest: XCTestCase {
         
         // Arrange
         
-        let dummyURL = try XCTUnwrap(URL(string: "test.com"))
-        let dummyData = Data()
-        let dummyResponse = HTTPURLResponse(
-            url: dummyURL,
+        let url = try XCTUnwrap(URL(string: "test.com"))
+        let data = Data()
+        let stubResponse = HTTPURLResponse(
+            url: url,
             statusCode: 200,
             httpVersion: "2.0",
             headerFields: nil
         )
         
         MockURLProtocol.requestHandler = { request in
-            return (nil, try XCTUnwrap(dummyResponse))
-            
+            return (data, try XCTUnwrap(stubResponse))
         }
         
         // Act and Assert
@@ -157,8 +155,9 @@ final class NetwokrPlatformTest: XCTestCase {
         let didCatchNoError = expectation(description: "upload error")
         didCatchNoError.isInverted = true
         
-        sut.upload(data: dummyData, url: dummyURL, method: .post) { error in
+        sut.upload(data: data, url: url, method: .post) { error in
             didCatchNoError.fulfill()
+            XCTFail("unexpected error: \(error.debugDescription)")
         }
         
         wait(for: [didCatchNoError], timeout: 2)
@@ -168,17 +167,17 @@ final class NetwokrPlatformTest: XCTestCase {
         
         // Arrange
         
-        let dummyURL = try XCTUnwrap(URL(string: "test.com"))
-        let dummyData = Data()
-        let dummyResponse = HTTPURLResponse(
-            url: dummyURL,
+        let url = try XCTUnwrap(URL(string: "test.com"))
+        let data = Data()
+        let stubResponse = HTTPURLResponse(
+            url: url,
             statusCode: 300,
             httpVersion: "2.0",
             headerFields: nil
         )
         
         MockURLProtocol.requestHandler = { request in
-            return (nil, try XCTUnwrap(dummyResponse))
+            return (nil, try XCTUnwrap(stubResponse))
         }
         
         // Act and Assert
@@ -186,7 +185,7 @@ final class NetwokrPlatformTest: XCTestCase {
         let didCatchError = expectation(description: "uploadError")
         let expectedResponseCode = 300
         
-        sut.upload(data: dummyData, url: dummyURL, method: .post) { error in
+        sut.upload(data: data, url: url, method: .post) { error in
             
             didCatchError.fulfill()
             
@@ -202,8 +201,8 @@ final class NetwokrPlatformTest: XCTestCase {
         
         // Arrange
         
-        let dummyURL = try XCTUnwrap(URL(string: "test.com"))
-        let dummyData = Data()
+        let url = try XCTUnwrap(URL(string: "test.com"))
+        let data = Data()
         
         MockURLProtocol.requestHandler = { request in
             throw NSError(domain: "fail request", code: 0)
@@ -214,7 +213,7 @@ final class NetwokrPlatformTest: XCTestCase {
         let didCatchErrorExpectation = expectation(description: "catch error")
         let requestFailedExpectation = expectation(description: "request failed")
         
-        sut.upload(data: dummyData, url: dummyURL, method: .post) { error in
+        sut.upload(data: data, url: url, method: .post) { error in
             
             didCatchErrorExpectation.fulfill()
             
