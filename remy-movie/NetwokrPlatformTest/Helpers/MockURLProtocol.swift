@@ -27,13 +27,16 @@ final class MockURLProtocol: URLProtocol {
         
         do {
             let (data, response) = try requestHandler(request)
-            
             client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            
             if let data = data {
                 client?.urlProtocol(self, didLoad: data)
+            } else {
+                let emptyDataError = NSError(domain: "emptyData", code: 1)
+                client?.urlProtocol(self, didFailWithError: emptyDataError)
             }
-            client?.urlProtocolDidFinishLoading(self)
             
+            client?.urlProtocolDidFinishLoading(self)
         } catch {
             client?.urlProtocol(self, didFailWithError: error)
             client?.urlProtocolDidFinishLoading(self)
