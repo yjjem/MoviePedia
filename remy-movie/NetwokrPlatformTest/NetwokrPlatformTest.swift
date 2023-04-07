@@ -34,6 +34,7 @@ final class NetwokrPlatformTest: XCTestCase {
         // Arrange
         
         let url = try XCTUnwrap(URL(string: "test.com"))
+        let data = Data()
         let expectedStatusCode = 300
         let stubResponse = HTTPURLResponse(
             url: url,
@@ -43,7 +44,7 @@ final class NetwokrPlatformTest: XCTestCase {
         )
         
         MockURLProtocol.requestHandler = { request in
-            return (nil, try XCTUnwrap(stubResponse))
+            return (data, try XCTUnwrap(stubResponse))
         }
         
         // Act and Assert
@@ -129,6 +130,40 @@ final class NetwokrPlatformTest: XCTestCase {
         }
         
         wait(for: [loadExpectation, successExpectation], timeout: 2)
+    }
+    
+    func test_load_올바르지_않은_response를_받으면_notHTTPURLResponse_에러를_반환하는지() throws {
+        
+        // Arrange
+        
+        let url = try XCTUnwrap(URL(string: "test.com"))
+        let data = Data()
+        let stubResponse = URLResponse(
+            url: url,
+            mimeType: "text/plain",
+            expectedContentLength: 0,
+            textEncodingName: nil
+        )
+        
+        MockURLProtocol.requestHandler = { request in
+            return (data, stubResponse)
+        }
+        
+        // Act and Assert
+        
+        let didCatchErrorExpectation = expectation(description: "catch error")
+        let requestFailedExpectation = expectation(description: "request failed")
+        
+        let _ = sut.load(url: url, method: .get) { error in
+            
+            didCatchErrorExpectation.fulfill()
+            
+            if case .failure(.notHTTPURLResponse) = error {
+                requestFailedExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [didCatchErrorExpectation, requestFailedExpectation], timeout: 2)
     }
     
     // MARK: Upload Test Cases
@@ -218,6 +253,40 @@ final class NetwokrPlatformTest: XCTestCase {
             didCatchErrorExpectation.fulfill()
             
             if case .requestFailed = error {
+                requestFailedExpectation.fulfill()
+            }
+        }
+        
+        wait(for: [didCatchErrorExpectation, requestFailedExpectation], timeout: 2)
+    }
+    
+    func test_upload_올바르지_않은_response를_받으면_notHTTPURLResponse_에러를_반환하는지() throws {
+        
+        // Arrange
+        
+        let url = try XCTUnwrap(URL(string: "test.com"))
+        let data = Data()
+        let stubResponse = URLResponse(
+            url: url,
+            mimeType: "text/plain",
+            expectedContentLength: 0,
+            textEncodingName: nil
+        )
+        
+        MockURLProtocol.requestHandler = { request in
+            return (data, stubResponse)
+        }
+        
+        // Act and Assert
+        
+        let didCatchErrorExpectation = expectation(description: "catch error")
+        let requestFailedExpectation = expectation(description: "request failed")
+        
+        let _ = sut.upload(data: data, url: url, method: .post) { error in
+            
+            didCatchErrorExpectation.fulfill()
+            
+            if case .notHTTPURLResponse = error {
                 requestFailedExpectation.fulfill()
             }
         }
