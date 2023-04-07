@@ -34,9 +34,10 @@ final class NetwokrPlatformTest: XCTestCase {
         // Arrange
         
         let url = try XCTUnwrap(URL(string: "test.com"))
+        let expectedStatusCode = 300
         let stubResponse = HTTPURLResponse(
             url: url,
-            statusCode: 300,
+            statusCode: expectedStatusCode,
             httpVersion: "2.0",
             headerFields: nil
         )
@@ -48,7 +49,6 @@ final class NetwokrPlatformTest: XCTestCase {
         // Act and Assert
         
         let loadExpectation = expectation(description: "load")
-        let expectedCode = 300
         
         let _ = sut.load(url: url, method: .get) { response in
             
@@ -56,7 +56,7 @@ final class NetwokrPlatformTest: XCTestCase {
             
             if case let .failure(error) = response,
                case let .badResponse(code) = error {
-                XCTAssertEqual(code, expectedCode)
+                XCTAssertEqual(code, expectedStatusCode)
             } else {
                 XCTFail("not expected: \(response)")
             }
@@ -168,10 +168,11 @@ final class NetwokrPlatformTest: XCTestCase {
         // Arrange
         
         let url = try XCTUnwrap(URL(string: "test.com"))
+        let expectedStatusCode = 300
         let data = Data()
         let stubResponse = HTTPURLResponse(
             url: url,
-            statusCode: 300,
+            statusCode: expectedStatusCode,
             httpVersion: "2.0",
             headerFields: nil
         )
@@ -183,14 +184,13 @@ final class NetwokrPlatformTest: XCTestCase {
         // Act and Assert
         
         let didCatchError = expectation(description: "uploadError")
-        let expectedResponseCode = 300
-        
+
         let _ = sut.upload(data: data, url: url, method: .post) { error in
             
             didCatchError.fulfill()
             
             if case let .badResponse(code) = error {
-                XCTAssertEqual(code, expectedResponseCode)
+                XCTAssertEqual(code, expectedStatusCode)
             }
         }
         
