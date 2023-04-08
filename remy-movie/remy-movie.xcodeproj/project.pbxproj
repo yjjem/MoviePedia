@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF5BA80929DA989C00C96823 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA80829DA989C00C96823 /* HTTPMethod.swift */; };
+		DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA80A29DA996800C96823 /* NetworkError.swift */; };
+		DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA81029DAA16700C96823 /* Networkable.swift */; };
+		DF5BA81329DAA23100C96823 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA81229DAA23100C96823 /* NetworkManager.swift */; };
+		DF62498B29DC7800002C82A8 /* NetwokrPlatformTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF62498A29DC7800002C82A8 /* NetwokrPlatformTest.swift */; };
+		DF62499229DC7902002C82A8 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF62499129DC7902002C82A8 /* MockURLProtocol.swift */; };
 		DF82076029D1635200E6854A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82075F29D1635200E6854A /* AppDelegate.swift */; };
 		DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076129D1635200E6854A /* SceneDelegate.swift */; };
 		DF82076429D1635200E6854A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076329D1635200E6854A /* ViewController.swift */; };
@@ -14,7 +20,24 @@
 		DF82076C29D1635300E6854A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF82076A29D1635300E6854A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		DF62498C29DC7800002C82A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DF82075429D1635200E6854A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DF82075B29D1635200E6854A;
+			remoteInfo = "remy-movie";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		DF5BA80829DA989C00C96823 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		DF5BA80A29DA996800C96823 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		DF5BA81029DAA16700C96823 /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
+		DF5BA81229DAA23100C96823 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		DF62498829DC7800002C82A8 /* NetwokrPlatformTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetwokrPlatformTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF62498A29DC7800002C82A8 /* NetwokrPlatformTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwokrPlatformTest.swift; sourceTree = "<group>"; };
+		DF62499129DC7902002C82A8 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		DF82075C29D1635200E6854A /* remy-movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "remy-movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF82075F29D1635200E6854A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF82076129D1635200E6854A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -25,6 +48,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DF62498529DC7800002C82A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DF82075929D1635200E6854A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -35,10 +65,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF5BA80729DA988F00C96823 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DF5BA80829DA989C00C96823 /* HTTPMethod.swift */,
+				DF5BA80A29DA996800C96823 /* NetworkError.swift */,
+				DF5BA81029DAA16700C96823 /* Networkable.swift */,
+				DF5BA81229DAA23100C96823 /* NetworkManager.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		DF62498929DC7800002C82A8 /* NetwokrPlatformTest */ = {
+			isa = PBXGroup;
+			children = (
+				DF62499B29DD6979002C82A8 /* Helpers */,
+				DF62498A29DC7800002C82A8 /* NetwokrPlatformTest.swift */,
+			);
+			path = NetwokrPlatformTest;
+			sourceTree = "<group>";
+		};
+		DF62499B29DD6979002C82A8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DF62499129DC7902002C82A8 /* MockURLProtocol.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		DF82075329D1635200E6854A = {
 			isa = PBXGroup;
 			children = (
 				DF82075E29D1635200E6854A /* remy-movie */,
+				DF62498929DC7800002C82A8 /* NetwokrPlatformTest */,
 				DF82075D29D1635200E6854A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				DF82075C29D1635200E6854A /* remy-movie.app */,
+				DF62498829DC7800002C82A8 /* NetwokrPlatformTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,6 +116,7 @@
 			children = (
 				DF82077329D1637500E6854A /* Application */,
 				DF82077529D1639100E6854A /* Scene */,
+				DF5BA80729DA988F00C96823 /* Data */,
 				DF82077429D1637E00E6854A /* Resources */,
 			);
 			path = "remy-movie";
@@ -91,6 +152,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DF62498729DC7800002C82A8 /* NetwokrPlatformTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF62499029DC7800002C82A8 /* Build configuration list for PBXNativeTarget "NetwokrPlatformTest" */;
+			buildPhases = (
+				DF62498429DC7800002C82A8 /* Sources */,
+				DF62498529DC7800002C82A8 /* Frameworks */,
+				DF62498629DC7800002C82A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DF62498D29DC7800002C82A8 /* PBXTargetDependency */,
+			);
+			name = NetwokrPlatformTest;
+			productName = NetwokrPlatformTest;
+			productReference = DF62498829DC7800002C82A8 /* NetwokrPlatformTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		DF82075B29D1635200E6854A /* remy-movie */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DF82077029D1635300E6854A /* Build configuration list for PBXNativeTarget "remy-movie" */;
@@ -118,6 +197,10 @@
 				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
+					DF62498729DC7800002C82A8 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = DF82075B29D1635200E6854A;
+					};
 					DF82075B29D1635200E6854A = {
 						CreatedOnToolsVersion = 14.0.1;
 					};
@@ -137,11 +220,19 @@
 			projectRoot = "";
 			targets = (
 				DF82075B29D1635200E6854A /* remy-movie */,
+				DF62498729DC7800002C82A8 /* NetwokrPlatformTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		DF62498629DC7800002C82A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DF82075A29D1635200E6854A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,17 +245,38 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DF62498429DC7800002C82A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF62498B29DC7800002C82A8 /* NetwokrPlatformTest.swift in Sources */,
+				DF62499229DC7902002C82A8 /* MockURLProtocol.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DF82075829D1635200E6854A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF5BA80929DA989C00C96823 /* HTTPMethod.swift in Sources */,
 				DF82076429D1635200E6854A /* ViewController.swift in Sources */,
 				DF82076029D1635200E6854A /* AppDelegate.swift in Sources */,
+				DF5BA81329DAA23100C96823 /* NetworkManager.swift in Sources */,
 				DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */,
+				DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */,
+				DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DF62498D29DC7800002C82A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DF82075B29D1635200E6854A /* remy-movie */;
+			targetProxy = DF62498C29DC7800002C82A8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		DF82076A29D1635300E6854A /* LaunchScreen.storyboard */ = {
@@ -178,6 +290,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		DF62498E29DC7800002C82A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 299MY3M6HX;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = remypark.NetwokrPlatformTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/remy-movie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/remy-movie";
+			};
+			name = Debug;
+		};
+		DF62498F29DC7800002C82A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 299MY3M6HX;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = remypark.NetwokrPlatformTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/remy-movie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/remy-movie";
+			};
+			name = Release;
+		};
 		DF82076E29D1635300E6854A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -355,6 +511,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DF62499029DC7800002C82A8 /* Build configuration list for PBXNativeTarget "NetwokrPlatformTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF62498E29DC7800002C82A8 /* Debug */,
+				DF62498F29DC7800002C82A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DF82075729D1635200E6854A /* Build configuration list for PBXProject "remy-movie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
