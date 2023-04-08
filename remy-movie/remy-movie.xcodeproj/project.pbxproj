@@ -68,10 +68,8 @@
 		DF5BA80729DA988F00C96823 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				DF5BA80829DA989C00C96823 /* HTTPMethod.swift */,
-				DF5BA80A29DA996800C96823 /* NetworkError.swift */,
-				DF5BA81029DAA16700C96823 /* Networkable.swift */,
-				DF5BA81229DAA23100C96823 /* NetworkManager.swift */,
+				DF6FBB4329E1112D00BE310A /* Network */,
+				DF6FBB4429E111B500BE310A /* Services */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -91,6 +89,24 @@
 				DF62499129DC7902002C82A8 /* MockURLProtocol.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DF6FBB4329E1112D00BE310A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				DF5BA80829DA989C00C96823 /* HTTPMethod.swift */,
+				DF5BA80A29DA996800C96823 /* NetworkError.swift */,
+				DF5BA81029DAA16700C96823 /* Networkable.swift */,
+				DF5BA81229DAA23100C96823 /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		DF6FBB4429E111B500BE310A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		DF82075329D1635200E6854A = {
