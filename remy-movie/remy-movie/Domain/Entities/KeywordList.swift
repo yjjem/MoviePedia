@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct KeywordList {
+struct KeywordList: Decodable {
     let id: Int?
     let keywords: [Keyword]?
 }
 
-struct Keyword {
+struct Keyword: Decodable {
     let id: Int?
     let name: String?
 }

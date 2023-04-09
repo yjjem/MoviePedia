@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Review {
+struct Review: Decodable {
     let author: String?
     let authorDetails: AuthorDetails?
     let contents: String?
@@ -17,7 +17,7 @@ struct Review {
     let url: String?
 }
 
-struct AuthorDetails {
+struct AuthorDetails: Decodable {
     let name: String?
     let userName: String?
     let avatarPath: String?

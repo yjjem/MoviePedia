@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Video {
+struct Video: Decodable {
     let iso6391: String?
     let iso31661: String?
     let name: String?

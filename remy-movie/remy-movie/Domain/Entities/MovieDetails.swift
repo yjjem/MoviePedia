@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieDetails {
+struct MovieDetails: Decodable {
     let adult: Bool?
     let backdropPath: String?
     let budget: Int?
@@ -34,24 +34,24 @@ struct MovieDetails {
     let voteCount: Int?
 }
 
-struct Languages {
+struct Languages: Decodable {
     let iso6391: String?
     let name: String?
 }
 
-struct ProductionCompany {
+struct ProductionCompany: Decodable {
     let id: Int?
     let logoPath: String?
     let name: String?
     let originalCountry: String?
 }
 
-struct ProductionCountry {
+struct ProductionCountry: Decodable {
     let iso31161: String?
     let name: String?
 }
 
-struct Genre {
+struct Genre: Decodable {
     let id: Int?
     let name: String?
 }
