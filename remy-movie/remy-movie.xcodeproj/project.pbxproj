@@ -13,6 +13,12 @@
 		DF5BA81329DAA23100C96823 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA81229DAA23100C96823 /* NetworkManager.swift */; };
 		DF62498B29DC7800002C82A8 /* NetwokrPlatformTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF62498A29DC7800002C82A8 /* NetwokrPlatformTest.swift */; };
 		DF62499229DC7902002C82A8 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF62499129DC7902002C82A8 /* MockURLProtocol.swift */; };
+		DF6FBB4E29E2A05F00BE310A /* GenericList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6FBB4D29E2A05F00BE310A /* GenericList.swift */; };
+		DF6FBB5029E2A07400BE310A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6FBB4F29E2A07400BE310A /* Movie.swift */; };
+		DF6FBB5229E2A13300BE310A /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6FBB5129E2A13300BE310A /* MovieDetails.swift */; };
+		DF6FBB5429E2A48B00BE310A /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6FBB5329E2A48B00BE310A /* Review.swift */; };
+		DF6FBB5629E2AAEB00BE310A /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6FBB5529E2AAEB00BE310A /* Video.swift */; };
+		DF6FBB5829E2ABF900BE310A /* KeywordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6FBB5729E2ABF900BE310A /* KeywordList.swift */; };
 		DF82076029D1635200E6854A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82075F29D1635200E6854A /* AppDelegate.swift */; };
 		DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076129D1635200E6854A /* SceneDelegate.swift */; };
 		DF82076429D1635200E6854A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076329D1635200E6854A /* ViewController.swift */; };
@@ -38,6 +44,12 @@
 		DF62498829DC7800002C82A8 /* NetwokrPlatformTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetwokrPlatformTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF62498A29DC7800002C82A8 /* NetwokrPlatformTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwokrPlatformTest.swift; sourceTree = "<group>"; };
 		DF62499129DC7902002C82A8 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		DF6FBB4D29E2A05F00BE310A /* GenericList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericList.swift; sourceTree = "<group>"; };
+		DF6FBB4F29E2A07400BE310A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		DF6FBB5129E2A13300BE310A /* MovieDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetails.swift; sourceTree = "<group>"; };
+		DF6FBB5329E2A48B00BE310A /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		DF6FBB5529E2AAEB00BE310A /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		DF6FBB5729E2ABF900BE310A /* KeywordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordList.swift; sourceTree = "<group>"; };
 		DF82075C29D1635200E6854A /* remy-movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "remy-movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF82075F29D1635200E6854A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF82076129D1635200E6854A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				DF6FBB4329E1112D00BE310A /* Network */,
-				DF6FBB4429E111B500BE310A /* Services */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -102,11 +113,25 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		DF6FBB4429E111B500BE310A /* Services */ = {
+		DF6FBB4929E2A03400BE310A /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				DF6FBB4C29E2A05700BE310A /* Entities */,
 			);
-			path = Services;
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		DF6FBB4C29E2A05700BE310A /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				DF6FBB4D29E2A05F00BE310A /* GenericList.swift */,
+				DF6FBB4F29E2A07400BE310A /* Movie.swift */,
+				DF6FBB5129E2A13300BE310A /* MovieDetails.swift */,
+				DF6FBB5329E2A48B00BE310A /* Review.swift */,
+				DF6FBB5529E2AAEB00BE310A /* Video.swift */,
+				DF6FBB5729E2ABF900BE310A /* KeywordList.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		DF82075329D1635200E6854A = {
@@ -132,6 +157,7 @@
 			children = (
 				DF82077329D1637500E6854A /* Application */,
 				DF82077529D1639100E6854A /* Scene */,
+				DF6FBB4929E2A03400BE310A /* Domain */,
 				DF5BA80729DA988F00C96823 /* Data */,
 				DF82077429D1637E00E6854A /* Resources */,
 			);
@@ -276,10 +302,16 @@
 			files = (
 				DF5BA80929DA989C00C96823 /* HTTPMethod.swift in Sources */,
 				DF82076429D1635200E6854A /* ViewController.swift in Sources */,
+				DF6FBB5829E2ABF900BE310A /* KeywordList.swift in Sources */,
+				DF6FBB5029E2A07400BE310A /* Movie.swift in Sources */,
+				DF6FBB5229E2A13300BE310A /* MovieDetails.swift in Sources */,
+				DF6FBB5429E2A48B00BE310A /* Review.swift in Sources */,
 				DF82076029D1635200E6854A /* AppDelegate.swift in Sources */,
+				DF6FBB5629E2AAEB00BE310A /* Video.swift in Sources */,
 				DF5BA81329DAA23100C96823 /* NetworkManager.swift in Sources */,
 				DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */,
 				DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */,
+				DF6FBB4E29E2A05F00BE310A /* GenericList.swift in Sources */,
 				DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
