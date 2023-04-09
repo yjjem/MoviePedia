@@ -19,6 +19,7 @@
 		DF6FBB5429E2A48B00BE310A /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6FBB5329E2A48B00BE310A /* Review.swift */; };
 		DF6FBB5629E2AAEB00BE310A /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6FBB5529E2AAEB00BE310A /* Video.swift */; };
 		DF6FBB5829E2ABF900BE310A /* KeywordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6FBB5729E2ABF900BE310A /* KeywordList.swift */; };
+		DF6FBB6129E3022700BE310A /* MovieServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6FBB6029E3022700BE310A /* MovieServiceInterface.swift */; };
 		DF82076029D1635200E6854A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82075F29D1635200E6854A /* AppDelegate.swift */; };
 		DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076129D1635200E6854A /* SceneDelegate.swift */; };
 		DF82076429D1635200E6854A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076329D1635200E6854A /* ViewController.swift */; };
@@ -50,6 +51,7 @@
 		DF6FBB5329E2A48B00BE310A /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		DF6FBB5529E2AAEB00BE310A /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		DF6FBB5729E2ABF900BE310A /* KeywordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordList.swift; sourceTree = "<group>"; };
+		DF6FBB6029E3022700BE310A /* MovieServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieServiceInterface.swift; sourceTree = "<group>"; };
 		DF82075C29D1635200E6854A /* remy-movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "remy-movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF82075F29D1635200E6854A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF82076129D1635200E6854A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		DF6FBB4929E2A03400BE310A /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				DF6FBB5F29E3021500BE310A /* ServiceInterface */,
 				DF6FBB4C29E2A05700BE310A /* Entities */,
 			);
 			path = Domain;
@@ -132,6 +135,14 @@
 				DF6FBB5729E2ABF900BE310A /* KeywordList.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		DF6FBB5F29E3021500BE310A /* ServiceInterface */ = {
+			isa = PBXGroup;
+			children = (
+				DF6FBB6029E3022700BE310A /* MovieServiceInterface.swift */,
+			);
+			path = ServiceInterface;
 			sourceTree = "<group>";
 		};
 		DF82075329D1635200E6854A = {
@@ -313,6 +324,7 @@
 				DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */,
 				DF6FBB4E29E2A05F00BE310A /* GenericList.swift in Sources */,
 				DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */,
+				DF6FBB6129E3022700BE310A /* MovieServiceInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
