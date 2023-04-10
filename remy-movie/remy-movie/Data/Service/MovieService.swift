@@ -71,6 +71,25 @@ final class MovieService: MovieServiceInterface {
         }
     }
     
+    func loadProvidersInfo(
+        movieId: Int,
+        completion: @escaping (Result<ProvidersInfo, NetworkError>?) -> Void
+    ) -> URLSessionDataTask? {
+        
+        // TODO: Change
+        
+        let endPoint: EndPoint = EndPoint(
+            host: "host.com",
+            path: "/3/movie/\(movieId)/watch/providers",
+            queryItems: nil
+        )
+        
+        return manager.load(url: endPoint.url, method: .get) { [weak self] response in
+            let decodeResult = self?.tryDecodeAndValidate(response: response, as: ProvidersInfo.self)
+            completion(decodeResult)
+        }
+    }
+    
     private func tryDecodeAndValidate<T: Decodable>(
         response: Result<Data, NetworkError>,
         as type: T.Type

@@ -28,7 +28,10 @@ protocol MovieServiceInterface {
         completion: @escaping (Result<VideoList, NetworkError>?) -> Void
     ) -> URLSessionDataTask?
     
-    // TODO: Add Credits, Recommendations, WatchProviders, ReleaseDates
+    func loadProvidersInfo(
+        movieId: Int,
+        completion: @escaping (Result<ProvidersInfo, NetworkError>?) -> Void
+    ) -> URLSessionDataTask?
 }
 
 enum ListCategory {
