@@ -30,11 +30,11 @@ final class MovieServiceTest: XCTestCase {
     
     // MARK: Test Cases
     
-    func test_loadMovie실행_decoding실패시_오류_반환하는지()  throws {
+    func test_loadMovieList실행_decoding실패시_오류_반환하는지()  throws {
         
         // Arrange
         
-        let url = try XCTUnwrap(URL(string: "host.com"))
+        let url = URL(string: "host.com")!
         let stubData = "stub data".data(using: .utf8)
         let stubResponse = HTTPURLResponse(
             url: url,
@@ -44,7 +44,7 @@ final class MovieServiceTest: XCTestCase {
         )
         
         MockURLProtocol.requestHandler = { request in
-            return (stubData, try XCTUnwrap(stubResponse))
+            return (stubData, stubResponse!)
         }
         
         // Act and Assert
@@ -60,6 +60,46 @@ final class MovieServiceTest: XCTestCase {
                 failExpectation.fulfill()
                 
                 printErrorWithDetailsOfFunction(name: #function, error: error)
+            } else {
+                XCTFail("unexpected response: \(response.debugDescription)")
+            }
+        }
+        
+        wait(for: [loadExpectation, failExpectation], timeout: 2)
+    }
+    
+    func test_loadMovieList실행_networkManager_에러가_올바르게_들어오는지() throws {
+        
+        // Arrange
+        
+        let url = URL(string: "host.com")!
+        let stubData = Data()
+        let expectedCode = 300
+        let stubResponse = HTTPURLResponse(
+            url: url,
+            statusCode: expectedCode,
+            httpVersion: nil,
+            headerFields: nil
+        )
+        
+        MockURLProtocol.requestHandler = { request in
+            return (stubData, stubResponse!)
+        }
+        
+        // Act and Assert
+        
+        let loadExpectation = expectation(description: "did load")
+        let failExpectation = expectation(description: "did fail")
+        
+        let _ = sut?.loadMovieList(page: 1, of: .popular) { response in
+            
+            loadExpectation.fulfill()
+            
+            if case let .failure(.badResponse(code)) = response {
+                failExpectation.fulfill()
+                XCTAssertEqual(expectedCode, code)
+            } else {
+                XCTFail("unexpected response: \(response.debugDescription)")
             }
         }
         
