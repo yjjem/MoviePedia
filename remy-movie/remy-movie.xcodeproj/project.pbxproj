@@ -11,6 +11,7 @@
 		DF06677B29E3FD9B00DFF788 /* ProvidersInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06677A29E3FD9B00DFF788 /* ProvidersInfo.swift */; };
 		DF06677D29E4036200DFF788 /* MovieServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06677C29E4036200DFF788 /* MovieServiceTest.swift */; };
 		DF06678129E42C6300DFF788 /* Print Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678029E42C6300DFF788 /* Print Helper.swift */; };
+		DF06678329E4315D00DFF788 /* StubJsons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678229E4315D00DFF788 /* StubJsons.swift */; };
 		DF5BA80929DA989C00C96823 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA80829DA989C00C96823 /* HTTPMethod.swift */; };
 		DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA80A29DA996800C96823 /* NetworkError.swift */; };
 		DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA81029DAA16700C96823 /* Networkable.swift */; };
@@ -48,6 +49,7 @@
 		DF06677A29E3FD9B00DFF788 /* ProvidersInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersInfo.swift; sourceTree = "<group>"; };
 		DF06677C29E4036200DFF788 /* MovieServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieServiceTest.swift; sourceTree = "<group>"; };
 		DF06678029E42C6300DFF788 /* Print Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Print Helper.swift"; sourceTree = "<group>"; };
+		DF06678229E4315D00DFF788 /* StubJsons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubJsons.swift; sourceTree = "<group>"; };
 		DF5BA80829DA989C00C96823 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		DF5BA80A29DA996800C96823 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DF5BA81029DAA16700C96823 /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				DF06678029E42C6300DFF788 /* Print Helper.swift */,
+				DF06678229E4315D00DFF788 /* StubJsons.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				DF6FBB4E29E2A05F00BE310A /* GenericList.swift in Sources */,
 				DF06678129E42C6300DFF788 /* Print Helper.swift in Sources */,
 				DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */,
+				DF06678329E4315D00DFF788 /* StubJsons.swift in Sources */,
 				DF6FBB6129E3022700BE310A /* MovieServiceInterface.swift in Sources */,
 				DF6FBB6429E3037000BE310A /* MovieService.swift in Sources */,
 			);
