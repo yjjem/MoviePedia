@@ -11,5 +11,6 @@ enum NetworkError: Error {
     case notHTTPURLResponse
     case requestFailed(_ error: Error)
     case emptyData
+    case decodeFailed(_ error: Error)
 }
 

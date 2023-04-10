@@ -13,19 +13,22 @@ protocol MovieServiceInterface {
     typealias VideoList = GenericList<Video>
     
     func loadMovieList(
+        page: Int,
         of category: ListCategory,
-        completion: @escaping (Result<MovieList, Error>?) -> Void
+        completion: @escaping (Result<MovieList, NetworkError>?) -> Void
     ) -> URLSessionDataTask?
     
     func loadReviewList(
         movieId: Int,
-        completion: @escaping (Result<ReviewList, Error>?) -> Void
+        completion: @escaping (Result<ReviewList, NetworkError>?) -> Void
     ) -> URLSessionDataTask?
     
     func loadVideoList(
         movieId: Int,
-        completion: @escaping (Result<VideoList, Error>?) -> Void
+        completion: @escaping (Result<VideoList, NetworkError>?) -> Void
     ) -> URLSessionDataTask?
+    
+    // TODO: Add Credits, Recommendations, WatchProviders, ReleaseDates
 }
 
 enum ListCategory {
