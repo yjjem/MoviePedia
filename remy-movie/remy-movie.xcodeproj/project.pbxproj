@@ -10,8 +10,8 @@
 		DF06677729E3EC2700DFF788 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06677629E3EC2700DFF788 /* EndPoint.swift */; };
 		DF06677B29E3FD9B00DFF788 /* ProvidersInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06677A29E3FD9B00DFF788 /* ProvidersInfo.swift */; };
 		DF06677D29E4036200DFF788 /* MovieServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06677C29E4036200DFF788 /* MovieServiceTest.swift */; };
-		DF06678129E42C6300DFF788 /* Print Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678029E42C6300DFF788 /* Print Helper.swift */; };
-		DF06678329E4315D00DFF788 /* StubJsons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678229E4315D00DFF788 /* StubJsons.swift */; };
+		DF06678529E5109300DFF788 /* StubJsons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678229E4315D00DFF788 /* StubJsons.swift */; };
+		DF06678629E5109300DFF788 /* Print Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678029E42C6300DFF788 /* Print Helper.swift */; };
 		DF5BA80929DA989C00C96823 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA80829DA989C00C96823 /* HTTPMethod.swift */; };
 		DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA80A29DA996800C96823 /* NetworkError.swift */; };
 		DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA81029DAA16700C96823 /* Networkable.swift */; };
@@ -96,19 +96,19 @@
 		DF06677E29E4039E00DFF788 /* ServicesTest */ = {
 			isa = PBXGroup;
 			children = (
-				DF06677F29E42C5500DFF788 /* Helpers */,
 				DF06677C29E4036200DFF788 /* MovieServiceTest.swift */,
 			);
 			path = ServicesTest;
 			sourceTree = "<group>";
 		};
-		DF06677F29E42C5500DFF788 /* Helpers */ = {
+		DF06678429E5106600DFF788 /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				DF06678029E42C6300DFF788 /* Print Helper.swift */,
-				DF06678229E4315D00DFF788 /* StubJsons.swift */,
+				DF62499B29DD6979002C82A8 /* Helpers */,
+				DF62498929DC7800002C82A8 /* NetwokrPlatformTest */,
+				DF06677E29E4039E00DFF788 /* ServicesTest */,
 			);
-			path = Helpers;
+			path = Test;
 			sourceTree = "<group>";
 		};
 		DF5BA80729DA988F00C96823 /* Data */ = {
@@ -123,7 +123,6 @@
 		DF62498929DC7800002C82A8 /* NetwokrPlatformTest */ = {
 			isa = PBXGroup;
 			children = (
-				DF62499B29DD6979002C82A8 /* Helpers */,
 				DF62498A29DC7800002C82A8 /* NetwokrPlatformTest.swift */,
 			);
 			path = NetwokrPlatformTest;
@@ -133,6 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				DF62499129DC7902002C82A8 /* MockURLProtocol.swift */,
+				DF06678229E4315D00DFF788 /* StubJsons.swift */,
+				DF06678029E42C6300DFF788 /* Print Helper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -200,8 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				DF82075E29D1635200E6854A /* remy-movie */,
-				DF62498929DC7800002C82A8 /* NetwokrPlatformTest */,
-				DF06677E29E4039E00DFF788 /* ServicesTest */,
+				DF06678429E5106600DFF788 /* Test */,
 				DF82075D29D1635200E6854A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -356,8 +356,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF62498B29DC7800002C82A8 /* NetwokrPlatformTest.swift in Sources */,
+				DF06678529E5109300DFF788 /* StubJsons.swift in Sources */,
 				DF06677D29E4036200DFF788 /* MovieServiceTest.swift in Sources */,
 				DF62499229DC7902002C82A8 /* MockURLProtocol.swift in Sources */,
+				DF06678629E5109300DFF788 /* Print Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,9 +382,7 @@
 				DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */,
 				DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */,
 				DF6FBB4E29E2A05F00BE310A /* GenericList.swift in Sources */,
-				DF06678129E42C6300DFF788 /* Print Helper.swift in Sources */,
 				DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */,
-				DF06678329E4315D00DFF788 /* StubJsons.swift in Sources */,
 				DF6FBB6129E3022700BE310A /* MovieServiceInterface.swift in Sources */,
 				DF6FBB6429E3037000BE310A /* MovieService.swift in Sources */,
 			);
