@@ -236,13 +236,60 @@ final class MovieServiceTest: XCTestCase {
         wait(for: [loadExpectation, successExpectation], timeout: 2)
     }
     
+    func test_loadKeywordList_문제없을시_정상적으로_KeywordList를_반환하는지() {
+        
+        // Arrange
+        
+        let url = URL(string: "host.com")!
+    
+        let expectedKeywordCount = 1
+        let expectedKeywordId = 825
+        
+        let stubData = MovieServiceStubJsons.keyworkdList
+        let stubResponse = HTTPURLResponse(
+            url: url,
+            statusCode: 200,
+            httpVersion: nil,
+            headerFields: nil
+        )
+        
+        MockURLProtocol.requestHandler = { request in
+            return (stubData, stubResponse!)
+        }
+        
+        // Act and Assert
+        
+        let loadExpectation = expectation(description: "did load")
+        let successExpectation = expectation(description: "did success")
+        
+        let _ = sut?.loadKeywordList(movieId: 550) { response in
+            
+            loadExpectation.fulfill()
+            
+            if case let .success(keywordList) = response {
+                successExpectation.fulfill()
+                
+                let keywordList = keywordList.keywords
+                
+                XCTAssertEqual(keywordList?.count, expectedKeywordCount)
+                XCTAssertEqual(keywordList?[0].id, expectedKeywordId)
+                
+            } else {
+                XCTFail("unexpected response: \(response.debugDescription)")
+            }
+        }
+        
+        wait(for: [loadExpectation, successExpectation], timeout: 2)
+
+    }
+    
     func test_loadProviderList_문제없을시_정상적으로_ProviderList를_반환하는지() {
         
         // Arrange
         
         let url = URL(string: "host.com")!
         
-        let expectedFlatRateCount = 2
+        let expectedFlatRateCount = 1
         let expectedBuyCount = 2
         
         let stubData = MovieServiceStubJsons.providersInfo

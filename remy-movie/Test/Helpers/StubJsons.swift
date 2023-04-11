@@ -92,6 +92,16 @@ enum MovieServiceStubJsons {
 }
 """.data(using: .utf8)
     
+    static let keyworkdList = """
+    {
+        "id": 550,
+        "keywords": [{
+            "id": 825,
+            "name": "support group"
+        }]
+    }
+    """.data(using: .utf8)
+    
     static let providersInfo = """
 {
     "id": 550,
