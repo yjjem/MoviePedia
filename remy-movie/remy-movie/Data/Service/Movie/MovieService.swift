@@ -71,6 +71,25 @@ final class MovieService: MovieServiceInterface {
         }
     }
     
+    func loadKeywordList(
+        movieId: Int,
+        completion: @escaping (Result<KeywordList, NetworkError>?) -> Void
+    ) -> URLSessionDataTask? {
+        
+        // TODO: Change
+        
+        let endPoint: EndPoint = EndPoint(
+            host: "host.com",
+            path: "/3/movie/\(movieId)/watch/providers",
+            queryItems: nil
+        )
+        
+        return manager.load(url: endPoint.url, method: .get) { [weak self] response in
+            let decodeResult = self?.tryDecodeAndValidate(response: response, as: KeywordList.self)
+            completion(decodeResult)
+        }
+    }
+    
     func loadProviderList(
         movieId: Int,
         completion: @escaping (Result<ProviderList, NetworkError>?) -> Void
@@ -80,7 +99,7 @@ final class MovieService: MovieServiceInterface {
         
         let endPoint: EndPoint = EndPoint(
             host: "host.com",
-            path: "/3/movie/\(movieId)/watch/providers",
+            path: "/3/movie/\(movieId)/reviews",
             queryItems: nil
         )
         

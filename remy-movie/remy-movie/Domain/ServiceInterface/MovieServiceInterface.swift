@@ -30,6 +30,11 @@ protocol MovieServiceInterface {
         completion: @escaping (Result<VideoList, NetworkError>?) -> Void
     ) -> URLSessionDataTask?
     
+    func loadKeywordList(
+        movieId: Int,
+        completion: @escaping (Result<KeywordList, NetworkError>?) -> Void
+    ) -> URLSessionDataTask?
+    
     func loadProviderList(
         movieId: Int,
         completion: @escaping (Result<ProviderList, NetworkError>?) -> Void
