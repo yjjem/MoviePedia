@@ -91,4 +91,47 @@ enum MovieServiceStubJsons {
   ]
 }
 """.data(using: .utf8)
+    
+    static let providersInfo = """
+{
+    "id": 550,
+    "results": {
+        "KR": {
+            "link": "https://www.themoviedb.org/movie/550-fight-club/watch?locale=KR",
+            "buy": [{
+                    "display_priority": 2,
+                    "logo_path": "/8N0DNa4BO3lH24KWv1EjJh4TxoD.jpg",
+                    "provider_id": 356,
+                    "provider_name": "wavve"
+                },
+                {
+                    "display_priority": 3,
+                    "logo_path": "/p3Z12gKq2qvJaUOMeKNU2mzKVI9.jpg",
+                    "provider_id": 3,
+                    "provider_name": "Google Play Movies"
+                }
+            ],
+            "rent": [{
+                    "display_priority": 2,
+                    "logo_path": "/8N0DNa4BO3lH24KWv1EjJh4TxoD.jpg",
+                    "provider_id": 356,
+                    "provider_name": "wavve"
+                },
+                {
+                    "display_priority": 3,
+                    "logo_path": "/p3Z12gKq2qvJaUOMeKNU2mzKVI9.jpg",
+                    "provider_id": 3,
+                    "provider_name": "Google Play Movies"
+                }
+            ],
+            "flatrate": [{
+                "display_priority": 1,
+                "logo_path": "/68MNrwlkpF7WnmNPXLah69CR5cb.jpg",
+                "provider_id": 119,
+                "provider_name": "Amazon Prime Video"
+            }]
+        }
+    }
+}
+""".data(using: .utf8)
 }

@@ -47,8 +47,6 @@ final class MovieService: MovieServiceInterface {
             queryItems: nil
         )
         
-        print(endPoint.url)
-        
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
             let decodeResult = self?.tryDecodeAndValidate(response: response, as: ReviewList.self)
             completion(decodeResult)
@@ -73,9 +71,9 @@ final class MovieService: MovieServiceInterface {
         }
     }
     
-    func loadProvidersInfo(
+    func loadProviderList(
         movieId: Int,
-        completion: @escaping (Result<ProvidersInfo, NetworkError>?) -> Void
+        completion: @escaping (Result<ProviderList, NetworkError>?) -> Void
     ) -> URLSessionDataTask? {
         
         // TODO: Change
@@ -87,7 +85,7 @@ final class MovieService: MovieServiceInterface {
         )
         
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
-            let decodeResult = self?.tryDecodeAndValidate(response: response, as: ProvidersInfo.self)
+            let decodeResult = self?.tryDecodeAndValidate(response: response, as: ProviderList.self)
             completion(decodeResult)
         }
     }

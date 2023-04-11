@@ -7,17 +7,28 @@
 
 import Foundation
 
-struct ProvidersInfo: Decodable {
-    let en: ProviderList?
-    let kr: ProviderList?
-    let jp: ProviderList?
+struct CountryProvidersList: Decodable {
+    let id: Int?
+    let results: Country?
 }
 
-struct ProviderList: Decodable {
+struct Country: Decodable {
+    let en: ProvidersInfo?
+    let kr: ProvidersInfo?
+    let jp: ProvidersInfo?
+    
+    enum CodingKeys: String, CodingKey {
+        case en = "EN"
+        case kr = "KR"
+        case jp = "JP"
+    }
+}
+
+struct ProvidersInfo: Decodable {
     let link: String?
-    let flatrate: [Provider]?
-    let rent: [Provider]?
     let buy: [Provider]?
+    let rent: [Provider]?
+    let flatrate: [Provider]?
 }
 
 struct Provider: Decodable {

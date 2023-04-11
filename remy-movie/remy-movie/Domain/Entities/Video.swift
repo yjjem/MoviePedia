@@ -15,6 +15,6 @@ struct Video: Decodable {
     let size: Int?
     let type: String?
     let official: Bool?
-    let publishedAt: Date?
+    let publishedAt: String?
     let id: String?
 }

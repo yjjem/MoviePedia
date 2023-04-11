@@ -203,7 +203,7 @@ final class MovieServiceTest: XCTestCase {
         let expectedId = 550
         let expectedVideoCount = 2
         
-        let stubData = MovieServiceStubJsons.reviewList
+        let stubData = MovieServiceStubJsons.videoList
         let stubResponse = HTTPURLResponse(
             url: url,
             statusCode: 200,
@@ -234,6 +234,49 @@ final class MovieServiceTest: XCTestCase {
         }
         
         wait(for: [loadExpectation, successExpectation], timeout: 2)
+    }
+    
+    func test_loadProviderList_문제없을시_정상적으로_ProviderList를_반환하는지() {
         
+        // Arrange
+        
+        let url = URL(string: "host.com")!
+        
+        let expectedFlatRateCount = 2
+        let expectedBuyCount = 2
+        
+        let stubData = MovieServiceStubJsons.providersInfo
+        let stubResponse = HTTPURLResponse(
+            url: url,
+            statusCode: 200,
+            httpVersion: nil,
+            headerFields: nil
+        )
+        
+        MockURLProtocol.requestHandler = { request in
+            return (stubData, stubResponse!)
+        }
+        
+        // Act and Assert
+        
+        let loadExpectation = expectation(description: "did load")
+        let successExpectation = expectation(description: "did success")
+        
+        let _ = sut?.loadProviderList(movieId: 11) { response in
+            
+            loadExpectation.fulfill()
+            
+            if case let .success(providersInfo) = response {
+                successExpectation.fulfill()
+                
+                let krProviderInfo = providersInfo.results?.kr
+                XCTAssertEqual(krProviderInfo?.flatrate?.count, expectedFlatRateCount)
+                XCTAssertEqual(krProviderInfo?.buy?.count, expectedBuyCount)
+            } else {
+                XCTFail("unexpected response: \(response.debugDescription)")
+            }
+        }
+        
+        wait(for: [loadExpectation, successExpectation], timeout: 2)
     }
 }

@@ -11,6 +11,7 @@ protocol MovieServiceInterface {
     typealias MovieList = GenericList<Movie>
     typealias ReviewList = GenericList<Review>
     typealias VideoList = GenericList<Video>
+    typealias ProviderList = CountryProvidersList
     
     func loadMovieList(
         page: Int,
@@ -28,9 +29,9 @@ protocol MovieServiceInterface {
         completion: @escaping (Result<VideoList, NetworkError>?) -> Void
     ) -> URLSessionDataTask?
     
-    func loadProvidersInfo(
+    func loadProviderList(
         movieId: Int,
-        completion: @escaping (Result<ProvidersInfo, NetworkError>?) -> Void
+        completion: @escaping (Result<ProviderList, NetworkError>?) -> Void
     ) -> URLSessionDataTask?
 }
 
