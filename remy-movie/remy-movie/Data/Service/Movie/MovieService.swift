@@ -23,11 +23,10 @@ final class MovieService: MovieServiceInterface {
         completion: @escaping (Result<MovieList, NetworkError>?) -> Void
     ) -> URLSessionDataTask? {
         
-        let queryItems: [URLQueryItem] = [URLQueryItem(name: "page", value: String(page))]
         let endPoint: EndPoint = EndPoint(
             host: "https://api.themoviedb.org",
             path: "/3/movie/\(category.path)",
-            queryItems: queryItems
+            queryItems: nil
         )
         
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
