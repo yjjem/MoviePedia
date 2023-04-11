@@ -111,10 +111,12 @@ final class MovieServiceTest: XCTestCase {
         // Arrange
         
         let url = URL(string: "host.com")!
+        
         let expectedCode = 200
         let expectedPage = 1
         let expectedMovieCount = 1
         let expectedTitle = "Suicide Squad"
+        
         let stubData = MovieServiceStubJsons.movieList
         let stubResponse = HTTPURLResponse(
             url: url,
@@ -147,6 +149,48 @@ final class MovieServiceTest: XCTestCase {
         }
         
         wait(for: [loadExpectation, successExpectation], timeout: 2)
-
+    }
+    
+    func test_loadReviewList_문제없을시_정상적으로_ReviewList를_반환하는지() {
+        
+        // Arrange
+        
+        let url = URL(string: "host.com")!
+        
+        let expectedCode = 200
+        let expectedId = 11
+        let expectedAuthor = "Cat Ellington"
+        
+        let stubData = MovieServiceStubJsons.reviewList
+        let stubResponse = HTTPURLResponse(
+            url: url,
+            statusCode: expectedCode,
+            httpVersion: nil,
+            headerFields: nil
+        )
+        
+        MockURLProtocol.requestHandler = { request in
+            return (stubData, stubResponse!)
+        }
+        
+        // Act and Assert
+        
+        let loadExpectation = expectation(description: "did load")
+        let successExpectation = expectation(description: "did success")
+        
+        let _ = sut?.loadReviewList(movieId: 11) { response in
+            
+            loadExpectation.fulfill()
+            
+            if case let .success(reviewList) = response {
+                successExpectation.fulfill()
+                XCTAssertEqual(reviewList.id, expectedId)
+                XCTAssertEqual(reviewList.results?[0].author, expectedAuthor)
+            } else {
+                XCTFail("unexpected response: \(response.debugDescription)")
+            }
+        }
+        
+        wait(for: [loadExpectation, successExpectation], timeout: 2)
     }
 }

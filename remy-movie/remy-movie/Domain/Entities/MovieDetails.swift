@@ -22,7 +22,7 @@ struct MovieDetails: Decodable {
     let posterPath: String?
     let productionCompanies: [ProductionCompany]?
     let productionCountries: [ProductionCountry]?
-    let releaseDate: Date?
+    let releaseDate: String?
     let revenue: Int?
     let runtime: Int?
     let spokenLanguages: [Languages]?

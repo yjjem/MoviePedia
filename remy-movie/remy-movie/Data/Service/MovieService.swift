@@ -42,10 +42,12 @@ final class MovieService: MovieServiceInterface {
         // TODO: Change
         
         let endPoint: EndPoint = EndPoint(
-            host: "host.com",
+            host: "https://api.themoviedb.org",
             path: "/3/movie/\(movieId)/reviews",
             queryItems: nil
         )
+        
+        print(endPoint.url)
         
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
             let decodeResult = self?.tryDecodeAndValidate(response: response, as: ReviewList.self)

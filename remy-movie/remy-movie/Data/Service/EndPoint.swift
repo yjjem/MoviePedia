@@ -19,7 +19,7 @@ struct EndPoint {
         )
         var components = URLComponents(string: host)
         components?.path = path
-        components?.queryItems = queryItems
+        components?.queryItems = queryItems ?? []
         components?.queryItems?.append(apiKeyQuery)
         return components?.url
     }
