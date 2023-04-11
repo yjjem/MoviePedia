@@ -28,7 +28,7 @@ final class MovieServiceTest: XCTestCase {
         sut = nil
     }
     
-    // MARK: Test Cases
+    // MARK: Failure Cases
     
     func test_loadMovieList실행_decoding실패시_오류_반환하는지()  throws {
         
@@ -106,13 +106,14 @@ final class MovieServiceTest: XCTestCase {
         wait(for: [loadExpectation, failExpectation], timeout: 2)
     }
     
+    // MARK: Success Cases
+    
     func test_loadMovieList_문제없을시_정상적으로_MovieList를_반환하는지() {
         
         // Arrange
         
         let url = URL(string: "host.com")!
         
-        let expectedCode = 200
         let expectedPage = 1
         let expectedMovieCount = 1
         let expectedTitle = "Suicide Squad"
@@ -120,7 +121,7 @@ final class MovieServiceTest: XCTestCase {
         let stubData = MovieServiceStubJsons.movieList
         let stubResponse = HTTPURLResponse(
             url: url,
-            statusCode: expectedCode,
+            statusCode: 200,
             httpVersion: nil,
             headerFields: nil
         )
@@ -157,14 +158,13 @@ final class MovieServiceTest: XCTestCase {
         
         let url = URL(string: "host.com")!
         
-        let expectedCode = 200
         let expectedId = 11
         let expectedAuthor = "Cat Ellington"
         
         let stubData = MovieServiceStubJsons.reviewList
         let stubResponse = HTTPURLResponse(
             url: url,
-            statusCode: expectedCode,
+            statusCode: 200,
             httpVersion: nil,
             headerFields: nil
         )
@@ -192,5 +192,48 @@ final class MovieServiceTest: XCTestCase {
         }
         
         wait(for: [loadExpectation, successExpectation], timeout: 2)
+    }
+    
+    func test_loadVideoList_문제없을시_정상적으로_VideoList를_반환하는지() {
+        
+        // Arrange
+        
+        let url = URL(string: "host.com")!
+        
+        let expectedId = 550
+        let expectedVideoCount = 2
+        
+        let stubData = MovieServiceStubJsons.reviewList
+        let stubResponse = HTTPURLResponse(
+            url: url,
+            statusCode: 200,
+            httpVersion: nil,
+            headerFields: nil
+        )
+        
+        MockURLProtocol.requestHandler = { request in
+            return (stubData, stubResponse!)
+        }
+        
+        // Act and Assert
+        
+        let loadExpectation = expectation(description: "did load")
+        let successExpectation = expectation(description: "did success")
+        
+        let _ = sut?.loadVideoList(movieId: 11) { response in
+            
+            loadExpectation.fulfill()
+            
+            if case let .success(videoList) = response {
+                successExpectation.fulfill()
+                XCTAssertEqual(videoList.id, expectedId)
+                XCTAssertEqual(videoList.results?.count, expectedVideoCount)
+            } else {
+                XCTFail("unexpected response: \(response.debugDescription)")
+            }
+        }
+        
+        wait(for: [loadExpectation, successExpectation], timeout: 2)
+        
     }
 }
