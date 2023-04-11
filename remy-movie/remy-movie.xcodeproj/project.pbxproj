@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DF06677729E3EC2700DFF788 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06677629E3EC2700DFF788 /* EndPoint.swift */; };
-		DF06677B29E3FD9B00DFF788 /* ProvidersByCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06677A29E3FD9B00DFF788 /* ProvidersByCountry.swift */; };
+		DF06677B29E3FD9B00DFF788 /* ProvidersInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06677A29E3FD9B00DFF788 /* ProvidersInfo.swift */; };
 		DF06677D29E4036200DFF788 /* MovieServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06677C29E4036200DFF788 /* MovieServiceTest.swift */; };
 		DF06678529E5109300DFF788 /* StubJsons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678229E4315D00DFF788 /* StubJsons.swift */; };
 		DF06678629E5109300DFF788 /* Print Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678029E42C6300DFF788 /* Print Helper.swift */; };
@@ -47,7 +47,7 @@
 
 /* Begin PBXFileReference section */
 		DF06677629E3EC2700DFF788 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
-		DF06677A29E3FD9B00DFF788 /* ProvidersByCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersByCountry.swift; sourceTree = "<group>"; };
+		DF06677A29E3FD9B00DFF788 /* ProvidersInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersInfo.swift; sourceTree = "<group>"; };
 		DF06677C29E4036200DFF788 /* MovieServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieServiceTest.swift; sourceTree = "<group>"; };
 		DF06678029E42C6300DFF788 /* Print Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Print Helper.swift"; sourceTree = "<group>"; };
 		DF06678229E4315D00DFF788 /* StubJsons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubJsons.swift; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 				DF6FBB5729E2ABF900BE310A /* Keyword.swift */,
 				DF6FBB5329E2A48B00BE310A /* Review.swift */,
 				DF6FBB5529E2AAEB00BE310A /* Video.swift */,
-				DF06677A29E3FD9B00DFF788 /* ProvidersByCountry.swift */,
+				DF06677A29E3FD9B00DFF788 /* ProvidersInfo.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -380,7 +380,7 @@
 			files = (
 				DF5BA80929DA989C00C96823 /* HTTPMethod.swift in Sources */,
 				DF82076429D1635200E6854A /* ViewController.swift in Sources */,
-				DF06677B29E3FD9B00DFF788 /* ProvidersByCountry.swift in Sources */,
+				DF06677B29E3FD9B00DFF788 /* ProvidersInfo.swift in Sources */,
 				DF6FBB5829E2ABF900BE310A /* Keyword.swift in Sources */,
 				DF6FBB5029E2A07400BE310A /* Movie.swift in Sources */,
 				DF06678829E563CA00DFF788 /* ProvidersByCountryResponse.swift in Sources */,

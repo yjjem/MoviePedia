@@ -1,5 +1,5 @@
 //
-//  ProvidersByCountry.swift
+//  ProvidersInfo.swift
 //  remy-movie
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
