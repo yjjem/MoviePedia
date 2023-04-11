@@ -9,10 +9,10 @@ import Foundation
 
 struct CountryProvidersList: Decodable {
     let id: Int?
-    let results: Country?
+    let results: ProvidersByCountry?
 }
 
-struct Country: Decodable {
+struct ProvidersByCountry: Decodable {
     let en: ProvidersInfo?
     let kr: ProvidersInfo?
     let jp: ProvidersInfo?
