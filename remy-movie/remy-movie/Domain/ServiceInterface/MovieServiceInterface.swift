@@ -8,11 +8,16 @@
 import Foundation
 
 protocol MovieServiceInterface {
+    
+    // MARK: Type(s)
+    
     typealias MovieList = GenericResponse<[Movie]>
     typealias ReviewList = GenericResponse<[Review]>
     typealias VideoList = GenericResponse<[Video]>
     typealias KeywordList = GenericResponse<[Keyword]>
     typealias ProviderList = GenericResponse<ProvidersByCountryResponse>
+    
+    // MARK: Function(s)
     
     func loadMovieList(
         page: Int,

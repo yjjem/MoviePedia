@@ -15,6 +15,8 @@ final class MovieService: MovieServiceInterface {
         self.manager = manger
     }
     
+    // MARK: Function(s)
+    
     func loadMovieList(
         page: Int,
         of category: ListCategory,
@@ -108,6 +110,8 @@ final class MovieService: MovieServiceInterface {
             completion(decodeResult)
         }
     }
+    
+    // MARK: Private Function(s)
     
     private func tryDecodeAndValidate<T: Decodable>(
         response: Result<Data, NetworkError>,
