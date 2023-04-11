@@ -23,10 +23,11 @@ final class MovieService: MovieServiceInterface {
         completion: @escaping (Result<MovieList, NetworkError>?) -> Void
     ) -> URLSessionDataTask? {
         
-        let endPoint: EndPoint = EndPoint(
-            host: "https://api.themoviedb.org",
-            path: "/3/movie/\(category.path)",
-            queryItems: nil
+        let endPoint = makeEndPoint(
+            path: .movieList(category),
+            queryItems: [
+                .page: String(page),
+            ]
         )
         
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
@@ -81,7 +82,7 @@ final class MovieService: MovieServiceInterface {
         
         let endPoint: EndPoint = EndPoint(
             host: "host.com",
-            path: "/3/movie/\(movieId)/watch/providers",
+            path: "/3/movie/\(movieId)/keywords",
             queryItems: nil
         )
         
@@ -100,7 +101,7 @@ final class MovieService: MovieServiceInterface {
         
         let endPoint: EndPoint = EndPoint(
             host: "host.com",
-            path: "/3/movie/\(movieId)/reviews",
+            path: "/3/movie/\(movieId)/watch/providers",
             queryItems: nil
         )
         
@@ -122,6 +123,26 @@ final class MovieService: MovieServiceInterface {
             return data.tryDecode(as: type)
         case .failure(let error):
             return .failure(error)
+        }
+    }
+}
+
+extension MovieService {
+    enum Path {
+        case movieList(ListCategory)
+        case reviewList(Int)
+        case videoList(Int)
+        case keywordList(Int)
+        case providerList(Int)
+        
+        var fullPath: String {
+            switch self {
+            case .movieList(let category): return category.path
+            case .reviewList(let id): return "/\(id)/reviews"
+            case .videoList(let id): return "/\(id)/videos"
+            case .keywordList(let id): return "/\(id)/keywords"
+            case .providerList(let id): return "/\(id)/watch/providers"
+            }
         }
     }
 }
