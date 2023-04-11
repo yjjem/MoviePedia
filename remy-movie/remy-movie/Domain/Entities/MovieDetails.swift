@@ -25,7 +25,7 @@ struct MovieDetails: Decodable {
     let releaseDate: String?
     let revenue: Int?
     let runtime: Int?
-    let spokenLanguages: [Languages]?
+    let spokenLanguages: [Language]?
     let status: String?
     let tagline: String?
     let title: String?
@@ -34,7 +34,7 @@ struct MovieDetails: Decodable {
     let voteCount: Int?
 }
 
-struct Languages: Decodable {
+struct Language: Decodable {
     let iso6391: String?
     let name: String?
 }

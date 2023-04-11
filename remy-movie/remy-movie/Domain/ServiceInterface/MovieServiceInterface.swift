@@ -8,10 +8,11 @@
 import Foundation
 
 protocol MovieServiceInterface {
-    typealias MovieList = GenericList<Movie>
-    typealias ReviewList = GenericList<Review>
-    typealias VideoList = GenericList<Video>
-    typealias ProviderList = CountryProvidersList
+    typealias MovieList = GenericResponse<[Movie]>
+    typealias ReviewList = GenericResponse<[Review]>
+    typealias VideoList = GenericResponse<[Video]>
+    typealias KeywordList = GenericResponse<[Keyword]>
+    typealias ProviderList = GenericResponse<ProvidersByCountryResponse>
     
     func loadMovieList(
         page: Int,

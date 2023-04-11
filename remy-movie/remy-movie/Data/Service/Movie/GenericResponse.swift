@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct GenericList<Item: Decodable>: Decodable {
+struct GenericResponse<Items: Decodable>: Decodable {
     let id: Int?
     let page: Int?
-    let results: [Item]?
+    let results: Items?
+    let keywords: Items?
     let totalPages: Int?
     let totalResults: Int?
 }
