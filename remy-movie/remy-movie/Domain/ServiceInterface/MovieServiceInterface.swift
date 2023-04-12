@@ -44,6 +44,12 @@ protocol MovieServiceInterface {
         movieId: Int,
         completion: @escaping (Result<ProviderList, NetworkError>?) -> Void
     ) -> URLSessionDataTask?
+    
+    func loadSimilarMovieList(
+        page: Int,
+        movieId: Int,
+        completion: @escaping (Result<MovieList, NetworkError>?) -> Void
+    ) -> URLSessionDataTask?
 }
 
 enum ListCategory {

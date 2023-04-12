@@ -83,6 +83,23 @@ final class MovieService: MovieServiceInterface {
         }
     }
     
+    func loadSimilarMovieList(
+        page: Int,
+        movieId: Int,
+        completion: @escaping (Result<MovieList, NetworkError>?) -> Void
+    ) -> URLSessionDataTask? {
+        
+        let endPoint = makeEndPoint(
+            path: .similarMovieList(movieId),
+            queryItems: [.page: String(page)]
+        )
+        
+        return manager.load(url: endPoint.url, method: .get) { [weak self] response in
+            let decodeResult = self?.tryDecodeAndValidate(response: response, as: MovieList.self)
+            completion(decodeResult)
+        }
+    }
+    
     // MARK: Private Function(s)
     
     private func makeEndPoint(path: Path, queryItems: [EndPoint.QueryKey: String]?) -> EndPoint {
@@ -118,6 +135,7 @@ extension MovieService {
         case videoList(Int)
         case keywordList(Int)
         case providerList(Int)
+        case similarMovieList(Int)
         
         var fullPath: String {
             let mainPath = TmdbAPIDetails.defaultPath
@@ -128,6 +146,7 @@ extension MovieService {
             case .videoList(let id): return mainPath + "/\(id)/videos"
             case .keywordList(let id): return mainPath  + "/\(id)/keywords"
             case .providerList(let id): return mainPath  + "/\(id)/watch/providers"
+            case .similarMovieList(let id): return mainPath + "\(id)/similar"
             }
         }
     }
