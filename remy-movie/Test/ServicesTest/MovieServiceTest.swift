@@ -326,4 +326,48 @@ final class MovieServiceTest: XCTestCase {
         
         wait(for: [loadExpectation, successExpectation], timeout: 2)
     }
+    
+    func test_loadSimilarMovieList_문제없으시_정상적으로_MovieList를_반환하는지() {
+        
+        // Arrange
+        
+        let url = URL(string: "host.com")!
+        
+        let expectedPage = 1
+        let expectedMovieCount = 1
+        let expectedTitle = "Suicide Squad"
+        
+        let stubData = MovieServiceStubJsons.movieList
+        let stubResponse = HTTPURLResponse(
+            url: url,
+            statusCode: 200,
+            httpVersion: nil,
+            headerFields: nil
+        )
+        
+        MockURLProtocol.requestHandler = { request in
+            return (stubData, stubResponse!)
+        }
+        
+        // Act and Assert
+        
+        let loadExpectation = expectation(description: "did load")
+        let successExpectation = expectation(description: "did success")
+        
+        let _ = sut?.loadSimilarMovieList(page: 1, movieId: 297761) { response in
+            
+            loadExpectation.fulfill()
+            
+            if case let .success(movieList) = response {
+                successExpectation.fulfill()
+                XCTAssertTrue(movieList.page == expectedPage)
+                XCTAssertTrue(movieList.results?.count == expectedMovieCount)
+                XCTAssertTrue(movieList.results?[0].originalTitle == expectedTitle)
+            } else {
+                XCTFail("unexpected response: \(response.debugDescription)")
+            }
+        }
+        
+        wait(for: [loadExpectation, successExpectation], timeout: 2)
+    }
 }
