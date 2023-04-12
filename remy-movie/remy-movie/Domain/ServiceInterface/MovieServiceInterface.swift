@@ -60,10 +60,10 @@ enum ListCategory {
     
     var path: String {
         switch self {
-        case .popular: return "popular"
-        case .topRated:  return "top_rated"
-        case .nowPlaying:  return "now_playing"
-        case .upcoming:  return "upcoming"
+        case .popular: return "/popular"
+        case .topRated:  return "/top_rated"
+        case .nowPlaying:  return "/now_playing"
+        case .upcoming:  return "/upcoming"
         }
     }
 }

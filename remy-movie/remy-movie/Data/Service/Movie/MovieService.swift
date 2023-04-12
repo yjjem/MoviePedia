@@ -141,12 +141,12 @@ extension MovieService {
             let mainPath = TmdbAPIDetails.defaultPath
             
             switch self {
-            case .movieList(let category): return category.path
+            case .movieList(let category): return mainPath + category.path
             case .reviewList(let id): return mainPath + "/\(id)/reviews"
             case .videoList(let id): return mainPath + "/\(id)/videos"
             case .keywordList(let id): return mainPath  + "/\(id)/keywords"
             case .providerList(let id): return mainPath  + "/\(id)/watch/providers"
-            case .similarMovieList(let id): return mainPath + "\(id)/similar"
+            case .similarMovieList(let id): return mainPath + "/\(id)/similar"
             }
         }
     }
