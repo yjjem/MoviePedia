@@ -178,7 +178,7 @@ final class MovieServiceTest: XCTestCase {
         let loadExpectation = expectation(description: "did load")
         let successExpectation = expectation(description: "did success")
         
-        let _ = sut?.loadReviewList(movieId: 11) { response in
+        let _ = sut?.loadReviewList(page: 1, movieId: 11) { response in
             
             loadExpectation.fulfill()
             

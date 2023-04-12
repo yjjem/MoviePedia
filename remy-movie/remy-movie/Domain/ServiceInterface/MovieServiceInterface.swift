@@ -26,6 +26,7 @@ protocol MovieServiceInterface {
     ) -> URLSessionDataTask?
     
     func loadReviewList(
+        page: Int,
         movieId: Int,
         completion: @escaping (Result<ReviewList, NetworkError>?) -> Void
     ) -> URLSessionDataTask?

@@ -32,11 +32,12 @@ final class MovieService: MovieServiceInterface {
     }
     
     func loadReviewList(
+        page: Int,
         movieId: Int,
         completion: @escaping (Result<ReviewList, NetworkError>?) -> Void
     ) -> URLSessionDataTask? {
         
-        let endPoint = makeEndPoint(path: .reviewList(movieId), queryItems: nil)
+        let endPoint = makeEndPoint(path: .reviewList(movieId), queryItems: [.page: String(page)])
         
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
             let decodeResult = self?.tryDecodeAndValidate(response: response, as: ReviewList.self)
