@@ -13,6 +13,7 @@
 		DF06678529E5109300DFF788 /* StubJsons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678229E4315D00DFF788 /* StubJsons.swift */; };
 		DF06678629E5109300DFF788 /* Print Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678029E42C6300DFF788 /* Print Helper.swift */; };
 		DF06678829E563CA00DFF788 /* ProvidersByCountryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678729E563CA00DFF788 /* ProvidersByCountryResponse.swift */; };
+		DF06678C29E5A34E00DFF788 /* Bundle + apiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678B29E5A34E00DFF788 /* Bundle + apiKey.swift */; };
 		DF5BA80929DA989C00C96823 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA80829DA989C00C96823 /* HTTPMethod.swift */; };
 		DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA80A29DA996800C96823 /* NetworkError.swift */; };
 		DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA81029DAA16700C96823 /* Networkable.swift */; };
@@ -52,6 +53,8 @@
 		DF06678029E42C6300DFF788 /* Print Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Print Helper.swift"; sourceTree = "<group>"; };
 		DF06678229E4315D00DFF788 /* StubJsons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubJsons.swift; sourceTree = "<group>"; };
 		DF06678729E563CA00DFF788 /* ProvidersByCountryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersByCountryResponse.swift; sourceTree = "<group>"; };
+		DF06678A29E5A1AD00DFF788 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		DF06678B29E5A34E00DFF788 /* Bundle + apiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle + apiKey.swift"; sourceTree = "<group>"; };
 		DF5BA80829DA989C00C96823 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		DF5BA80A29DA996800C96823 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DF5BA81029DAA16700C96823 /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -203,6 +206,7 @@
 		DF6FBB6529E3042500BE310A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				DF06678B29E5A34E00DFF788 /* Bundle + apiKey.swift */,
 				DF6FBB6629E3044C00BE310A /* Data + decode.swift */,
 			);
 			path = Utility;
@@ -254,6 +258,7 @@
 				DF82076829D1635300E6854A /* Assets.xcassets */,
 				DF82076A29D1635300E6854A /* LaunchScreen.storyboard */,
 				DF82076D29D1635300E6854A /* Info.plist */,
+				DF06678A29E5A1AD00DFF788 /* Secrets.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -394,6 +399,7 @@
 				DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */,
 				DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */,
 				DF6FBB4E29E2A05F00BE310A /* GenericResponse.swift in Sources */,
+				DF06678C29E5A34E00DFF788 /* Bundle + apiKey.swift in Sources */,
 				DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */,
 				DF6FBB6129E3022700BE310A /* MovieServiceInterface.swift in Sources */,
 				DF6FBB6429E3037000BE310A /* MovieService.swift in Sources */,
@@ -582,6 +588,7 @@
 		};
 		DF82077129D1635300E6854A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF06678A29E5A1AD00DFF788 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -612,6 +619,7 @@
 		};
 		DF82077229D1635300E6854A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF06678A29E5A1AD00DFF788 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
