@@ -14,6 +14,7 @@
 		DF06678629E5109300DFF788 /* Print Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678029E42C6300DFF788 /* Print Helper.swift */; };
 		DF06678829E563CA00DFF788 /* ProvidersByCountryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678729E563CA00DFF788 /* ProvidersByCountryResponse.swift */; };
 		DF06678C29E5A34E00DFF788 /* Bundle + apiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678B29E5A34E00DFF788 /* Bundle + apiKey.swift */; };
+		DF06678F29E695B100DFF788 /* TmdbAPIDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06678E29E695B100DFF788 /* TmdbAPIDetails.swift */; };
 		DF5BA80929DA989C00C96823 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA80829DA989C00C96823 /* HTTPMethod.swift */; };
 		DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA80A29DA996800C96823 /* NetworkError.swift */; };
 		DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5BA81029DAA16700C96823 /* Networkable.swift */; };
@@ -55,6 +56,7 @@
 		DF06678729E563CA00DFF788 /* ProvidersByCountryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersByCountryResponse.swift; sourceTree = "<group>"; };
 		DF06678A29E5A1AD00DFF788 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		DF06678B29E5A34E00DFF788 /* Bundle + apiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle + apiKey.swift"; sourceTree = "<group>"; };
+		DF06678E29E695B100DFF788 /* TmdbAPIDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmdbAPIDetails.swift; sourceTree = "<group>"; };
 		DF5BA80829DA989C00C96823 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		DF5BA80A29DA996800C96823 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DF5BA81029DAA16700C96823 /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 		DF6FBB6229E3036400BE310A /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				DF06678E29E695B100DFF788 /* TmdbAPIDetails.swift */,
 				DF06677629E3EC2700DFF788 /* EndPoint.swift */,
 				DF06678929E563F000DFF788 /* Movie */,
 			);
@@ -403,6 +406,7 @@
 				DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */,
 				DF6FBB6129E3022700BE310A /* MovieServiceInterface.swift in Sources */,
 				DF6FBB6429E3037000BE310A /* MovieService.swift in Sources */,
+				DF06678F29E695B100DFF788 /* TmdbAPIDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
