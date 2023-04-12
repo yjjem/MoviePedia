@@ -23,11 +23,7 @@ final class MovieService: MovieServiceInterface {
         completion: @escaping (Result<MovieList, NetworkError>?) -> Void
     ) -> URLSessionDataTask? {
         
-        let endPoint: EndPoint = EndPoint(
-            host: "https://api.themoviedb.org",
-            path: "/3/movie/\(page)/reviews",
-            queryItems: nil
-        )
+        let endPoint = makeEndPoint(path: .movieList(category), queryItems: [.page: String(page)])
         
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
             let decodeResult = self?.tryDecodeAndValidate(response: response, as: MovieList.self)
@@ -40,13 +36,7 @@ final class MovieService: MovieServiceInterface {
         completion: @escaping (Result<ReviewList, NetworkError>?) -> Void
     ) -> URLSessionDataTask? {
         
-        // TODO: Change
-        
-        let endPoint: EndPoint = EndPoint(
-            host: "https://api.themoviedb.org",
-            path: "/3/movie/\(movieId)/reviews",
-            queryItems: nil
-        )
+        let endPoint = makeEndPoint(path: .reviewList(movieId), queryItems: nil)
         
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
             let decodeResult = self?.tryDecodeAndValidate(response: response, as: ReviewList.self)
@@ -59,13 +49,8 @@ final class MovieService: MovieServiceInterface {
         completion: @escaping (Result<VideoList, NetworkError>?) -> Void
     ) -> URLSessionDataTask? {
         
-        // TODO: Change
+        let endPoint = makeEndPoint(path: .videoList(movieId), queryItems: nil)
         
-        let endPoint: EndPoint = EndPoint(
-            host: "host.com",
-            path: "/3/movie/\(movieId)/videos",
-            queryItems: nil
-        )
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
             let decodeResult = self?.tryDecodeAndValidate(response: response, as: VideoList.self)
             completion(decodeResult)
@@ -77,13 +62,7 @@ final class MovieService: MovieServiceInterface {
         completion: @escaping (Result<KeywordList, NetworkError>?) -> Void
     ) -> URLSessionDataTask? {
         
-        // TODO: Change
-        
-        let endPoint: EndPoint = EndPoint(
-            host: "host.com",
-            path: "/3/movie/\(movieId)/keywords",
-            queryItems: nil
-        )
+        let endPoint = makeEndPoint(path: .keywordList(movieId), queryItems: nil)
         
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
             let decodeResult = self?.tryDecodeAndValidate(response: response, as: KeywordList.self)
@@ -96,13 +75,7 @@ final class MovieService: MovieServiceInterface {
         completion: @escaping (Result<ProviderList, NetworkError>?) -> Void
     ) -> URLSessionDataTask? {
         
-        // TODO: Change
-        
-        let endPoint: EndPoint = EndPoint(
-            host: "host.com",
-            path: "/3/movie/\(movieId)/watch/providers",
-            queryItems: nil
-        )
+        let endPoint: EndPoint = makeEndPoint(path: .providerList(movieId), queryItems: nil)
         
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
             let decodeResult = self?.tryDecodeAndValidate(response: response, as: ProviderList.self)
@@ -111,6 +84,18 @@ final class MovieService: MovieServiceInterface {
     }
     
     // MARK: Private Function(s)
+    
+    private func makeEndPoint(path: Path, queryItems: [EndPoint.QueryKey: String]?) -> EndPoint {
+        
+        var queries = queryItems ?? [:]
+        queries[.apiKey] = MainBundle.apiKey
+        
+        return EndPoint(
+            host: TmdbAPIDetails.defaultHost,
+            path: path.fullPath,
+            queryItems: queries
+        )
+    }
     
     private func tryDecodeAndValidate<T: Decodable>(
         response: Result<Data, NetworkError>,
@@ -135,12 +120,14 @@ extension MovieService {
         case providerList(Int)
         
         var fullPath: String {
+            let mainPath = TmdbAPIDetails.defaultPath
+            
             switch self {
             case .movieList(let category): return category.path
-            case .reviewList(let id): return "/\(id)/reviews"
-            case .videoList(let id): return "/\(id)/videos"
-            case .keywordList(let id): return "/\(id)/keywords"
-            case .providerList(let id): return "/\(id)/watch/providers"
+            case .reviewList(let id): return mainPath + "/\(id)/reviews"
+            case .videoList(let id): return mainPath + "/\(id)/videos"
+            case .keywordList(let id): return mainPath  + "/\(id)/keywords"
+            case .providerList(let id): return mainPath  + "/\(id)/watch/providers"
             }
         }
     }
