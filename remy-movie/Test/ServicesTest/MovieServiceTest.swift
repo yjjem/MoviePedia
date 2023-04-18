@@ -10,7 +10,7 @@ import XCTest
 
 final class MovieServiceTest: XCTestCase {
     
-    var sut: MovieService?
+    private var sut: MovieService?
     
     override func setUpWithError() throws {
         try super.setUpWithError()
