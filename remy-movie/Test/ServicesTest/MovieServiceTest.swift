@@ -15,10 +15,7 @@ final class MovieServiceTest: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let sessionConfiguration = URLSessionConfiguration.default
-        sessionConfiguration.protocolClasses = [MockURLProtocol.self]
-        let session = URLSession(configuration: sessionConfiguration)
-        let manager = NetworkManager(session: session)
+        let manager = MockNetworkManager()
         sut = MovieService(manger: manager)
     }
     
@@ -34,17 +31,12 @@ final class MovieServiceTest: XCTestCase {
         
         // Arrange
         
-        let url = URL(string: "host.com")!
-        let stubData = "stub data".data(using: .utf8)
-        let stubResponse = HTTPURLResponse(
-            url: url,
-            statusCode: 200,
-            httpVersion: nil,
-            headerFields: nil
-        )
+        let decodeFailError = NSError(domain: "invalid json", code: 1)
+        let error: NetworkError = .decodeFailed(decodeFailError)
+        let data: Data? = nil
         
-        MockURLProtocol.requestHandler = { request in
-            return (stubData, stubResponse!)
+        MockNetworkManager.mockHandler = {
+            return (error, data)
         }
         
         // Act and Assert
@@ -69,18 +61,11 @@ final class MovieServiceTest: XCTestCase {
         
         // Arrange
         
-        let url = URL(string: "host.com")!
-        let stubData = Data()
-        let expectedCode = 300
-        let stubResponse = HTTPURLResponse(
-            url: url,
-            statusCode: expectedCode,
-            httpVersion: nil,
-            headerFields: nil
-        )
+        let data: Data? = nil
+        let error: NetworkError = .notHTTPURLResponse
         
-        MockURLProtocol.requestHandler = { request in
-            return (stubData, stubResponse!)
+        MockNetworkManager.mockHandler = {
+            return (error, data)
         }
         
         // Act and Assert
@@ -92,9 +77,8 @@ final class MovieServiceTest: XCTestCase {
             
             loadExpectation.fulfill()
             
-            if case let .failure(.badResponse(code)) = response {
+            if case .failure(.notHTTPURLResponse) = response {
                 failExpectation.fulfill()
-                XCTAssertEqual(expectedCode, code)
             } else {
                 XCTFail("unexpected response: \(response.debugDescription)")
             }
@@ -109,22 +93,14 @@ final class MovieServiceTest: XCTestCase {
         
         // Arrange
         
-        let url = URL(string: "host.com")!
-        
+        let error: NetworkError? = nil
+        let stubJsonData: Data = MovieServiceStubJsons.movieList!
         let expectedPage = 1
         let expectedMovieCount = 1
         let expectedTitle = "Suicide Squad"
         
-        let stubData = MovieServiceStubJsons.movieList
-        let stubResponse = HTTPURLResponse(
-            url: url,
-            statusCode: 200,
-            httpVersion: nil,
-            headerFields: nil
-        )
-        
-        MockURLProtocol.requestHandler = { request in
-            return (stubData, stubResponse!)
+        MockNetworkManager.mockHandler = {
+            return (error, stubJsonData)
         }
         
         // Act and Assert
@@ -153,21 +129,13 @@ final class MovieServiceTest: XCTestCase {
         
         // Arrange
         
-        let url = URL(string: "host.com")!
-        
+        let error: NetworkError? = nil
+        let stubJsonData = MovieServiceStubJsons.reviewList
         let expectedId = 11
         let expectedAuthor = "Cat Ellington"
         
-        let stubData = MovieServiceStubJsons.reviewList
-        let stubResponse = HTTPURLResponse(
-            url: url,
-            statusCode: 200,
-            httpVersion: nil,
-            headerFields: nil
-        )
-        
-        MockURLProtocol.requestHandler = { request in
-            return (stubData, stubResponse!)
+        MockNetworkManager.mockHandler = {
+            return (error, stubJsonData)
         }
         
         // Act and Assert
@@ -195,21 +163,13 @@ final class MovieServiceTest: XCTestCase {
         
         // Arrange
         
-        let url = URL(string: "host.com")!
-        
+        let error: NetworkError? = nil
+        let stubJsonData = MovieServiceStubJsons.videoList
         let expectedId = 550
         let expectedVideoCount = 2
         
-        let stubData = MovieServiceStubJsons.videoList
-        let stubResponse = HTTPURLResponse(
-            url: url,
-            statusCode: 200,
-            httpVersion: nil,
-            headerFields: nil
-        )
-        
-        MockURLProtocol.requestHandler = { request in
-            return (stubData, stubResponse!)
+        MockNetworkManager.mockHandler = {
+            return (error, stubJsonData)
         }
         
         // Act and Assert
@@ -236,22 +196,14 @@ final class MovieServiceTest: XCTestCase {
     func test_loadKeywordList_문제없을시_정상적으로_KeywordList를_반환하는지() {
         
         // Arrange
-        
-        let url = URL(string: "host.com")!
     
+        let error: NetworkError? = nil
+        let stubJsonData = MovieServiceStubJsons.keyworkdList
         let expectedKeywordCount = 1
         let expectedKeywordId = 825
         
-        let stubData = MovieServiceStubJsons.keyworkdList
-        let stubResponse = HTTPURLResponse(
-            url: url,
-            statusCode: 200,
-            httpVersion: nil,
-            headerFields: nil
-        )
-        
-        MockURLProtocol.requestHandler = { request in
-            return (stubData, stubResponse!)
+        MockNetworkManager.mockHandler = {
+            return (error, stubJsonData)
         }
         
         // Act and Assert
@@ -284,21 +236,13 @@ final class MovieServiceTest: XCTestCase {
         
         // Arrange
         
-        let url = URL(string: "host.com")!
-        
+        let error: NetworkError? = nil
+        let stubJsonData = MovieServiceStubJsons.providersInfo
         let expectedFlatRateCount = 1
         let expectedBuyCount = 2
         
-        let stubData = MovieServiceStubJsons.providersInfo
-        let stubResponse = HTTPURLResponse(
-            url: url,
-            statusCode: 200,
-            httpVersion: nil,
-            headerFields: nil
-        )
-        
-        MockURLProtocol.requestHandler = { request in
-            return (stubData, stubResponse!)
+        MockNetworkManager.mockHandler = {
+            return (error, stubJsonData)
         }
         
         // Act and Assert
@@ -328,22 +272,14 @@ final class MovieServiceTest: XCTestCase {
         
         // Arrange
         
-        let url = URL(string: "host.com")!
-        
+        let error: NetworkError? = nil
+        let stubJsonData = MovieServiceStubJsons.movieList
         let expectedPage = 1
         let expectedMovieCount = 1
         let expectedTitle = "Suicide Squad"
         
-        let stubData = MovieServiceStubJsons.movieList
-        let stubResponse = HTTPURLResponse(
-            url: url,
-            statusCode: 200,
-            httpVersion: nil,
-            headerFields: nil
-        )
-        
-        MockURLProtocol.requestHandler = { request in
-            return (stubData, stubResponse!)
+        MockNetworkManager.mockHandler = {
+            return (error, stubJsonData)
         }
         
         // Act and Assert
