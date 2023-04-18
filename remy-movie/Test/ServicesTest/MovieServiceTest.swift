@@ -55,11 +55,8 @@ final class MovieServiceTest: XCTestCase {
         let _ = sut?.loadMovieList(page: 1, of: .popular) { response in
             loadExpectation.fulfill()
             
-            if case let .failure(.decodeFailed(error)) = response {
-                
+            if case .failure(.decodeFailed) = response {
                 failExpectation.fulfill()
-                
-                printErrorWithDetailsOfFunction(name: #function, error: error)
             } else {
                 XCTFail("unexpected response: \(response.debugDescription)")
             }
