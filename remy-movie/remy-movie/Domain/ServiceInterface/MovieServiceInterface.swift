@@ -12,10 +12,7 @@ protocol MovieServiceInterface {
     // MARK: Type(s)
     
     typealias MovieList = GenericResponse<[Movie]>
-    typealias ReviewList = GenericResponse<[Review]>
     typealias VideoList = GenericResponse<[Video]>
-    typealias KeywordList = GenericResponse<[Keyword]>
-    typealias ProviderList = GenericResponse<ProvidersByCountryResponse>
     
     // MARK: Function(s)
     
@@ -25,31 +22,9 @@ protocol MovieServiceInterface {
         completion: @escaping (Result<MovieList, NetworkError>?) -> Void
     ) -> URLSessionDataTask?
     
-    func loadReviewList(
-        page: Int,
-        movieId: Int,
-        completion: @escaping (Result<ReviewList, NetworkError>?) -> Void
-    ) -> URLSessionDataTask?
-    
     func loadVideoList(
         movieId: Int,
         completion: @escaping (Result<VideoList, NetworkError>?) -> Void
-    ) -> URLSessionDataTask?
-    
-    func loadKeywordList(
-        movieId: Int,
-        completion: @escaping (Result<KeywordList, NetworkError>?) -> Void
-    ) -> URLSessionDataTask?
-    
-    func loadProviderList(
-        movieId: Int,
-        completion: @escaping (Result<ProviderList, NetworkError>?) -> Void
-    ) -> URLSessionDataTask?
-    
-    func loadSimilarMovieList(
-        page: Int,
-        movieId: Int,
-        completion: @escaping (Result<MovieList, NetworkError>?) -> Void
     ) -> URLSessionDataTask?
 }
 

@@ -122,183 +122,38 @@ final class MovieServiceTest: XCTestCase {
             }
         }
         
-        wait(for: [loadExpectation, successExpectation], timeout: 2)
-    }
-    
-    func test_loadReviewList_문제없을시_정상적으로_ReviewList를_반환하는지() {
-        
-        // Arrange
-        
-        let error: NetworkError? = nil
-        let stubJsonData = MovieServiceStubJsons.reviewList
-        let expectedId = 11
-        let expectedAuthor = "Cat Ellington"
-        
-        MockNetworkManager.mockHandler = {
-            return (error, stubJsonData)
-        }
-        
-        // Act and Assert
-        
-        let loadExpectation = expectation(description: "did load")
-        let successExpectation = expectation(description: "did success")
-        
-        let _ = sut?.loadReviewList(page: 1, movieId: 11) { response in
+        func test_loadVideoList_문제없을시_정상적으로_VideoList를_반환하는지() {
             
-            loadExpectation.fulfill()
+            // Arrange
             
-            if case let .success(reviewList) = response {
-                successExpectation.fulfill()
-                XCTAssertEqual(reviewList.id, expectedId)
-                XCTAssertEqual(reviewList.results?[0].author, expectedAuthor)
-            } else {
-                XCTFail("unexpected response: \(response.debugDescription)")
+            let error: NetworkError? = nil
+            let stubJsonData = MovieServiceStubJsons.videoList
+            let expectedId = 550
+            let expectedVideoCount = 2
+            
+            MockNetworkManager.mockHandler = {
+                return (error, stubJsonData)
             }
-        }
-        
-        wait(for: [loadExpectation, successExpectation], timeout: 2)
-    }
-    
-    func test_loadVideoList_문제없을시_정상적으로_VideoList를_반환하는지() {
-        
-        // Arrange
-        
-        let error: NetworkError? = nil
-        let stubJsonData = MovieServiceStubJsons.videoList
-        let expectedId = 550
-        let expectedVideoCount = 2
-        
-        MockNetworkManager.mockHandler = {
-            return (error, stubJsonData)
-        }
-        
-        // Act and Assert
-        
-        let loadExpectation = expectation(description: "did load")
-        let successExpectation = expectation(description: "did success")
-        
-        let _ = sut?.loadVideoList(movieId: 11) { response in
             
-            loadExpectation.fulfill()
+            // Act and Assert
             
-            if case let .success(videoList) = response {
-                successExpectation.fulfill()
-                XCTAssertEqual(videoList.id, expectedId)
-                XCTAssertEqual(videoList.results?.count, expectedVideoCount)
-            } else {
-                XCTFail("unexpected response: \(response.debugDescription)")
-            }
-        }
-        
-        wait(for: [loadExpectation, successExpectation], timeout: 2)
-    }
-    
-    func test_loadKeywordList_문제없을시_정상적으로_KeywordList를_반환하는지() {
-        
-        // Arrange
-    
-        let error: NetworkError? = nil
-        let stubJsonData = MovieServiceStubJsons.keyworkdList
-        let expectedKeywordCount = 1
-        let expectedKeywordId = 825
-        
-        MockNetworkManager.mockHandler = {
-            return (error, stubJsonData)
-        }
-        
-        // Act and Assert
-        
-        let loadExpectation = expectation(description: "did load")
-        let successExpectation = expectation(description: "did success")
-        
-        let _ = sut?.loadKeywordList(movieId: 550) { response in
+            let loadExpectation = expectation(description: "did load")
+            let successExpectation = expectation(description: "did success")
             
-            loadExpectation.fulfill()
-            
-            if case let .success(keywordList) = response {
-                successExpectation.fulfill()
+            let _ = sut?.loadVideoList(movieId: 11) { response in
                 
-                let keywordList = keywordList.keywords
+                loadExpectation.fulfill()
                 
-                XCTAssertEqual(keywordList?.count, expectedKeywordCount)
-                XCTAssertEqual(keywordList?[0].id, expectedKeywordId)
-                
-            } else {
-                XCTFail("unexpected response: \(response.debugDescription)")
+                if case let .success(videoList) = response {
+                    successExpectation.fulfill()
+                    XCTAssertEqual(videoList.id, expectedId)
+                    XCTAssertEqual(videoList.results?.count, expectedVideoCount)
+                } else {
+                    XCTFail("unexpected response: \(response.debugDescription)")
+                }
             }
-        }
-        
-        wait(for: [loadExpectation, successExpectation], timeout: 2)
-
-    }
-    
-    func test_loadProviderList_문제없을시_정상적으로_ProviderList를_반환하는지() {
-        
-        // Arrange
-        
-        let error: NetworkError? = nil
-        let stubJsonData = MovieServiceStubJsons.providersInfo
-        let expectedFlatRateCount = 1
-        let expectedBuyCount = 2
-        
-        MockNetworkManager.mockHandler = {
-            return (error, stubJsonData)
-        }
-        
-        // Act and Assert
-        
-        let loadExpectation = expectation(description: "did load")
-        let successExpectation = expectation(description: "did success")
-        
-        let _ = sut?.loadProviderList(movieId: 11) { response in
             
-            loadExpectation.fulfill()
-            
-            if case let .success(providersInfo) = response {
-                successExpectation.fulfill()
-                
-                let krProviderInfo = providersInfo.results?.kr
-                XCTAssertEqual(krProviderInfo?.flatrate?.count, expectedFlatRateCount)
-                XCTAssertEqual(krProviderInfo?.buy?.count, expectedBuyCount)
-            } else {
-                XCTFail("unexpected response: \(response.debugDescription)")
-            }
-        }
-        
-        wait(for: [loadExpectation, successExpectation], timeout: 2)
-    }
-    
-    func test_loadSimilarMovieList_문제없으시_정상적으로_MovieList를_반환하는지() {
-        
-        // Arrange
-        
-        let error: NetworkError? = nil
-        let stubJsonData = MovieServiceStubJsons.movieList
-        let expectedPage = 1
-        let expectedMovieCount = 1
-        let expectedTitle = "Suicide Squad"
-        
-        MockNetworkManager.mockHandler = {
-            return (error, stubJsonData)
-        }
-        
-        // Act and Assert
-        
-        let loadExpectation = expectation(description: "did load")
-        let successExpectation = expectation(description: "did success")
-        
-        let _ = sut?.loadSimilarMovieList(page: 1, movieId: 297761) { response in
-            
-            loadExpectation.fulfill()
-            
-            if case let .success(movieList) = response {
-                successExpectation.fulfill()
-                XCTAssertTrue(movieList.page == expectedPage)
-                XCTAssertTrue(movieList.results?.count == expectedMovieCount)
-                XCTAssertTrue(movieList.results?[0].originalTitle == expectedTitle)
-            } else {
-                XCTFail("unexpected response: \(response.debugDescription)")
-            }
+            wait(for: [loadExpectation, successExpectation], timeout: 2)
         }
         
         wait(for: [loadExpectation, successExpectation], timeout: 2)
