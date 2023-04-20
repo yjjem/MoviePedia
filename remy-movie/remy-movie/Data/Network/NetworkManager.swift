@@ -19,6 +19,8 @@ final class NetworkManager: Networkable {
         session.invalidateAndCancel()
     }
     
+    // MARK: Function(s)
+    
     func load(
         url: URL?,
         method: HTTPMethod,
@@ -87,6 +89,8 @@ final class NetworkManager: Networkable {
         
         return request
     }
+    
+    // MARK: Private Function(s)
     
     private func tryValidateSession(
         error: Error?,

@@ -7,7 +7,12 @@
 import Foundation
 
 protocol Networkable {
+    
+    // MARK:  Type(s)
+    
     typealias FailableData = Result<Data, NetworkError>
+    
+    // MARK:  Function(s)
     
     func load(
         url: URL?,
