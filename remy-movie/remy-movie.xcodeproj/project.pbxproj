@@ -31,7 +31,7 @@
 		DF6FBB6729E3044C00BE310A /* Data + decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6FBB6629E3044C00BE310A /* Data + decode.swift */; };
 		DF82076029D1635200E6854A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82075F29D1635200E6854A /* AppDelegate.swift */; };
 		DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076129D1635200E6854A /* SceneDelegate.swift */; };
-		DF82076429D1635200E6854A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076329D1635200E6854A /* ViewController.swift */; };
+		DF82076429D1635200E6854A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076329D1635200E6854A /* HomeViewController.swift */; };
 		DF82076929D1635300E6854A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF82076829D1635300E6854A /* Assets.xcassets */; };
 		DF82076C29D1635300E6854A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF82076A29D1635300E6854A /* LaunchScreen.storyboard */; };
 		DFB56DE029EE6CD40017000D /* MockNetwokrManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB56DDF29EE6CD40017000D /* MockNetwokrManager.swift */; };
@@ -75,7 +75,7 @@
 		DF82075C29D1635200E6854A /* remy-movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "remy-movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF82075F29D1635200E6854A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF82076129D1635200E6854A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DF82076329D1635200E6854A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DF82076329D1635200E6854A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DF82076829D1635300E6854A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF82076B29D1635300E6854A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF82076D29D1635300E6854A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -269,7 +269,7 @@
 		DF82077529D1639100E6854A /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				DF82076329D1635200E6854A /* ViewController.swift */,
+				DF82076329D1635200E6854A /* HomeViewController.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -387,7 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF5BA80929DA989C00C96823 /* HTTPMethod.swift in Sources */,
-				DF82076429D1635200E6854A /* ViewController.swift in Sources */,
+				DF82076429D1635200E6854A /* HomeViewController.swift in Sources */,
 				DF06677B29E3FD9B00DFF788 /* ProvidersInfo.swift in Sources */,
 				DF6FBB5829E2ABF900BE310A /* Keyword.swift in Sources */,
 				DF6FBB5029E2A07400BE310A /* Movie.swift in Sources */,

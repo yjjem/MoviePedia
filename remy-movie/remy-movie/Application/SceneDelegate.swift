@@ -17,9 +17,18 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
-        let rootViewController = ViewController()
+        
+        let home = HomeViewController()
+        let sceneList: [UIViewController] = [home]
+        
+        let rootViewController = UITabBarController()
+        rootViewController.modalPresentationStyle = .fullScreen
+        rootViewController.tabBar.backgroundColor = .white
+        rootViewController.setViewControllers(sceneList, animated: true)
+        
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = rootViewController
+        window?.backgroundColor = .systemGray6
         window?.makeKeyAndVisible()
     }
 }
