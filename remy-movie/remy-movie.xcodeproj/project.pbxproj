@@ -31,6 +31,7 @@
 		DF6FBB6729E3044C00BE310A /* Data + decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6FBB6629E3044C00BE310A /* Data + decode.swift */; };
 		DF72873229F3E8DE002C6701 /* RoundableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF72873129F3E8DE002C6701 /* RoundableView.swift */; };
 		DF72873429F3E9AB002C6701 /* SingleMovieInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF72873329F3E9AB002C6701 /* SingleMovieInfoView.swift */; };
+		DF72873829F50BED002C6701 /* MovieInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF72873729F50BED002C6701 /* MovieInfoCell.swift */; };
 		DF82076029D1635200E6854A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82075F29D1635200E6854A /* AppDelegate.swift */; };
 		DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076129D1635200E6854A /* SceneDelegate.swift */; };
 		DF82076429D1635200E6854A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076329D1635200E6854A /* HomeViewController.swift */; };
@@ -76,6 +77,7 @@
 		DF6FBB6629E3044C00BE310A /* Data + decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + decode.swift"; sourceTree = "<group>"; };
 		DF72873129F3E8DE002C6701 /* RoundableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundableView.swift; sourceTree = "<group>"; };
 		DF72873329F3E9AB002C6701 /* SingleMovieInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMovieInfoView.swift; sourceTree = "<group>"; };
+		DF72873729F50BED002C6701 /* MovieInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoCell.swift; sourceTree = "<group>"; };
 		DF82075C29D1635200E6854A /* remy-movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "remy-movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF82075F29D1635200E6854A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF82076129D1635200E6854A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 		DF82077529D1639100E6854A /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				DF72873729F50BED002C6701 /* MovieInfoCell.swift */,
 				DF72873129F3E8DE002C6701 /* RoundableView.swift */,
 				DF72873329F3E9AB002C6701 /* SingleMovieInfoView.swift */,
 				DF82076329D1635200E6854A /* HomeViewController.swift */,
@@ -410,6 +413,7 @@
 				DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */,
 				DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */,
 				DF6FBB4E29E2A05F00BE310A /* GenericResponse.swift in Sources */,
+				DF72873829F50BED002C6701 /* MovieInfoCell.swift in Sources */,
 				DF06678C29E5A34E00DFF788 /* Bundle + apiKey.swift in Sources */,
 				DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */,
 				DF6FBB6129E3022700BE310A /* MovieServiceInterface.swift in Sources */,
