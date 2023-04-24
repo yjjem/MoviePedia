@@ -20,7 +20,7 @@ final class SingleMovieInfoView: RoundableView {
     }()
     
     convenience init() {
-        self.init()
+        self.init(frame: .zero)
         
         configureViews()
         configureConstraints()
