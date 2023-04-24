@@ -38,6 +38,7 @@
 		DF82076929D1635300E6854A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF82076829D1635300E6854A /* Assets.xcassets */; };
 		DF82076C29D1635300E6854A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF82076A29D1635300E6854A /* LaunchScreen.storyboard */; };
 		DFB56DE029EE6CD40017000D /* MockNetwokrManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB56DDF29EE6CD40017000D /* MockNetwokrManager.swift */; };
+		DFBB8ED629F6BA03000D1A1C /* MovieInfoListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8ED529F6BA03000D1A1C /* MovieInfoListCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		DF82076B29D1635300E6854A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF82076D29D1635300E6854A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFB56DDF29EE6CD40017000D /* MockNetwokrManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetwokrManager.swift; sourceTree = "<group>"; };
+		DFBB8ED529F6BA03000D1A1C /* MovieInfoListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoListCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +280,7 @@
 				DF72873729F50BED002C6701 /* MovieInfoCell.swift */,
 				DF72873129F3E8DE002C6701 /* RoundableView.swift */,
 				DF72873329F3E9AB002C6701 /* SingleMovieInfoView.swift */,
+				DFBB8ED529F6BA03000D1A1C /* MovieInfoListCollectionView.swift */,
 				DF82076329D1635200E6854A /* HomeViewController.swift */,
 			);
 			path = Scene;
@@ -400,6 +403,7 @@
 				DF82076429D1635200E6854A /* HomeViewController.swift in Sources */,
 				DF06677B29E3FD9B00DFF788 /* ProvidersInfo.swift in Sources */,
 				DF6FBB5829E2ABF900BE310A /* Keyword.swift in Sources */,
+				DFBB8ED629F6BA03000D1A1C /* MovieInfoListCollectionView.swift in Sources */,
 				DF6FBB5029E2A07400BE310A /* Movie.swift in Sources */,
 				DF06678829E563CA00DFF788 /* ProvidersByCountryResponse.swift in Sources */,
 				DF06677729E3EC2700DFF788 /* EndPoint.swift in Sources */,
