@@ -11,11 +11,13 @@ final class SingleMovieInfoView: RoundableView {
     
     private let infoTypeLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let movieTitleLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -37,6 +39,8 @@ final class SingleMovieInfoView: RoundableView {
         NSLayoutConstraint.activate([
             infoTypeLabel.topAnchor.constraint(equalTo: topAnchor),
             infoTypeLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            infoTypeLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            movieTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             movieTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             movieTitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])

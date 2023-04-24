@@ -186,10 +186,10 @@
 			children = (
 				DF6FBB4F29E2A07400BE310A /* Movie.swift */,
 				DF6FBB5129E2A13300BE310A /* MovieDetails.swift */,
+				DF06677A29E3FD9B00DFF788 /* ProvidersInfo.swift */,
 				DF6FBB5729E2ABF900BE310A /* Keyword.swift */,
 				DF6FBB5329E2A48B00BE310A /* Review.swift */,
 				DF6FBB5529E2AAEB00BE310A /* Video.swift */,
-				DF06677A29E3FD9B00DFF788 /* ProvidersInfo.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
