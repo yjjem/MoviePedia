@@ -39,6 +39,7 @@
 		DF82076C29D1635300E6854A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF82076A29D1635300E6854A /* LaunchScreen.storyboard */; };
 		DFB56DE029EE6CD40017000D /* MockNetwokrManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB56DDF29EE6CD40017000D /* MockNetwokrManager.swift */; };
 		DFBB8ED629F6BA03000D1A1C /* MovieInfoListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8ED529F6BA03000D1A1C /* MovieInfoListCollectionView.swift */; };
+		DFBB8ED829F79686000D1A1C /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8ED729F79686000D1A1C /* StyleGuide.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		DF82076D29D1635300E6854A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFB56DDF29EE6CD40017000D /* MockNetwokrManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetwokrManager.swift; sourceTree = "<group>"; };
 		DFBB8ED529F6BA03000D1A1C /* MovieInfoListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoListCollectionView.swift; sourceTree = "<group>"; };
+		DFBB8ED729F79686000D1A1C /* StyleGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +279,7 @@
 		DF82077529D1639100E6854A /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				DFBB8ED729F79686000D1A1C /* StyleGuide.swift */,
 				DF72873729F50BED002C6701 /* MovieInfoCell.swift */,
 				DF72873129F3E8DE002C6701 /* RoundableView.swift */,
 				DF72873329F3E9AB002C6701 /* SingleMovieInfoView.swift */,
@@ -410,6 +413,7 @@
 				DF72873229F3E8DE002C6701 /* RoundableView.swift in Sources */,
 				DF6FBB5229E2A13300BE310A /* MovieDetails.swift in Sources */,
 				DF6FBB5429E2A48B00BE310A /* Review.swift in Sources */,
+				DFBB8ED829F79686000D1A1C /* StyleGuide.swift in Sources */,
 				DF82076029D1635200E6854A /* AppDelegate.swift in Sources */,
 				DF6FBB6729E3044C00BE310A /* Data + decode.swift in Sources */,
 				DF6FBB5629E2AAEB00BE310A /* Video.swift in Sources */,
