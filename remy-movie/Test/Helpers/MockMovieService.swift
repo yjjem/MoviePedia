@@ -13,9 +13,38 @@ final class MockMovieService: MovieServiceInterface {
     var loadMovieListCallCount: Int = 0
     var loadMovieListPage: Int?
     var loadMovieListCategory: ListCategory?
+    let expectedMovie: Movie = .init(
+        posterPath: "/e1mjopzAS2KNsvpbpahQ1a6SkSn.jpg",
+        adult: false,
+        overview: "From DC Comics...",
+        releaseData: "2016-08-03",
+        genreIds: [14, 28, 80],
+        id: 297761,
+        originalTitle: "Suicide Squad",
+        originalLanguage: "en",
+        title: "Suicide Squad",
+        backdropPath: "/ndlQ2Cuc3cjTL7lTynw6I4boP4S.jpg",
+        popularity: 48.261451,
+        voteCount: 1466,
+        video: false,
+        voteAverage: 5.91
+    )
     
     var loadVideoListCallCount: Int = 0
     var loadVideoListMovieId: Int?
+    let expectedVideo: Video = .init(
+        iso6391: "en",
+        iso31661: "US",
+        name: "Fight Club - Theatrical Trailer Remastered in HD",
+        key: "6JnN1DmbqoU",
+        size: 1080,
+        type: "Trailer",
+        official: false,
+        publishedAt: "2015-02-26T03:19:25.000Z",
+        id: "5e382d1b4ca676001453826d"
+    )
+    
+    var expectedError: NetworkError?
     
     func loadMovieList(
         page: Int,
@@ -25,6 +54,12 @@ final class MockMovieService: MovieServiceInterface {
         loadMovieListCallCount += 1
         loadMovieListPage = page
         loadMovieListCategory = category
+        
+        if let expectedError {
+            completion(.failure(expectedError))
+        } else {
+            completion(.success([expectedMovie, expectedMovie]))
+        }
     }
     
     func loadVideoList(
@@ -33,6 +68,12 @@ final class MockMovieService: MovieServiceInterface {
     ) {
         loadVideoListCallCount += 1
         loadVideoListMovieId = movieId
+        
+        if let expectedError {
+            completion(.failure(expectedError))
+        } else {
+            completion(.success([expectedVideo, expectedVideo]))
+        }
     }
     
     func verityLoadMovieList(

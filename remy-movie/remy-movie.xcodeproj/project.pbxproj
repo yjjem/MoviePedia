@@ -42,6 +42,7 @@
 		DFBB8ED829F79686000D1A1C /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8ED729F79686000D1A1C /* StyleGuide.swift */; };
 		DFBB8EE229F7EC40000D1A1C /* MovieInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8EE129F7EC40000D1A1C /* MovieInfoUseCase.swift */; };
 		DFBB8EE629F8065B000D1A1C /* MockMovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8EE529F8065B000D1A1C /* MockMovieService.swift */; };
+		DFBB8EEB29F80B90000D1A1C /* MovieInfoUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8EEA29F80B90000D1A1C /* MovieInfoUseCaseTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		DFBB8ED729F79686000D1A1C /* StyleGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
 		DFBB8EE129F7EC40000D1A1C /* MovieInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoUseCase.swift; sourceTree = "<group>"; };
 		DFBB8EE529F8065B000D1A1C /* MockMovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieService.swift; sourceTree = "<group>"; };
+		DFBB8EEA29F80B90000D1A1C /* MovieInfoUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieInfoUseCaseTest.swift; path = Test/UseCaseTest/MovieInfoUseCaseTest.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				DF62499B29DD6979002C82A8 /* Helpers */,
 				DF62498929DC7800002C82A8 /* NetwokrPlatformTest */,
 				DF06677E29E4039E00DFF788 /* ServicesTest */,
+				DFBB8EE729F80B3F000D1A1C /* UseCaseTest */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -303,6 +306,14 @@
 			path = UseCase;
 			sourceTree = "<group>";
 		};
+		DFBB8EE729F80B3F000D1A1C /* UseCaseTest */ = {
+			isa = PBXGroup;
+			children = (
+				DFBB8EEA29F80B90000D1A1C /* MovieInfoUseCaseTest.swift */,
+			);
+			path = UseCaseTest;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -406,6 +417,7 @@
 				DF62498B29DC7800002C82A8 /* NetwokrPlatformTest.swift in Sources */,
 				DF06678529E5109300DFF788 /* StubJsons.swift in Sources */,
 				DF06677D29E4036200DFF788 /* MovieServiceTest.swift in Sources */,
+				DFBB8EEB29F80B90000D1A1C /* MovieInfoUseCaseTest.swift in Sources */,
 				DFB56DE029EE6CD40017000D /* MockNetwokrManager.swift in Sources */,
 				DFBB8EE629F8065B000D1A1C /* MockMovieService.swift in Sources */,
 				DF62499229DC7902002C82A8 /* MockURLProtocol.swift in Sources */,
