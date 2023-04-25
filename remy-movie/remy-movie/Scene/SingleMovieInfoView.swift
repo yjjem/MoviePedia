@@ -26,6 +26,7 @@ final class SingleMovieInfoView: RoundableView {
         
         configureViews()
         configureConstraints()
+        applyPresentingStyle()
     }
     
     private func configureViews() {
