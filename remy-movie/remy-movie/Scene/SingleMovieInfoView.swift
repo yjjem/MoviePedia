@@ -25,6 +25,13 @@ final class SingleMovieInfoView: RoundableView {
         return label
     }()
     
+    private let backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .systemGreen
+        return imageView
+    }()
+    
     private let layoutGuide: UILayoutGuide = {
         return UILayoutGuide()
     }()
@@ -38,10 +45,10 @@ final class SingleMovieInfoView: RoundableView {
     }
     
     private func configureViews() {
-        
-        let views: [UIView] = [infoTypeLabel, movieTitleLabel]
+        let views: [UIView] = [backgroundImageView, infoTypeLabel, movieTitleLabel]
         views.forEach { addSubview($0) }
         addLayoutGuide(layoutGuide)
+        clipsToBounds = true
     }
     
     private func configureConstraints() {
@@ -55,9 +62,19 @@ final class SingleMovieInfoView: RoundableView {
         ])
         
         NSLayoutConstraint.activate([
+            backgroundImageView.topAnchor.constraint(equalTo: topAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
             infoTypeLabel.topAnchor.constraint(equalTo: layoutGuide.topAnchor),
             infoTypeLabel.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor),
             infoTypeLabel.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
             movieTitleLabel.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor),
             movieTitleLabel.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor),
             movieTitleLabel.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor)
