@@ -34,8 +34,7 @@ final class MovieInfoListCollectionView: UICollectionView {
     
     private func makeMovieInfoCellRegistration() -> MovieInfoCellRegistration {
         
-        return MovieInfoCellRegistration {
-            cell, indexPath, itemIdentifier in
+        return MovieInfoCellRegistration { cell, indexPath, itemIdentifier in
             
             let infoView = SingleMovieInfoView()
             infoView.backgroundColor = .systemBlue
@@ -49,6 +48,7 @@ final class MovieInfoListCollectionView: UICollectionView {
         
         diffableDataSource = .init(collectionView: self) {
             collectionView, indexPath, itemIdentifier in
+            
             return collectionView.dequeueConfiguredReusableCell(
                 using: registration,
                 for: indexPath,

@@ -44,6 +44,8 @@ final class SingleMovieInfoView: RoundableView {
         applyPresentingStyle()
     }
     
+    // MARK: Private Function(s)
+    
     private func configureViews() {
         let views: [UIView] = [backgroundImageView, infoTypeLabel, movieTitleLabel]
         views.forEach { addSubview($0) }

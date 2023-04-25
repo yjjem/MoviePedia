@@ -18,6 +18,8 @@ final class MovieInfoCell: UICollectionViewCell {
         }
     }
     
+    // MARK: Private Function(s)
+    
     private func configureView() {
         
         guard let content = content else { return }
