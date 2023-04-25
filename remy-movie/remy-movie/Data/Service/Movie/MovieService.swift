@@ -20,26 +20,28 @@ final class MovieService: MovieServiceInterface {
     func loadMovieList(
         page: Int,
         of category: ListCategory,
-        completion: @escaping (Result<MovieList, NetworkError>?) -> Void
+        completion: @escaping (Result<MovieList, NetworkError>) -> Void
     ) -> URLSessionDataTask? {
         
         let endPoint = makeEndPoint(path: .movieList(category), queryItems: [.page: String(page)])
         
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
-            let decodeResult = self?.tryDecodeAndValidate(response: response, as: MovieList.self)
+            guard let self = self else { return }
+            let decodeResult = self.tryDecodeAndValidate(response: response, as: MovieList.self)
             completion(decodeResult)
         }
     }
     
     func loadVideoList(
             movieId: Int,
-            completion: @escaping (Result<VideoList, NetworkError>?) -> Void
+            completion: @escaping (Result<VideoList, NetworkError>) -> Void
         ) -> URLSessionDataTask? {
             
             let endPoint = makeEndPoint(path: .videoList(movieId), queryItems: nil)
             
             return manager.load(url: endPoint.url, method: .get) { [weak self] response in
-                let decodeResult = self?.tryDecodeAndValidate(response: response, as: VideoList.self)
+                guard let self = self else { return }
+                let decodeResult = self.tryDecodeAndValidate(response: response, as: VideoList.self)
                 completion(decodeResult)
             }
         }
