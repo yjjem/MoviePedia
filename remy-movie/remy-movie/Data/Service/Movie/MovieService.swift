@@ -33,19 +33,19 @@ final class MovieService: MovieServiceInterface {
     }
     
     func loadVideoList(
-            movieId: Int,
-            completion: @escaping (Result<VideoList, NetworkError>) -> Void
-        ) -> URLSessionDataTask? {
-            
-            let endPoint = makeEndPoint(path: .videoList(movieId), queryItems: nil)
-            
-            return manager.load(url: endPoint.url, method: .get) { [weak self] response in
-                guard let self = self else { return }
-                let decodeResult = self.tryDecodeAndValidate(response: response, as: VideoList.self)
-                completion(decodeResult)
-            }
+        movieId: Int,
+        completion: @escaping (Result<VideoList, NetworkError>) -> Void
+    ) -> URLSessionDataTask? {
+        
+        let endPoint = makeEndPoint(path: .videoList(movieId), queryItems: nil)
+        
+        return manager.load(url: endPoint.url, method: .get) { [weak self] response in
+            guard let self = self else { return }
+            let decodeResult = self.tryDecodeAndValidate(response: response, as: VideoList.self)
+            completion(decodeResult)
         }
-
+    }
+    
     
     // MARK: Private Function(s)
     
