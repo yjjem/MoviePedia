@@ -9,10 +9,17 @@ import Foundation
 
 final class MovieService: MovieServiceInterface {
     
+    private var tasks: [URLSessionTask] = []
     private let manager: Networkable
     
     init(manger: Networkable) {
         self.manager = manger
+    }
+    
+    deinit {
+        tasks.forEach {
+            $0.cancel()
+        }
     }
     
     // MARK: Function(s)
@@ -21,28 +28,36 @@ final class MovieService: MovieServiceInterface {
         page: Int,
         of category: ListCategory,
         completion: @escaping (Result<[Movie]?, NetworkError>) -> Void
-    ) -> URLSessionDataTask? {
+    ) {
         
         let endPoint = makeEndPoint(path: .movieList(category), queryItems: [.page: String(page)])
         
-        return manager.load(url: endPoint.url, method: .get) { [weak self] response in
+        let task = manager.load(url: endPoint.url, method: .get) { [weak self] response in
             guard let self = self else { return }
             let decodeResult = self.tryDecodeAndValidate(response: response, as: MovieList.self)
             completion(decodeResult.map { $0.asMovieList() })
+        }
+        
+        if let task {
+            tasks.append(task)
         }
     }
     
     func loadVideoList(
         movieId: Int,
         completion: @escaping (Result<[Video]?, NetworkError>) -> Void
-    ) -> URLSessionDataTask? {
+    ) {
         
         let endPoint = makeEndPoint(path: .videoList(movieId), queryItems: nil)
         
-        return manager.load(url: endPoint.url, method: .get) { [weak self] response in
+        let task = manager.load(url: endPoint.url, method: .get) { [weak self] response in
             guard let self = self else { return }
             let decodeResult = self.tryDecodeAndValidate(response: response, as: VideoList.self)
             completion(decodeResult.map { $0.asVideList() })
+        }
+        
+        if let task {
+            tasks.append(task)
         }
     }
     

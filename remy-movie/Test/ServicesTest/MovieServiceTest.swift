@@ -50,7 +50,7 @@ final class MovieServiceTest: XCTestCase {
             if case .failure(.decodeFailed) = response {
                 failExpectation.fulfill()
             } else {
-                XCTFail("unexpected response: \(response.debugDescription)")
+                XCTFail("unexpected response: \(response)")
             }
         }
         
@@ -80,7 +80,7 @@ final class MovieServiceTest: XCTestCase {
             if case .failure(.notHTTPURLResponse) = response {
                 failExpectation.fulfill()
             } else {
-                XCTFail("unexpected response: \(response.debugDescription)")
+                XCTFail("unexpected response: \(response)")
             }
         }
         
@@ -95,9 +95,7 @@ final class MovieServiceTest: XCTestCase {
         
         let error: NetworkError? = nil
         let stubJsonData: Data = MovieServiceStubJsons.movieList!
-        let expectedPage = 1
         let expectedMovieCount = 1
-        let expectedTitle = "Suicide Squad"
         
         MockNetworkManager.mockHandler = {
             return (error, stubJsonData)
@@ -114,11 +112,9 @@ final class MovieServiceTest: XCTestCase {
             
             if case let .success(movieList) = response {
                 successExpectation.fulfill()
-                XCTAssertTrue(movieList.page == expectedPage)
-                XCTAssertTrue(movieList.results?.count == expectedMovieCount)
-                XCTAssertTrue(movieList.results?[0].originalTitle == expectedTitle)
+                XCTAssertTrue(movieList?.count == expectedMovieCount)
             } else {
-                XCTFail("unexpected response: \(response.debugDescription)")
+                XCTFail("unexpected response: \(response)")
             }
         }
         
@@ -128,7 +124,6 @@ final class MovieServiceTest: XCTestCase {
             
             let error: NetworkError? = nil
             let stubJsonData = MovieServiceStubJsons.videoList
-            let expectedId = 550
             let expectedVideoCount = 2
             
             MockNetworkManager.mockHandler = {
@@ -146,10 +141,9 @@ final class MovieServiceTest: XCTestCase {
                 
                 if case let .success(videoList) = response {
                     successExpectation.fulfill()
-                    XCTAssertEqual(videoList.id, expectedId)
-                    XCTAssertEqual(videoList.results?.count, expectedVideoCount)
+                    XCTAssertTrue(videoList?.count == expectedVideoCount)
                 } else {
-                    XCTFail("unexpected response: \(response.debugDescription)")
+                    XCTFail("unexpected response: \(response)")
                 }
             }
             
