@@ -15,3 +15,17 @@ struct GenericResponse<Items: Decodable>: Decodable {
     let totalPages: Int?
     let totalResults: Int?
 }
+
+extension GenericResponse where Items == [Movie] {
+    
+    func asMovieList() -> [Movie]? {
+        return results
+    }
+}
+
+extension GenericResponse where Items == [Video] {
+    
+    func asVideList() -> [Video]? {
+        return results
+    }
+}

@@ -19,12 +19,12 @@ protocol MovieServiceInterface {
     func loadMovieList(
         page: Int,
         of category: ListCategory,
-        completion: @escaping (Result<MovieList, NetworkError>) -> Void
+        completion: @escaping (Result<[Movie]?, NetworkError>) -> Void
     ) -> URLSessionDataTask?
     
     func loadVideoList(
         movieId: Int,
-        completion: @escaping (Result<VideoList, NetworkError>) -> Void
+        completion: @escaping (Result<[Video]?, NetworkError>) -> Void
     ) -> URLSessionDataTask?
 }
 

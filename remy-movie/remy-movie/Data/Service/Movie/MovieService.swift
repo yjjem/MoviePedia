@@ -20,7 +20,7 @@ final class MovieService: MovieServiceInterface {
     func loadMovieList(
         page: Int,
         of category: ListCategory,
-        completion: @escaping (Result<MovieList, NetworkError>) -> Void
+        completion: @escaping (Result<[Movie]?, NetworkError>) -> Void
     ) -> URLSessionDataTask? {
         
         let endPoint = makeEndPoint(path: .movieList(category), queryItems: [.page: String(page)])
@@ -28,13 +28,13 @@ final class MovieService: MovieServiceInterface {
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
             guard let self = self else { return }
             let decodeResult = self.tryDecodeAndValidate(response: response, as: MovieList.self)
-            completion(decodeResult)
+            completion(decodeResult.map { $0.asMovieList() })
         }
     }
     
     func loadVideoList(
         movieId: Int,
-        completion: @escaping (Result<VideoList, NetworkError>) -> Void
+        completion: @escaping (Result<[Video]?, NetworkError>) -> Void
     ) -> URLSessionDataTask? {
         
         let endPoint = makeEndPoint(path: .videoList(movieId), queryItems: nil)
@@ -42,7 +42,7 @@ final class MovieService: MovieServiceInterface {
         return manager.load(url: endPoint.url, method: .get) { [weak self] response in
             guard let self = self else { return }
             let decodeResult = self.tryDecodeAndValidate(response: response, as: VideoList.self)
-            completion(decodeResult)
+            completion(decodeResult.map { $0.asVideList() })
         }
     }
     
