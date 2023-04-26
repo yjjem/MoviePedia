@@ -1,5 +1,5 @@
 //
-//  SingleMovieView.swift
+//  MovieView.swift
 //  remy-movie
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SingleMovieInfoView: RoundableView {
+final class MovieInfoView: RoundableView {
     
     private let infoTypeLabel: UILabel = {
         let label = UILabel()

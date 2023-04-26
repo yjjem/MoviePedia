@@ -63,7 +63,7 @@ final class MovieInfoListCollectionView: UICollectionView {
         
         return CellRegistration { cell, indexPath, itemIdentifier in
             
-            let infoView = SingleMovieInfoView()
+            let infoView = MovieInfoView()
             infoView.backgroundColor = .systemBlue
             cell.content = infoView
         }
