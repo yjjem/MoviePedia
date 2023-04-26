@@ -18,6 +18,12 @@ final class MovieInfoCell: UICollectionViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        content?.removeFromSuperview()
+    }
+    
     // MARK: Private Function(s)
     
     private func configureView() {
