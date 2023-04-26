@@ -63,11 +63,21 @@ final class MovieInfoListCollectionView: UICollectionView {
         
         return CellRegistration { cell, indexPath, itemIdentifier in
             
-            let infoView = MovieInfoView(infoStyle: .poster)
-            infoView.applyCornerStyle()
-            infoView.infoStyle = .poster
+            let popularSection: Section = .popular
+            let trailerSection: Section = .trailer
             
-            cell.content = infoView
+            switch indexPath.section {
+                
+            case popularSection.index, trailerSection.index:
+                let infoView = MovieInfoView(infoStyle: .backdrop)
+                infoView.applyCornerStyle()
+                cell.content = infoView
+                
+            default:
+                let infoView = MovieInfoView(infoStyle: .poster)
+                infoView.applyCornerStyle()
+                cell.content = infoView
+            }
         }
     }
     
