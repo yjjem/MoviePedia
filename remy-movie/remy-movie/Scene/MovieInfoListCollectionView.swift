@@ -63,8 +63,10 @@ final class MovieInfoListCollectionView: UICollectionView {
         
         return CellRegistration { cell, indexPath, itemIdentifier in
             
-            let infoView = MovieInfoView()
-            infoView.backgroundColor = .systemBlue
+            let infoView = MovieInfoView(infoStyle: .poster)
+            infoView.applyCornerStyle()
+            infoView.infoStyle = .poster
+            
             cell.content = infoView
         }
     }
@@ -122,7 +124,7 @@ final class MovieInfoListCollectionView: UICollectionView {
         let item = makeItem(width: .fractionalWidth(1.0), height: .fractionalHeight(1.0))
         item.contentInsets = contentsInset
         
-        let group = makeGroup(width: .absolute(140), height: .absolute(cellHeight), items: [item])
+        let group = makeGroup(width: .absolute(180), height: .absolute(cellHeight), items: [item])
         group.interItemSpacing = contentsSpacing
         
         let section = NSCollectionLayoutSection(group: group)
