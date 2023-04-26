@@ -94,7 +94,7 @@ final class MovieInfoView: RoundableView {
     
     private func configureConstraints() {
         
-        addBackgroundImageConstrations()
+        addBackgroundImageConstraints()
         
         switch infoStyle {
         case .backdrop:
@@ -105,7 +105,7 @@ final class MovieInfoView: RoundableView {
         }
     }
     
-    private func addBackgroundImageConstrations() {
+    private func addBackgroundImageConstraints() {
         NSLayoutConstraint.activate([
             backgroundImageView.topAnchor.constraint(equalTo: topAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
