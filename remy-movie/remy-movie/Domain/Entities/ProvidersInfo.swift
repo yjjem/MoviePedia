@@ -8,15 +8,15 @@
 import Foundation
 
 struct ProvidersInfo: Decodable {
-    let link: String?
-    let buy: [ProviderDetails]?
-    let rent: [ProviderDetails]?
-    let flatrate: [ProviderDetails]?
+    let link: String
+    let buy: [ProviderDetails]
+    let rent: [ProviderDetails]
+    let flatrate: [ProviderDetails]
 }
 
 struct ProviderDetails: Decodable {
-    let displayPriority: Int?
-    let logoPath: String?
-    let providerId: Int?
-    let providerName: String?
+    let displayPriority: Int
+    let logoPath: String
+    let providerId: Int
+    let providerName: String
 }

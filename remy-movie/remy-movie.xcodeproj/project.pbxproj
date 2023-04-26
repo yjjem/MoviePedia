@@ -197,8 +197,8 @@
 		DF6FBB4C29E2A05700BE310A /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				DF6FBB4F29E2A07400BE310A /* Movie.swift */,
 				DF6FBB5129E2A13300BE310A /* MovieDetails.swift */,
+				DF6FBB4F29E2A07400BE310A /* Movie.swift */,
 				DF06677A29E3FD9B00DFF788 /* ProvidersInfo.swift */,
 				DF6FBB5729E2ABF900BE310A /* Keyword.swift */,
 				DF6FBB5329E2A48B00BE310A /* Review.swift */,

@@ -8,6 +8,6 @@
 import Foundation
 
 struct Keyword: Decodable {
-    let id: Int?
-    let name: String?
+    let id: Int
+    let name: String
 }
