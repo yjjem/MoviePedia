@@ -9,11 +9,11 @@ import UIKit
 
 class RoundableView: UIView {
     
-    enum PresentingStyle {
+    enum CornerStyle {
         case full
         case rounded
         
-        var cornerRadius: CGFloat {
+        var radius: CGFloat {
             switch self {
             case .full: return 0
             case .rounded: return 21.65
@@ -21,13 +21,14 @@ class RoundableView: UIView {
         }
     }
     
-    var style: PresentingStyle = .rounded {
+    var cornerStyle: CornerStyle = .rounded {
         didSet {
-            applyPresentingStyle()
+            applyCornerStyle()
         }
     }
     
-    func applyPresentingStyle() {
-        layer.cornerRadius = style.cornerRadius
+    func applyCornerStyle() {
+        layer.cornerRadius = cornerStyle.radius
+        layer.masksToBounds = true
     }
 }

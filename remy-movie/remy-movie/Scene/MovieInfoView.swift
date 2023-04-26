@@ -41,7 +41,7 @@ final class MovieInfoView: RoundableView {
         
         configureViews()
         configureConstraints()
-        applyPresentingStyle()
+        applyCornerStyle()
     }
     
     // MARK: Private Function(s)
@@ -50,7 +50,6 @@ final class MovieInfoView: RoundableView {
         let views: [UIView] = [backgroundImageView, infoTypeLabel, movieTitleLabel]
         views.forEach { addSubview($0) }
         addLayoutGuide(layoutGuide)
-        clipsToBounds = true
     }
     
     private func configureConstraints() {
