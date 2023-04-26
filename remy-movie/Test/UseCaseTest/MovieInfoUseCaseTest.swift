@@ -28,9 +28,13 @@ final class MovieInfoUseCaseTest: XCTestCase {
     
     func test_loadMovieList_정상작동_확인() {
         
+        // Arrange
+        
         let expectedCallCount: Int = 1
         let page: Int = 12
         let category: ListCategory = .popular
+        
+        // Act and Assert
         
         sut?.loadMovieList(page: page, of: category) { _ in }
         
@@ -38,6 +42,23 @@ final class MovieInfoUseCaseTest: XCTestCase {
             callCount: expectedCallCount,
             page: page,
             category: category
+        )
+    }
+    
+    func test_loadVideoList_정상작동_확인() {
+        
+        // Arrange
+        
+        let expectedCallCount: Int = 1
+        let expectedMovieId: Int = 12
+        
+        // Act and Assert
+        
+        sut?.loadVideoList(movieId: expectedMovieId) { _ in }
+        
+        mockMovieService?.verifyLoadVideoList(
+            callCount: expectedCallCount,
+            movieId: expectedMovieId
         )
     }
 }
