@@ -44,6 +44,7 @@
 		DFBB8EE629F8065B000D1A1C /* MockMovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8EE529F8065B000D1A1C /* MockMovieService.swift */; };
 		DFBB8EEB29F80B90000D1A1C /* MovieInfoUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8EEA29F80B90000D1A1C /* MovieInfoUseCaseTest.swift */; };
 		DFBB8EFC29FA6203000D1A1C /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8EFB29FA6203000D1A1C /* ImageCacheManager.swift */; };
+		DFBB8EFE29FA647F000D1A1C /* MovieInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8EFD29FA647F000D1A1C /* MovieInfoViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		DFBB8EE529F8065B000D1A1C /* MockMovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieService.swift; sourceTree = "<group>"; };
 		DFBB8EEA29F80B90000D1A1C /* MovieInfoUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieInfoUseCaseTest.swift; path = Test/UseCaseTest/MovieInfoUseCaseTest.swift; sourceTree = SOURCE_ROOT; };
 		DFBB8EFB29FA6203000D1A1C /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		DFBB8EFD29FA647F000D1A1C /* MovieInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				DF72873329F3E9AB002C6701 /* MovieInfoView.swift */,
+				DFBB8EFD29FA647F000D1A1C /* MovieInfoViewModel.swift */,
 				DFBB8ED529F6BA03000D1A1C /* MovieInfoListCollectionView.swift */,
 			);
 			path = Views;
@@ -479,6 +482,7 @@
 				DF6FBB4E29E2A05F00BE310A /* GenericResponse.swift in Sources */,
 				DF72873829F50BED002C6701 /* MovieInfoCell.swift in Sources */,
 				DF06678C29E5A34E00DFF788 /* Bundle + apiKey.swift in Sources */,
+				DFBB8EFE29FA647F000D1A1C /* MovieInfoViewModel.swift in Sources */,
 				DF5BA80B29DA996800C96823 /* NetworkError.swift in Sources */,
 				DF6FBB6129E3022700BE310A /* MovieServiceInterface.swift in Sources */,
 				DF6FBB6429E3037000BE310A /* MovieService.swift in Sources */,
