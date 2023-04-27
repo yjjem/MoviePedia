@@ -43,6 +43,7 @@
 		DFBB8EE229F7EC40000D1A1C /* MovieInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8EE129F7EC40000D1A1C /* MovieInfoUseCase.swift */; };
 		DFBB8EE629F8065B000D1A1C /* MockMovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8EE529F8065B000D1A1C /* MockMovieService.swift */; };
 		DFBB8EEB29F80B90000D1A1C /* MovieInfoUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8EEA29F80B90000D1A1C /* MovieInfoUseCaseTest.swift */; };
+		DFBB8EFC29FA6203000D1A1C /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8EFB29FA6203000D1A1C /* ImageCacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		DFBB8EE129F7EC40000D1A1C /* MovieInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoUseCase.swift; sourceTree = "<group>"; };
 		DFBB8EE529F8065B000D1A1C /* MockMovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieService.swift; sourceTree = "<group>"; };
 		DFBB8EEA29F80B90000D1A1C /* MovieInfoUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieInfoUseCaseTest.swift; path = Test/UseCaseTest/MovieInfoUseCaseTest.swift; sourceTree = SOURCE_ROOT; };
+		DFBB8EFB29FA6203000D1A1C /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +232,7 @@
 			children = (
 				DF06678B29E5A34E00DFF788 /* Bundle + apiKey.swift */,
 				DF6FBB6629E3044C00BE310A /* Data + decode.swift */,
+				DFBB8EFB29FA6203000D1A1C /* ImageCacheManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				DF5BA81329DAA23100C96823 /* NetworkManager.swift in Sources */,
 				DF82076229D1635200E6854A /* SceneDelegate.swift in Sources */,
 				DF5BA81129DAA16700C96823 /* Networkable.swift in Sources */,
+				DFBB8EFC29FA6203000D1A1C /* ImageCacheManager.swift in Sources */,
 				DF6FBB4E29E2A05F00BE310A /* GenericResponse.swift in Sources */,
 				DF72873829F50BED002C6701 /* MovieInfoCell.swift in Sources */,
 				DF06678C29E5A34E00DFF788 /* Bundle + apiKey.swift in Sources */,
