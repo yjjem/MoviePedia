@@ -9,6 +9,8 @@ import UIKit
 
 final class HomeViewController: UIViewController {
     
+    // MARK: View(s)
+    
     private let movieInfoCollectionView: MovieInfoCollectionView = {
         let manager = NetworkManager(session: .init(configuration: .default))
         let service = MovieService(manger: manager)
@@ -19,6 +21,8 @@ final class HomeViewController: UIViewController {
         return collection
     }()
     
+    // MARK: Override(s)
+    
     override func loadView() {
         super.loadView()
         
@@ -27,6 +31,8 @@ final class HomeViewController: UIViewController {
         configureConstraints()
         configureCollectionView()
     }
+    
+    // MARK: Private Function(s)
     
     private func configureCollectionView() {
         movieInfoCollectionView.delegate = self
@@ -53,5 +59,7 @@ final class HomeViewController: UIViewController {
         ])
     }
 }
+
+// MARK: Extension(s)
 
 extension HomeViewController: UICollectionViewDelegate { }

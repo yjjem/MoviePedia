@@ -22,6 +22,8 @@ final class MovieInfoCollectionViewModel {
         self.useCase = useCase
     }
     
+    // MARK: Function(s)
+    
     func loadAllMovieLists() {
         
         let categories: [ListCategory] = [.popular, .upcoming, .nowPlaying, .topRated]

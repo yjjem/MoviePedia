@@ -179,6 +179,8 @@ final class MovieInfoCollectionView: UICollectionView {
     }
 }
 
+// MARK: Extension(s)
+
 extension MovieInfoCollectionView: MovieInfoCollectionDelegate {
     
     func didLoadMovieList(list: MovieList, of category: ListCategory) {

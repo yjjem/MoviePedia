@@ -14,8 +14,6 @@ final class MovieInfoView: RoundableView {
         case poster
     }
     
-    var infoStyle: InfoStyle = .backdrop
-    
     // MARK: View(s)
     
     private let movieTitleLabel: UILabel = {
@@ -46,8 +44,9 @@ final class MovieInfoView: RoundableView {
     }()
     
     private var viewModel: MovieInfoViewModel?
+    private var infoStyle: InfoStyle = .backdrop
     
-    // MARK: Initializer
+    // MARK: Initializer(s)
     
     convenience init(viewModel: MovieInfoViewModel, infoStyle: InfoStyle) {
         self.init(frame: .zero)
@@ -60,6 +59,8 @@ final class MovieInfoView: RoundableView {
         bindViewModel()
     }
     
+    // MARK: Private Function(s)
+    
     private func bindViewModel() {
         guard let viewModel else { return }
         movieTitleLabel.text = viewModel.title
@@ -71,8 +72,6 @@ final class MovieInfoView: RoundableView {
             backgroundImageView.setImage(from: viewModel.posterPath!)
         }
     }
-    
-    // MARK: Private Function(s)
     
     private func makeLayoutGuide() {
         

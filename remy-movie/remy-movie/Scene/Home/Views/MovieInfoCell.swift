@@ -18,6 +18,8 @@ final class MovieInfoCell: UICollectionViewCell {
         }
     }
     
+    // MARK: Override(s)
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
