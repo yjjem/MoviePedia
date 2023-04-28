@@ -99,6 +99,14 @@ final class MovieInfoCollectionView: UICollectionView {
         diffableDataSource?.apply(snapshot)
     }
     
+    private func updateSnapshot(list: MovieList, for section: ListCategory) {
+        
+        guard var snapshot = diffableDataSource?.snapshot() else { return }
+        snapshot.appendItems(list, toSection: section)
+        
+        diffableDataSource?.apply(snapshot, animatingDifferences: true)
+    }
+    
     private func makeBigInfoSection() -> NSCollectionLayoutSection {
         
         let item = makeItem(width: .fractionalWidth(1.0), height: .fractionalHeight(1.0))
@@ -172,12 +180,6 @@ final class MovieInfoCollectionView: UICollectionView {
 }
 
 extension MovieInfoCollectionView: MovieInfoCollectionDelegate {
-    
-    private func updateSnapshot(list: MovieList, for section: ListCategory) {
-        guard var snapshot = diffableDataSource?.snapshot() else { return }
-        snapshot.appendItems(list, toSection: section)
-        diffableDataSource?.apply(snapshot, animatingDifferences: true)
-    }
     
     func didLoadMovieList(list: MovieList, of category: ListCategory) {
         updateSnapshot(list: list, for: category)
