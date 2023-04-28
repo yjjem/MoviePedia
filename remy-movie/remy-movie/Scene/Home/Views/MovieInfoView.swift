@@ -18,21 +18,11 @@ final class MovieInfoView: RoundableView {
     
     // MARK: View(s)
     
-    private let infoTypeLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.configureAsCellInfo()
-        label.textColor = .white
-        label.text = "추천"
-        return label
-    }()
-    
     private let movieTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.configureAsMovieTitle()
         label.textColor = .white
-        label.text = "John Wick 4"
         return label
     }()
     
@@ -66,7 +56,6 @@ final class MovieInfoView: RoundableView {
         
         makeLayoutGuide()
         configureViews()
-        configureConstraints()
         applyCornerStyle()
         bindViewModel()
     }
@@ -85,17 +74,6 @@ final class MovieInfoView: RoundableView {
     
     // MARK: Private Function(s)
     
-    private func configureViews() {
-        
-        let backdropStyleViewSets: [UIView] = [backgroundImageView, infoTypeLabel, movieTitleLabel]
-        let posterStyleViewSets: [UIView] = [backgroundImageView, ratingView]
-        
-        switch infoStyle {
-        case .backdrop: backdropStyleViewSets.forEach { addSubview($0) }
-        case .poster: posterStyleViewSets.forEach { addSubview($0) }
-        }
-    }
-    
     private func makeLayoutGuide() {
         
         let guideInset: CGFloat = 20
@@ -110,20 +88,31 @@ final class MovieInfoView: RoundableView {
         ])
     }
     
-    private func configureConstraints() {
+    private func configureViews() {
         
-        addBackgroundImageConstraints()
+        if infoStyle == .backdrop {
+            configureAsBackdropInfo()
+        }
         
-        switch infoStyle {
-        case .backdrop:
-            addInfoTypeLabelConstraints()
-            addMovieTitleLabelConstraints()
-        case .poster:
-            addRatingViewConstraints()
+        if infoStyle == .poster {
+            configureAsPosterInfo()
         }
     }
     
-    private func addBackgroundImageConstraints() {
+    private func configureAsBackdropInfo() {
+        addBackgroundImageView()
+        addMovieTitleLabelView()
+    }
+    
+    private func configureAsPosterInfo() {
+        addBackgroundImageView()
+        addRatingViewView()
+    }
+    
+    private func addBackgroundImageView() {
+        
+        addSubview(backgroundImageView)
+        
         NSLayoutConstraint.activate([
             backgroundImageView.topAnchor.constraint(equalTo: topAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
@@ -132,15 +121,10 @@ final class MovieInfoView: RoundableView {
         ])
     }
     
-    private func addInfoTypeLabelConstraints() {
-        NSLayoutConstraint.activate([
-            infoTypeLabel.topAnchor.constraint(equalTo: layoutGuide.topAnchor),
-            infoTypeLabel.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor),
-            infoTypeLabel.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor),
-        ])
-    }
-    
-    private func addMovieTitleLabelConstraints() {
+    private func addMovieTitleLabelView() {
+        
+        addSubview(movieTitleLabel)
+        
         NSLayoutConstraint.activate([
             movieTitleLabel.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor),
             movieTitleLabel.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor),
@@ -148,7 +132,10 @@ final class MovieInfoView: RoundableView {
         ])
     }
     
-    private func addRatingViewConstraints() {
+    private func addRatingViewView() {
+        
+        addSubview(ratingView)
+        
         NSLayoutConstraint.activate([
             ratingView.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor, constant: 5),
             ratingView.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor, constant: 5),
