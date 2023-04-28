@@ -47,6 +47,7 @@
 		DFBB8EFE29FA647F000D1A1C /* MovieInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8EFD29FA647F000D1A1C /* MovieInfoViewModel.swift */; };
 		DFF8932329FB846E00659D49 /* MovieInfoCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF8932229FB846E00659D49 /* MovieInfoCollectionViewModel.swift */; };
 		DFF8932529FB941C00659D49 /* ListCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF8932429FB941C00659D49 /* ListCategory.swift */; };
+		DFF8932729FBA53200659D49 /* UIImageView + setImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF8932629FBA53200659D49 /* UIImageView + setImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 		DFBB8EFD29FA647F000D1A1C /* MovieInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoViewModel.swift; sourceTree = "<group>"; };
 		DFF8932229FB846E00659D49 /* MovieInfoCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoCollectionViewModel.swift; sourceTree = "<group>"; };
 		DFF8932429FB941C00659D49 /* ListCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCategory.swift; sourceTree = "<group>"; };
+		DFF8932629FBA53200659D49 /* UIImageView + setImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + setImage.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +336,7 @@
 			children = (
 				DFBB8ED729F79686000D1A1C /* StyleGuide.swift */,
 				DF72873129F3E8DE002C6701 /* RoundableView.swift */,
+				DFF8932629FBA53200659D49 /* UIImageView + setImage.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				DF72873229F3E8DE002C6701 /* RoundableView.swift in Sources */,
 				DF6FBB5229E2A13300BE310A /* MovieDetails.swift in Sources */,
 				DF6FBB5429E2A48B00BE310A /* Review.swift in Sources */,
+				DFF8932729FBA53200659D49 /* UIImageView + setImage.swift in Sources */,
 				DFBB8ED829F79686000D1A1C /* StyleGuide.swift in Sources */,
 				DF82076029D1635200E6854A /* AppDelegate.swift in Sources */,
 				DF6FBB6729E3044C00BE310A /* Data + decode.swift in Sources */,

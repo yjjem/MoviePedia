@@ -144,14 +144,3 @@ final class MovieInfoView: RoundableView {
         ])
     }
 }
-
-extension UIImageView {
-    
-    func setImage(from imagePath: String) {
-        let mainHost = "https://image.tmdb.org/t/p/original"
-        
-        ImageCacheManager.loadImage(urlString: mainHost + imagePath) {
-            self.image = $0
-        }
-    }
-}
