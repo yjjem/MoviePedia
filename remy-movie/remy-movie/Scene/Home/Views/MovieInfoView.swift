@@ -22,7 +22,8 @@ final class MovieInfoView: RoundableView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.configureAsCellInfo()
-        label.text = "오늘의 영화"
+        label.textColor = .white
+        label.text = "추천"
         return label
     }()
     
@@ -30,6 +31,7 @@ final class MovieInfoView: RoundableView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.configureAsMovieTitle()
+        label.textColor = .white
         label.text = "John Wick 4"
         return label
     }()
@@ -53,16 +55,32 @@ final class MovieInfoView: RoundableView {
         return UILayoutGuide()
     }()
     
+    private var viewModel: MovieInfoViewModel?
+    
     // MARK: Initializer
     
-    convenience init(infoStyle: InfoStyle) {
+    convenience init(viewModel: MovieInfoViewModel, infoStyle: InfoStyle) {
         self.init(frame: .zero)
         self.infoStyle = infoStyle
+        self.viewModel = viewModel
         
         makeLayoutGuide()
         configureViews()
         configureConstraints()
         applyCornerStyle()
+        bindViewModel()
+    }
+    
+    private func bindViewModel() {
+        guard let viewModel else { return }
+        movieTitleLabel.text = viewModel.title
+        
+        switch infoStyle {
+        case .backdrop:
+            backgroundImageView.setImage(from: viewModel.backdropPath!)
+        case .poster:
+            backgroundImageView.setImage(from: viewModel.posterPath!)
+        }
     }
     
     // MARK: Private Function(s)
@@ -137,5 +155,16 @@ final class MovieInfoView: RoundableView {
             ratingView.widthAnchor.constraint(equalToConstant: 50),
             ratingView.heightAnchor.constraint(equalTo: ratingView.widthAnchor)
         ])
+    }
+}
+
+extension UIImageView {
+    
+    func setImage(from imagePath: String) {
+        let mainHost = "https://image.tmdb.org/t/p/original"
+        
+        ImageCacheManager.loadImage(urlString: mainHost + imagePath) {
+            self.image = $0
+        }
     }
 }

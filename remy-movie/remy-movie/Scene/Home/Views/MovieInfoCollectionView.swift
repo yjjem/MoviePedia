@@ -60,12 +60,14 @@ final class MovieInfoCollectionView: UICollectionView {
             switch indexPath.section {
                 
             case popularSection.index:
-                let infoView = MovieInfoView(infoStyle: .backdrop)
+                let viewModel = MovieInfoViewModel(movie: itemIdentifier)
+                let infoView = MovieInfoView(viewModel: viewModel,infoStyle: .backdrop)
                 infoView.applyCornerStyle()
                 cell.content = infoView
                 
             default:
-                let infoView = MovieInfoView(infoStyle: .poster)
+                let viewModel = MovieInfoViewModel(movie: itemIdentifier)
+                let infoView = MovieInfoView(viewModel: viewModel, infoStyle: .poster)
                 infoView.applyCornerStyle()
                 cell.content = infoView
             }

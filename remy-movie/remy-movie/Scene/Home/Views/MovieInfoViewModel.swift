@@ -19,6 +19,6 @@ struct MovieInfoViewModel {
         self.title = movie.title
         self.userScore = movie.voteAverage
         self.backdropPath = movie.backdropPath
-        self.posterPath = movie.backdropPath
+        self.posterPath = movie.posterPath
     }
 }
