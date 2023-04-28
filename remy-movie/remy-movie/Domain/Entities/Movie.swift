@@ -5,8 +5,6 @@
 //  Copyright (c) 2023 Jeremy All rights reserved.
 
 
-import Foundation
-
 struct Movie: Decodable, Hashable {
     let posterPath: String?
     let adult: Bool

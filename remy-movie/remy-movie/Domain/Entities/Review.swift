@@ -5,8 +5,6 @@
 //  Copyright (c) 2023 Jeremy All rights reserved.
     
 
-import Foundation
-
 struct Review: Decodable {
     let author: String
     let authorDetails: AuthorDetails

@@ -3,9 +3,7 @@
 //  remy-movie
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
-    
 
-import Foundation
 
 struct GenericResponse<Items: Decodable>: Decodable {
     let id: Int?

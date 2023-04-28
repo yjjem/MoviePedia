@@ -5,8 +5,6 @@
 //  Copyright (c) 2023 Jeremy All rights reserved.
 
 
-import Foundation
-
 typealias MovieList = [Movie]
 typealias VideoList = [Video]
 
@@ -19,7 +17,7 @@ final class MovieInfoCollectionViewModel {
     var delegate: MovieInfoCollectionDelegate?
     
     private let useCase: MovieInfoUseCaseType
-
+    
     init(useCase: MovieInfoUseCaseType) {
         self.useCase = useCase
     }

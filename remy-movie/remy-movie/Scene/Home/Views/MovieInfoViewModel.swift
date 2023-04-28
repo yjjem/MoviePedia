@@ -3,9 +3,7 @@
 //  remy-movie
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
-    
 
-import UIKit
 
 struct MovieInfoViewModel {
     let backdropPath: String?

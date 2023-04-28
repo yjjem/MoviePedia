@@ -5,8 +5,6 @@
 //  Copyright (c) 2023 Jeremy All rights reserved.
     
 
-import Foundation
-
 enum TmdbAPIDetails {
     static let defaultHost = "https://api.themoviedb.org"
     static let defaultPath = "/3/movie"

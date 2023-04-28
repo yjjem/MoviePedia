@@ -5,8 +5,6 @@
 //  Copyright (c) 2023 Jeremy All rights reserved.
     
 
-import Foundation
-
 struct Video: Decodable {
     let iso6391: String
     let iso31661: String

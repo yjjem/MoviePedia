@@ -3,9 +3,7 @@
 //  remy-movie
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
-    
 
-import Foundation
 
 struct ProvidersByCountryResponse: Decodable {
     let en: ProvidersInfo?
