@@ -39,7 +39,7 @@ final class MovieInfoCollectionView: UICollectionView {
         
         configureCollectionDataSource()
         applyCollectionViewLayout()
-        initializeDataSourceSnapshot()
+        initializeSnapshot()
         bindViewModel()
     }
     
@@ -62,13 +62,11 @@ final class MovieInfoCollectionView: UICollectionView {
             case popularSection.index:
                 let viewModel = MovieInfoViewModel(movie: itemIdentifier)
                 let infoView = MovieInfoView(viewModel: viewModel,infoStyle: .backdrop)
-                infoView.applyCornerStyle()
                 cell.content = infoView
                 
             default:
                 let viewModel = MovieInfoViewModel(movie: itemIdentifier)
                 let infoView = MovieInfoView(viewModel: viewModel, infoStyle: .poster)
-                infoView.applyCornerStyle()
                 cell.content = infoView
             }
         }
@@ -91,7 +89,7 @@ final class MovieInfoCollectionView: UICollectionView {
         self.dataSource = diffableDataSource
     }
     
-    private func initializeDataSourceSnapshot() {
+    private func initializeSnapshot() {
         
         var snapshot = NSDiffableDataSourceSnapshot<ListCategory, Movie>()
         snapshot.appendSections([.popular, .topRated, .nowPlaying, .upcoming])
@@ -185,7 +183,6 @@ extension MovieInfoCollectionView: MovieInfoCollectionDelegate {
     
     func didLoadMovieList(list: MovieList, of category: ListCategory) {
         updateSnapshot(list: list, for: category)
-        print(list)
     }
 }
 
