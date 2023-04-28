@@ -9,8 +9,8 @@ import UIKit
 
 final class HomeViewController: UIViewController {
     
-    private let collectionView: MovieInfoListCollectionView = {
-        let collection = MovieInfoListCollectionView()
+    private let movieInfoCollectionView: MovieInfoCollectionView = {
+        let collection = MovieInfoCollectionView()
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
@@ -25,7 +25,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func configureCollectionView() {
-        collectionView.delegate = self
+        movieInfoCollectionView.delegate = self
     }
     
     private func configureTabBarItem() {
@@ -36,16 +36,16 @@ final class HomeViewController: UIViewController {
     
     private func configureViews() {
         
-        view.addSubview(collectionView)
+        view.addSubview(movieInfoCollectionView)
     }
     
     private func configureConstraints() {
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            movieInfoCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            movieInfoCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            movieInfoCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            movieInfoCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
 }

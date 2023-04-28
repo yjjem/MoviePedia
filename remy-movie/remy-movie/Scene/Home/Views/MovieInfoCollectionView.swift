@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MovieInfoListCollectionView: UICollectionView {
+final class MovieInfoCollectionView: UICollectionView {
     
     // MARK: Type(s)
     
