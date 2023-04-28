@@ -11,26 +11,8 @@ final class MovieInfoCollectionView: UICollectionView {
     
     // MARK: Type(s)
     
-    private typealias DiffableDataSource = UICollectionViewDiffableDataSource<Section, String>
-    private typealias CellRegistration = UICollectionView.CellRegistration<MovieInfoCell, String>
-    
-    private enum Section: String {
-        case popular = "Popular"
-        case topRated = "Top Rated"
-        case nowPlaying = "Now Playing"
-        case trailer = "Trailer"
-        case upcoming = "Upcoming"
-        
-        var index: Int {
-            switch self {
-            case .popular: return 0
-            case .topRated: return 1
-            case .nowPlaying: return 2
-            case .trailer: return 3
-            case .upcoming: return 4
-            }
-        }
-    }
+    private typealias DiffableDataSource = UICollectionViewDiffableDataSource<ListCategory, Movie>
+    private typealias CellRegistration = UICollectionView.CellRegistration<MovieInfoCell, Movie>
     
     // MARK: Variable(s)
     
@@ -47,28 +29,37 @@ final class MovieInfoCollectionView: UICollectionView {
         trailing: 10
     )
     
+    private var viewModel: MovieInfoCollectionViewModel?
+    
     // MARK: Initializer(s)
     
-    convenience init() {
+    convenience init(viewModel: MovieInfoCollectionViewModel) {
         self.init(frame: .zero, collectionViewLayout: .init())
+        self.viewModel = viewModel
         
         configureCollectionDataSource()
         applyCollectionViewLayout()
         initializeDataSourceSnapshot()
+        bindViewModel()
     }
     
     // MARK: Private Function(s)
+    
+    private func bindViewModel() {
+        guard let viewModel else { return }
+        viewModel.delegate = self
+        viewModel.loadAllMovieLists()
+    }
     
     private func makeMovieInfoCellRegistration() -> CellRegistration {
         
         return CellRegistration { cell, indexPath, itemIdentifier in
             
-            let popularSection: Section = .popular
-            let trailerSection: Section = .trailer
+            let popularSection: ListCategory = .popular
             
             switch indexPath.section {
                 
-            case popularSection.index, trailerSection.index:
+            case popularSection.index:
                 let infoView = MovieInfoView(infoStyle: .backdrop)
                 infoView.applyCornerStyle()
                 cell.content = infoView
@@ -100,13 +91,8 @@ final class MovieInfoCollectionView: UICollectionView {
     
     private func initializeDataSourceSnapshot() {
         
-        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
-        snapshot.appendSections([.popular, .topRated, .nowPlaying, .trailer, .upcoming])
-        snapshot.appendItems(["a", "b","c","d","e","f"], toSection: .popular)
-        snapshot.appendItems(["g", "h","i","j","k","q"], toSection: .upcoming)
-        snapshot.appendItems(["a51", "11b2","c24","d112233","23","12"], toSection: .topRated)
-        snapshot.appendItems(["a321", "2b2","12c4","d1233","223","11"], toSection: .nowPlaying)
-        snapshot.appendItems(["56a1", "bssdfg2"], toSection: .trailer)
+        var snapshot = NSDiffableDataSourceSnapshot<ListCategory, Movie>()
+        snapshot.appendSections([.popular, .topRated, .nowPlaying, .upcoming])
         
         diffableDataSource?.apply(snapshot)
     }
@@ -167,13 +153,12 @@ final class MovieInfoCollectionView: UICollectionView {
     
     private func applyCollectionViewLayout() {
         
-        let popularSection: Section = .popular
-        let trailerSection: Section = .trailer
+        let popularSection: ListCategory = .popular
         
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             
             switch sectionIndex {
-            case popularSection.index, trailerSection.index:
+            case popularSection.index:
                 return self.makeBigInfoSection()
             default:
                 return self.makeSmallInfoSection()
@@ -181,5 +166,39 @@ final class MovieInfoCollectionView: UICollectionView {
         }
         
         setCollectionViewLayout(layout, animated: true)
+    }
+}
+
+extension MovieInfoCollectionView: MovieInfoCollectionDelegate {
+    
+    private func updateSnapshot(list: MovieList, for section: ListCategory) {
+        guard var snapshot = diffableDataSource?.snapshot() else { return }
+        snapshot.appendItems(list, toSection: section)
+        diffableDataSource?.apply(snapshot, animatingDifferences: true)
+    }
+    
+    func didLoadMovieList(list: MovieList, of category: ListCategory) {
+        updateSnapshot(list: list, for: category)
+        print(list)
+    }
+}
+
+private extension ListCategory {
+    var index: Int {
+        switch self {
+        case .popular: return 0
+        case .topRated: return 1
+        case .nowPlaying: return 2
+        case .upcoming: return 3
+        }
+    }
+    
+    var name: String {
+        switch self {
+        case .popular: return "Popular"
+        case .topRated: return "Top Rated"
+        case .nowPlaying: return "Now Playing"
+        case .upcoming: return "Upcoming"
+        }
     }
 }

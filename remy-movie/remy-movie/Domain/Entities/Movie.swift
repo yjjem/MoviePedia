@@ -3,15 +3,15 @@
 //  remy-movie
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
-    
+
 
 import Foundation
 
-struct Movie: Decodable {
+struct Movie: Decodable, Hashable {
     let posterPath: String?
     let adult: Bool
     let overview: String
-    let releaseData: String
+    let releaseDate: String
     let genreIds: [Int]
     let id: Int
     let originalTitle: String

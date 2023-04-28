@@ -10,7 +10,11 @@ import UIKit
 final class HomeViewController: UIViewController {
     
     private let movieInfoCollectionView: MovieInfoCollectionView = {
-        let collection = MovieInfoCollectionView()
+        let manager = NetworkManager(session: .init(configuration: .default))
+        let service = MovieService(manger: manager)
+        let useCase = MovieInfoUseCase(service: service)
+        let viewModel = MovieInfoCollectionViewModel(useCase: useCase)
+        let collection = MovieInfoCollectionView(viewModel: viewModel)
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()

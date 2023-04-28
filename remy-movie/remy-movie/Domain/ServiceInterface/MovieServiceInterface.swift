@@ -28,12 +28,7 @@ protocol MovieServiceInterface {
     )
 }
 
-enum ListCategory {
-    case popular
-    case topRated
-    case nowPlaying
-    case upcoming
-    
+extension ListCategory {
     var path: String {
         switch self {
         case .popular: return "/popular"
