@@ -9,7 +9,9 @@ import UIKit
 
 final class MovieInfoCollectionHeaderView: UICollectionReusableView {
     
-    let label: UILabel = {
+    static let reuseIdentifier: String = "header"
+    
+    private let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.configureAsCellInfo()

@@ -13,6 +13,8 @@ final class MovieInfoCollectionView: UICollectionView {
     
     private typealias DiffableDataSource = UICollectionViewDiffableDataSource<Section, Movie>
     private typealias CellRegistration = UICollectionView.CellRegistration<MovieInfoCell, Movie>
+    private typealias Header = MovieInfoCollectionHeaderView
+    private typealias CategorySelector = MovieInfoCollectionSelectorView
     
     enum Section: CaseIterable {
         case trending
@@ -42,9 +44,7 @@ final class MovieInfoCollectionView: UICollectionView {
         self.init(frame: .zero, collectionViewLayout: .init())
         self.viewModel = viewModel
         
-        configureCollectionDataSource()
-        applyCollectionViewLayout()
-        initializeSnapshot()
+        configureCollectionView()
         bindViewModel()
     }
     
@@ -53,6 +53,16 @@ final class MovieInfoCollectionView: UICollectionView {
     private func bindViewModel() {
         guard let viewModel else { return }
         viewModel.delegate = self
+        viewModel.loadMovieList(of: .popular)
+    }
+    
+    private func configureCollectionView() {
+        
+        registerHeaderView()
+        registerSelectorView()
+        configureCollectionDataSource()
+        applyCollectionViewLayout()
+        initializeSnapshot()
     }
     
     private func makeMovieInfoCellRegistration() -> CellRegistration {
@@ -76,6 +86,28 @@ final class MovieInfoCollectionView: UICollectionView {
         }
     }
     
+    private func registerHeaderView() {
+        
+        let trendingSection: Section = .trending
+        
+        register(
+            Header.self,
+            forSupplementaryViewOfKind: trendingSection.elementKind,
+            withReuseIdentifier: Header.reuseIdentifier
+        )
+    }
+    
+    private func registerSelectorView() {
+        
+        let categoryListSection: Section = .categoryList
+        
+        register(
+            CategorySelector.self,
+            forSupplementaryViewOfKind: categoryListSection.elementKind,
+            withReuseIdentifier: CategorySelector.reuseIdentifier
+        )
+    }
+    
     private func makeDiffableDataSource() -> DiffableDataSource {
         
         let registration = makeMovieInfoCellRegistration()
@@ -88,6 +120,34 @@ final class MovieInfoCollectionView: UICollectionView {
                 for: indexPath,
                 item: itemIdentifier
             )
+        }
+        
+        diffableDataSource.supplementaryViewProvider = {
+            collectionView, kind, indexPath in
+            
+            switch kind {
+            case Section.categoryList.elementKind:
+                guard let selector = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: Section.categoryList.elementKind,
+                    withReuseIdentifier: CategorySelector.reuseIdentifier,
+                    for: indexPath
+                ) as? CategorySelector else { return .init() }
+                
+                selector.delegate = self
+                
+                return selector
+                
+            default:
+                guard let header = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: Section.trending.elementKind,
+                    withReuseIdentifier: Header.reuseIdentifier,
+                    for: indexPath
+                ) as? Header else { return .init() }
+                
+                header.setTitle(string: Section.trending.name)
+                
+                return header
+            }
         }
         
         return diffableDataSource
@@ -114,10 +174,21 @@ final class MovieInfoCollectionView: UICollectionView {
         snapshot.deleteSections([section])
         snapshot.appendSections([section])
         snapshot.appendItems(list, toSection: section)
-        self.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+        DispatchQueue.main.async {
+            self.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+        }
     }
     
     private func makeBigInfoSection() -> NSCollectionLayoutSection {
+        
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: Section.trending.elementKind,
+            alignment: .top
+        )
         
         let item = makeItem(width: .fractionalWidth(1.0), height: .fractionalHeight(1.0))
         item.contentInsets = contentsInset
@@ -125,26 +196,47 @@ final class MovieInfoCollectionView: UICollectionView {
         let group = makeGroup(
             width: .fractionalWidth(1.0),
             height: .absolute(cellHeight),
-            items: [item]
+            repeatingItem: item,
+            count: 1
         )
         group.interItemSpacing = contentsSpacing
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
+        section.boundarySupplementaryItems = [sectionHeader]
         
         return section
     }
     
     private func makeSmallInfoSection() -> NSCollectionLayoutSection {
         
-        let item = makeItem(width: .fractionalWidth(1.0), height: .fractionalHeight(1.0))
-        item.contentInsets = contentsInset
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: Section.categoryList.elementKind,
+            alignment: .top
+        )
         
-        let group = makeGroup(width: .absolute(180), height: .absolute(cellHeight), items: [item])
-        group.interItemSpacing = contentsSpacing
+        let item = makeItem(width: .fractionalWidth(1/3), height: .absolute(200))
+        item.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
+        
+        let group = makeGroup(
+            width: .fractionalWidth(1.0),
+            height: .absolute(200),
+            repeatingItem: item,
+            count: 3
+        )
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 10,
+            leading: 10,
+            bottom: 10,
+            trailing: 10
+        )
+        section.boundarySupplementaryItems = [sectionHeader]
         
         return section
     }
@@ -163,11 +255,16 @@ final class MovieInfoCollectionView: UICollectionView {
     private func makeGroup(
         width: NSCollectionLayoutDimension,
         height: NSCollectionLayoutDimension,
-        items: [NSCollectionLayoutItem]
+        repeatingItem: NSCollectionLayoutItem,
+        count: Int
     ) -> NSCollectionLayoutGroup {
         
         let groupSize = NSCollectionLayoutSize(widthDimension: width, heightDimension: height)
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: items)
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            repeatingSubitem: repeatingItem,
+            count: count
+        )
         
         return group
     }
@@ -196,5 +293,35 @@ extension MovieInfoCollectionView: MovieInfoCollectionDelegate {
     
     func didLoadMovieList(list: MovieList) {
         updateSnapshot(list: list, for: .categoryList)
+    }
+}
+
+extension MovieInfoCollectionView: MovieInfoCollectionSelectorDelegate {
+    
+    func didSelectCategory(_ category: ListCategory) {
+        viewModel?.loadMovieList(of: category)
+    }
+}
+
+extension MovieInfoCollectionView.Section {
+    var name: String {
+        switch self {
+        case .trending: return "Trending"
+        case .categoryList: return "Category List"
+        }
+    }
+    
+    var elementKind: String {
+        switch self {
+        case .trending: return "header"
+        case .categoryList: return "selector"
+        }
+    }
+    
+    var index: Int {
+        switch self {
+        case .trending: return 1
+        case .categoryList: return 2
+        }
     }
 }

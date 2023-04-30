@@ -27,7 +27,6 @@ final class MovieInfoView: RoundableView {
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .systemGreen
         return imageView
     }()
     

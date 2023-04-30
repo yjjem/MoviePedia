@@ -14,19 +14,23 @@ protocol MovieInfoCollectionSelectorDelegate {
 
 final class MovieInfoCollectionSelectorView: UICollectionReusableView {
     
+    static let reuseIdentifier: String =  "selector view"
+    
+    var delegate: MovieInfoCollectionSelectorDelegate?
+    
     private let selectorView: UISegmentedControl = {
         let listCategoryItems = ListCategory.allNames
         let selector = UISegmentedControl(items: listCategoryItems)
         selector.translatesAutoresizingMaskIntoConstraints = false
+        selector.selectedSegmentIndex = ListCategory.popular.index
         return selector
     }()
-    
-    var delegate: MovieInfoCollectionSelectorDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         addSelectorView()
+        configureActions()
     }
     
     required init?(coder: NSCoder) {
@@ -48,7 +52,7 @@ final class MovieInfoCollectionSelectorView: UICollectionReusableView {
     }
     
     private func configureActions() {
-        selectorView.addTarget(self, action: #selector(sendSelectionToDelegate), for: .touchUpInside)
+        selectorView.addTarget(self, action: #selector(sendSelectionToDelegate), for: .valueChanged)
     }
     
     @objc
@@ -56,7 +60,6 @@ final class MovieInfoCollectionSelectorView: UICollectionReusableView {
         
         let selectedIndex = selectorView.selectedSegmentIndex
         let selectedCategory = ListCategory.allCases[selectedIndex]
-        
         delegate?.didSelectCategory(selectedCategory)
     }
 }
