@@ -38,6 +38,7 @@
 		DF82076429D1635200E6854A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82076329D1635200E6854A /* HomeViewController.swift */; };
 		DF82076929D1635300E6854A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF82076829D1635300E6854A /* Assets.xcassets */; };
 		DF82076C29D1635300E6854A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF82076A29D1635300E6854A /* LaunchScreen.storyboard */; };
+		DF84E8E929FE431C00D1156B /* MovieInfoCollectionSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF84E8E829FE431C00D1156B /* MovieInfoCollectionSelectorView.swift */; };
 		DFB56DE029EE6CD40017000D /* MockNetwokrManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB56DDF29EE6CD40017000D /* MockNetwokrManager.swift */; };
 		DFBB8ED629F6BA03000D1A1C /* MovieInfoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8ED529F6BA03000D1A1C /* MovieInfoCollectionView.swift */; };
 		DFBB8ED829F79686000D1A1C /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBB8ED729F79686000D1A1C /* StyleGuide.swift */; };
@@ -97,6 +98,7 @@
 		DF82076829D1635300E6854A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF82076B29D1635300E6854A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF82076D29D1635300E6854A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF84E8E829FE431C00D1156B /* MovieInfoCollectionSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoCollectionSelectorView.swift; sourceTree = "<group>"; };
 		DFB56DDF29EE6CD40017000D /* MockNetwokrManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetwokrManager.swift; sourceTree = "<group>"; };
 		DFBB8ED529F6BA03000D1A1C /* MovieInfoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoCollectionView.swift; sourceTree = "<group>"; };
 		DFBB8ED729F79686000D1A1C /* StyleGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
@@ -248,6 +250,18 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		DF8206FC29FE423400D7860C /* MovieCollection */ = {
+			isa = PBXGroup;
+			children = (
+				DFBB8ED529F6BA03000D1A1C /* MovieInfoCollectionView.swift */,
+				DFF8932229FB846E00659D49 /* MovieInfoCollectionViewModel.swift */,
+				DF8206F829FC302800D7860C /* MovieInfoCollectionHeaderView.swift */,
+				DF84E8E829FE431C00D1156B /* MovieInfoCollectionSelectorView.swift */,
+				DF72873729F50BED002C6701 /* MovieInfoCell.swift */,
+			);
+			path = MovieCollection;
+			sourceTree = "<group>";
+		};
 		DF82075329D1635200E6854A = {
 			isa = PBXGroup;
 			children = (
@@ -346,12 +360,9 @@
 		DFBB8EF029F98832000D1A1C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DF8206FC29FE423400D7860C /* MovieCollection */,
 				DF72873329F3E9AB002C6701 /* MovieInfoView.swift */,
 				DFBB8EFD29FA647F000D1A1C /* MovieInfoViewModel.swift */,
-				DFBB8ED529F6BA03000D1A1C /* MovieInfoCollectionView.swift */,
-				DFF8932229FB846E00659D49 /* MovieInfoCollectionViewModel.swift */,
-				DF8206F829FC302800D7860C /* MovieInfoCollectionHeaderView.swift */,
-				DF72873729F50BED002C6701 /* MovieInfoCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -486,6 +497,7 @@
 				DF8206F929FC302800D7860C /* MovieInfoCollectionHeaderView.swift in Sources */,
 				DFF8932729FBA53200659D49 /* UIImageView + setImage.swift in Sources */,
 				DFBB8ED829F79686000D1A1C /* StyleGuide.swift in Sources */,
+				DF84E8E929FE431C00D1156B /* MovieInfoCollectionSelectorView.swift in Sources */,
 				DF82076029D1635200E6854A /* AppDelegate.swift in Sources */,
 				DF6FBB6729E3044C00BE310A /* Data + decode.swift in Sources */,
 				DF6FBB5629E2AAEB00BE310A /* Video.swift in Sources */,

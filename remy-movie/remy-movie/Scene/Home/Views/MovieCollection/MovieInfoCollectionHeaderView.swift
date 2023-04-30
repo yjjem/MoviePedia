@@ -26,9 +26,13 @@ final class MovieInfoCollectionHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Function(s)
+    
     func setTitle(string: String) {
         label.text = string
     }
+    
+    // MARK: Private Function(s)
     
     private func addLabel() {
         
