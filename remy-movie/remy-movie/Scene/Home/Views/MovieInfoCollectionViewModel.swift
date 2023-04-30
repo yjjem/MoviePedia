@@ -34,7 +34,6 @@ final class MovieInfoCollectionViewModel {
                 if case let .success(item) = response,
                    let item {
                     self.delegate?.didLoadMovieList(list: item, of: category)
-                    print(item)
                 }
             }
         }

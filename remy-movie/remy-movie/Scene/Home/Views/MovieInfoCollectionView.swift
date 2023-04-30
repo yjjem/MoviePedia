@@ -72,11 +72,11 @@ final class MovieInfoCollectionView: UICollectionView {
         }
     }
     
-    private func configureCollectionDataSource() {
+    private func makeDiffableDataSource() -> DiffableDataSource {
         
         let registration = makeMovieInfoCellRegistration()
         
-        diffableDataSource = .init(collectionView: self) {
+        let diffableDataSource: DiffableDataSource = .init(collectionView: self) {
             collectionView, indexPath, itemIdentifier in
             
             return collectionView.dequeueConfiguredReusableCell(
@@ -86,23 +86,29 @@ final class MovieInfoCollectionView: UICollectionView {
             )
         }
         
-        self.dataSource = diffableDataSource
+        return diffableDataSource
+    }
+    
+    private func configureCollectionDataSource() {
+        
+        diffableDataSource = makeDiffableDataSource()
+        dataSource = diffableDataSource
+        
+        initializeSnapshot()
     }
     
     private func initializeSnapshot() {
         
         var snapshot = NSDiffableDataSourceSnapshot<ListCategory, Movie>()
-        snapshot.appendSections([.popular, .topRated, .nowPlaying, .upcoming])
+        snapshot.appendSections(ListCategory.allCases)
         
         diffableDataSource?.apply(snapshot)
     }
     
     private func updateSnapshot(list: MovieList, for section: ListCategory) {
-        
-        guard var snapshot = diffableDataSource?.snapshot() else { return }
+        guard var snapshot = self.diffableDataSource?.snapshot() else { return }
         snapshot.appendItems(list, toSection: section)
-        
-        diffableDataSource?.apply(snapshot, animatingDifferences: true)
+        self.diffableDataSource?.apply(snapshot, animatingDifferences: true)
     }
     
     private func makeBigInfoSection() -> NSCollectionLayoutSection {
@@ -133,6 +139,7 @@ final class MovieInfoCollectionView: UICollectionView {
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
+        
         return section
     }
     
@@ -183,25 +190,5 @@ extension MovieInfoCollectionView: MovieInfoCollectionDelegate {
     
     func didLoadMovieList(list: MovieList, of category: ListCategory) {
         updateSnapshot(list: list, for: category)
-    }
-}
-
-private extension ListCategory {
-    var index: Int {
-        switch self {
-        case .popular: return 0
-        case .topRated: return 1
-        case .nowPlaying: return 2
-        case .upcoming: return 3
-        }
-    }
-    
-    var name: String {
-        switch self {
-        case .popular: return "Popular"
-        case .topRated: return "Top Rated"
-        case .nowPlaying: return "Now Playing"
-        case .upcoming: return "Upcoming"
-        }
     }
 }
