@@ -44,21 +44,4 @@ final class MovieInfoUseCaseTest: XCTestCase {
             category: category
         )
     }
-    
-    func test_loadVideoList_정상작동_확인() {
-        
-        // Arrange
-        
-        let expectedCallCount: Int = 1
-        let expectedMovieId: Int = 12
-        
-        // Act and Assert
-        
-        sut?.loadVideoList(movieId: expectedMovieId) { _ in }
-        
-        mockMovieService?.verifyLoadVideoList(
-            callCount: expectedCallCount,
-            movieId: expectedMovieId
-        )
-    }
 }

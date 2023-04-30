@@ -10,12 +10,12 @@ protocol MovieInfoUseCaseType {
     func loadMovieList(
         page: Int,
         of category: ListCategory,
-        completion: @escaping (Result<[Movie]?, NetworkError>) -> Void
+        completion: @escaping (Result<MovieList?, NetworkError>) -> Void
     )
     
-    func loadVideoList(
-        movieId: Int,
-        completion: @escaping (Result<[Video]?, NetworkError>) -> Void
+    func loadDailyTrending(
+        page: Int,
+        completion: @escaping (Result<MovieList?, NetworkError>) -> Void
     )
 }
 
@@ -35,10 +35,10 @@ final class MovieInfoUseCase: MovieInfoUseCaseType {
         service?.loadMovieList(page: page, of: category, completion: completion)
     }
     
-    func loadVideoList(
-        movieId: Int,
-        completion: @escaping (Result<[Video]?, NetworkError>) -> Void
+    func loadDailyTrending(
+        page: Int,
+        completion: @escaping (Result<MovieList?, NetworkError>) -> Void
     ) {
-        service?.loadVideoList(movieId: movieId, completion: completion)
+        service?.loadDailyTrending(page: page, completion: completion)
     }
 }

@@ -27,14 +27,14 @@ final class MovieService: MovieServiceInterface {
     func loadMovieList(
         page: Int,
         of category: ListCategory,
-        completion: @escaping (Result<[Movie]?, NetworkError>) -> Void
+        completion: @escaping (Result<MovieList?, NetworkError>) -> Void
     ) {
         
         let endPoint = makeEndPoint(path: .movieList(category), queryItems: [.page: String(page)])
         
         let task = manager.load(url: endPoint.url, method: .get) { [weak self] response in
             guard let self = self else { return }
-            let decodeResult = self.tryDecodeAndValidate(response: response, as: MovieList.self)
+            let decodeResult = self.tryDecodeAndValidate(response: response, as: MovieListResponse.self)
             completion(decodeResult.map { $0.asMovieList() })
         }
         
@@ -43,24 +43,23 @@ final class MovieService: MovieServiceInterface {
         }
     }
     
-    func loadVideoList(
-        movieId: Int,
-        completion: @escaping (Result<[Video]?, NetworkError>) -> Void
+    func loadDailyTrending(
+        page: Int,
+        completion: @escaping (Result<MovieList?, NetworkError>) -> Void
     ) {
         
-        let endPoint = makeEndPoint(path: .videoList(movieId), queryItems: nil)
+        let endPoint = makeEndPoint(path: .trending(.weekly), queryItems: [.page: String(page)])
         
         let task = manager.load(url: endPoint.url, method: .get) { [weak self] response in
             guard let self = self else { return }
-            let decodeResult = self.tryDecodeAndValidate(response: response, as: VideoList.self)
-            completion(decodeResult.map { $0.asVideList() })
+            let decodeResult = self.tryDecodeAndValidate(response: response, as: MovieListResponse.self)
+            completion(decodeResult.map { $0.asMovieList() })
         }
         
         if let task {
             tasks.append(task)
         }
     }
-    
     
     // MARK: Private Function(s)
     
@@ -93,14 +92,26 @@ final class MovieService: MovieServiceInterface {
 extension MovieService {
     enum Path {
         case movieList(ListCategory)
-        case videoList(Int)
+        case trending(TrendingType)
         
         var fullPath: String {
             let mainPath = TmdbAPIDetails.defaultPath
             
             switch self {
             case .movieList(let category): return mainPath + category.path
-            case .videoList(let id): return mainPath + "/\(id)/videos"
+            case .trending(let type): return mainPath + type.path
+            }
+        }
+    }
+    
+    enum TrendingType {
+        case daily
+        case weekly
+        
+        var path: String {
+            switch self {
+            case .daily: return "/daily"
+            case .weekly: return "/weekly"
             }
         }
     }

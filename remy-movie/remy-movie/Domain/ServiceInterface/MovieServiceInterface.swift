@@ -9,20 +9,19 @@ protocol MovieServiceInterface {
     
     // MARK: Type(s)
     
-    typealias MovieList = GenericResponse<[Movie]>
-    typealias VideoList = GenericResponse<[Video]>
+    typealias MovieListResponse = GenericResponse<[Movie]>
     
     // MARK: Function(s)
     
     func loadMovieList(
         page: Int,
         of category: ListCategory,
-        completion: @escaping (Result<[Movie]?, NetworkError>) -> Void
+        completion: @escaping (Result<MovieList?, NetworkError>) -> Void
     )
     
-    func loadVideoList(
-        movieId: Int,
-        completion: @escaping (Result<[Video]?, NetworkError>) -> Void
+    func loadDailyTrending(
+        page: Int,
+        completion: @escaping (Result<MovieList?, NetworkError>) -> Void
     )
 }
 

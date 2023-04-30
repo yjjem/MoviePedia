@@ -117,39 +117,5 @@ final class MovieServiceTest: XCTestCase {
                 XCTFail("unexpected response: \(response)")
             }
         }
-        
-        func test_loadVideoList_문제없을시_정상적으로_VideoList를_반환하는지() {
-            
-            // Arrange
-            
-            let error: NetworkError? = nil
-            let stubJsonData = MovieServiceStubJsons.videoList
-            let expectedVideoCount = 2
-            
-            MockNetworkManager.mockHandler = {
-                return (error, stubJsonData)
-            }
-            
-            // Act and Assert
-            
-            let loadExpectation = expectation(description: "did load")
-            let successExpectation = expectation(description: "did success")
-            
-            let _ = sut?.loadVideoList(movieId: 11) { response in
-                
-                loadExpectation.fulfill()
-                
-                if case let .success(videoList) = response {
-                    successExpectation.fulfill()
-                    XCTAssertTrue(videoList?.count == expectedVideoCount)
-                } else {
-                    XCTFail("unexpected response: \(response)")
-                }
-            }
-            
-            wait(for: [loadExpectation, successExpectation], timeout: 2)
-        }
-        
-        wait(for: [loadExpectation, successExpectation], timeout: 2)
     }
 }
