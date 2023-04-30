@@ -9,7 +9,7 @@ typealias MovieList = [Movie]
 typealias VideoList = [Video]
 
 protocol MovieInfoCollectionDelegate {
-    func didLoadMovieList(list: MovieList, of category: ListCategory)
+    func didLoadMovieList(list: MovieList)
 }
 
 final class MovieInfoCollectionViewModel {
@@ -24,17 +24,14 @@ final class MovieInfoCollectionViewModel {
     
     // MARK: Function(s)
     
-    func loadAllMovieLists() {
+    func loadMovieList(of category: ListCategory) {
         
-        let categories: [ListCategory] = [.popular, .upcoming, .nowPlaying, .topRated]
         let pageToLoad: Int = 1
         
-        for category in categories {
-            useCase.loadMovieList(page: pageToLoad, of: category) { response in
-                if case let .success(item) = response,
-                   let item {
-                    self.delegate?.didLoadMovieList(list: item, of: category)
-                }
+        useCase.loadMovieList(page: pageToLoad, of: category) { response in
+            if case let .success(item) = response,
+               let item {
+                self.delegate?.didLoadMovieList(list: item)
             }
         }
     }

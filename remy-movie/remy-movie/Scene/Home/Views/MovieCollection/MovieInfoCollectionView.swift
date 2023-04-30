@@ -11,8 +11,13 @@ final class MovieInfoCollectionView: UICollectionView {
     
     // MARK: Type(s)
     
-    private typealias DiffableDataSource = UICollectionViewDiffableDataSource<ListCategory, Movie>
+    private typealias DiffableDataSource = UICollectionViewDiffableDataSource<Section, Movie>
     private typealias CellRegistration = UICollectionView.CellRegistration<MovieInfoCell, Movie>
+    
+    enum Section: CaseIterable {
+        case trending
+        case categoryList
+    }
     
     // MARK: Variable(s)
     
@@ -48,7 +53,6 @@ final class MovieInfoCollectionView: UICollectionView {
     private func bindViewModel() {
         guard let viewModel else { return }
         viewModel.delegate = self
-        viewModel.loadAllMovieLists()
     }
     
     private func makeMovieInfoCellRegistration() -> CellRegistration {
@@ -99,14 +103,16 @@ final class MovieInfoCollectionView: UICollectionView {
     
     private func initializeSnapshot() {
         
-        var snapshot = NSDiffableDataSourceSnapshot<ListCategory, Movie>()
-        snapshot.appendSections(ListCategory.allCases)
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
+        snapshot.appendSections(Section.allCases)
         
         diffableDataSource?.apply(snapshot)
     }
     
-    private func updateSnapshot(list: MovieList, for section: ListCategory) {
+    private func updateSnapshot(list: MovieList, for section: Section) {
         guard var snapshot = self.diffableDataSource?.snapshot() else { return }
+        snapshot.deleteSections([section])
+        snapshot.appendSections([section])
         snapshot.appendItems(list, toSection: section)
         self.diffableDataSource?.apply(snapshot, animatingDifferences: true)
     }
@@ -188,7 +194,7 @@ final class MovieInfoCollectionView: UICollectionView {
 
 extension MovieInfoCollectionView: MovieInfoCollectionDelegate {
     
-    func didLoadMovieList(list: MovieList, of category: ListCategory) {
-        updateSnapshot(list: list, for: category)
+    func didLoadMovieList(list: MovieList) {
+        updateSnapshot(list: list, for: .categoryList)
     }
 }

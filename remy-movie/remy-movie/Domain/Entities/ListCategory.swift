@@ -32,7 +32,7 @@ extension ListCategory: CaseIterable {
     }
     
     static var allNames: [String] {
-        var allCases = ListCategory.allCases
+        let allCases = ListCategory.allCases
         return allCases.map { $0.name }
     }
 }

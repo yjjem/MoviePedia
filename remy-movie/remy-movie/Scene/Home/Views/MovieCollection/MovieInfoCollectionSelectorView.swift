@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol MovieInfoCollectionSelectorDelegate {
+    
+    func didSelectCategory(_ category: ListCategory)
+}
+
 final class MovieInfoCollectionSelectorView: UICollectionReusableView {
     
     private let selectorView: UISegmentedControl = {
@@ -15,6 +20,8 @@ final class MovieInfoCollectionSelectorView: UICollectionReusableView {
         selector.translatesAutoresizingMaskIntoConstraints = false
         return selector
     }()
+    
+    var delegate: MovieInfoCollectionSelectorDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,5 +45,18 @@ final class MovieInfoCollectionSelectorView: UICollectionReusableView {
             selectorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
             selectorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset)
         ])
+    }
+    
+    private func configureActions() {
+        selectorView.addTarget(self, action: #selector(sendSelectionToDelegate), for: .touchUpInside)
+    }
+    
+    @objc
+    private func sendSelectionToDelegate() {
+        
+        let selectedIndex = selectorView.selectedSegmentIndex
+        let selectedCategory = ListCategory.allCases[selectedIndex]
+        
+        delegate?.didSelectCategory(selectedCategory)
     }
 }
