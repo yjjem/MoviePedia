@@ -4,19 +4,22 @@
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
 
+import Foundation
 
 typealias MovieList = [Movie]
 typealias VideoList = [Video]
 
-protocol MovieInfoCollectionDelegate {
-    func didLoadMovieList(list: MovieList)
-}
-
-final class MovieInfoCollectionViewModel {
-    
-    var delegate: MovieInfoCollectionDelegate?
+final class MovieCategoryCollectionViewModel {
     
     private let useCase: MovieInfoUseCaseType
+    
+    var category: ListCategory = .popular {
+        didSet {
+            bind()
+        }
+    }
+    
+    var handler: ((Output) -> Void)?
     
     init(useCase: MovieInfoUseCaseType) {
         self.useCase = useCase
@@ -24,15 +27,23 @@ final class MovieInfoCollectionViewModel {
     
     // MARK: Function(s)
     
-    func loadMovieList(of category: ListCategory) {
+    func bind() {
         
         let pageToLoad: Int = 1
         
-        useCase.loadMovieList(page: pageToLoad, of: category) { response in
+        self.useCase.loadMovieList(page: pageToLoad, of: category) { [weak self] response in
+            
             if case let .success(item) = response,
                let item {
-                self.delegate?.didLoadMovieList(list: item)
+                let loadedItem = Output(categoryMovieList: item)
+                self?.handler?(loadedItem)
             }
         }
+    }
+}
+
+extension MovieCategoryCollectionViewModel {
+    struct Output {
+        let categoryMovieList: MovieList
     }
 }

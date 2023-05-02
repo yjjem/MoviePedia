@@ -30,14 +30,6 @@ final class MovieInfoView: RoundableView {
         return imageView
     }()
     
-    private let ratingView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .black
-        view.layer.cornerRadius = 25
-        return view
-    }()
-    
     private let layoutGuide: UILayoutGuide = {
         return UILayoutGuide()
     }()
@@ -104,7 +96,6 @@ final class MovieInfoView: RoundableView {
     
     private func configureAsPosterInfo() {
         addBackgroundImageView()
-        addRatingViewView()
     }
     
     private func addBackgroundImageView() {
@@ -127,18 +118,6 @@ final class MovieInfoView: RoundableView {
             movieTitleLabel.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor),
             movieTitleLabel.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor),
             movieTitleLabel.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor)
-        ])
-    }
-    
-    private func addRatingViewView() {
-        
-        addSubview(ratingView)
-        
-        NSLayoutConstraint.activate([
-            ratingView.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor, constant: 5),
-            ratingView.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor, constant: 5),
-            ratingView.widthAnchor.constraint(equalToConstant: 50),
-            ratingView.heightAnchor.constraint(equalTo: ratingView.widthAnchor)
         ])
     }
 }

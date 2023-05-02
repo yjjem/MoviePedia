@@ -11,12 +11,12 @@ final class HomeViewController: UIViewController {
     
     // MARK: View(s)
     
-    private let movieInfoCollectionView: MovieInfoCollectionView = {
+    private let movieInfoCollectionView: MovieCategoryCollectionView = {
         let manager = NetworkManager(session: .init(configuration: .default))
         let service = MovieService(manger: manager)
         let useCase = MovieInfoUseCase(service: service)
-        let viewModel = MovieInfoCollectionViewModel(useCase: useCase)
-        let collection = MovieInfoCollectionView(viewModel: viewModel)
+        let viewModel = MovieCategoryCollectionViewModel(useCase: useCase)
+        let collection = MovieCategoryCollectionView(viewModel: viewModel)
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()

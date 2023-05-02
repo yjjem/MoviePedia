@@ -96,10 +96,11 @@ extension MovieService {
         
         var fullPath: String {
             let mainPath = TmdbAPIDetails.defaultPath
+            let trendingPath = TmdbAPIDetails.trendingMoviePath
             
             switch self {
             case .movieList(let category): return mainPath + category.path
-            case .trending(let type): return mainPath + type.path
+            case .trending(let type): return trendingPath + type.path
             }
         }
     }
@@ -110,8 +111,8 @@ extension MovieService {
         
         var path: String {
             switch self {
-            case .daily: return "/daily"
-            case .weekly: return "/weekly"
+            case .daily: return "/day"
+            case .weekly: return "/week"
             }
         }
     }
