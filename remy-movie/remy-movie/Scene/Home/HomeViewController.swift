@@ -11,7 +11,13 @@ final class HomeViewController: UIViewController {
     
     // MARK: View(s)
     
-    private let movieInfoCollectionView: MovieCategoryCollectionView = {
+    private let categorySelector: UISegmentedControl = {
+        let categorySelector = UISegmentedControl(items: ListCategory.allNames)
+        categorySelector.translatesAutoresizingMaskIntoConstraints = false
+        return categorySelector
+    }()
+    
+    private let movieCategoryCollectionView: MovieCategoryCollectionView = {
         let manager = NetworkManager(session: .init(configuration: .default))
         let service = MovieService(manger: manager)
         let useCase = MovieInfoUseCase(service: service)
@@ -27,16 +33,12 @@ final class HomeViewController: UIViewController {
         super.loadView()
         
         configureTabBarItem()
-        configureViews()
-        configureConstraints()
-        configureCollectionView()
+        addCategorySelector()
+        addMovieCategoryCollectionView()
+        addCategorySelector()
     }
     
     // MARK: Private Function(s)
-    
-    private func configureCollectionView() {
-        movieInfoCollectionView.delegate = self
-    }
     
     private func configureTabBarItem() {
         
@@ -44,19 +46,38 @@ final class HomeViewController: UIViewController {
         tabBarItem.image = UIImage(systemName: "house")
     }
     
-    private func configureViews() {
+    private func addCategorySelector() {
         
-        view.addSubview(movieInfoCollectionView)
-    }
-    
-    private func configureConstraints() {
+        categorySelector.addTarget(self, action: #selector(updateMovieCategory), for: .valueChanged)
+        categorySelector.selectedSegmentIndex = ListCategory.popular.index
+        
+        view.addSubview(categorySelector)
         
         NSLayoutConstraint.activate([
-            movieInfoCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            movieInfoCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            movieInfoCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            movieInfoCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            categorySelector.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            categorySelector.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            categorySelector.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
+    }
+    
+    private func addMovieCategoryCollectionView() {
+        
+        movieCategoryCollectionView.delegate = self
+        
+        view.addSubview(movieCategoryCollectionView)
+        
+        NSLayoutConstraint.activate([
+            movieCategoryCollectionView.topAnchor.constraint(equalTo: categorySelector.bottomAnchor, constant: 10),
+            movieCategoryCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            movieCategoryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            movieCategoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+    
+    @objc private func updateMovieCategory(_ selector: UISegmentedControl) {
+        let selectedIndex = selector.selectedSegmentIndex
+        let selectedCategory = ListCategory.category(of: selectedIndex)
+        movieCategoryCollectionView.category = selectedCategory
     }
 }
 

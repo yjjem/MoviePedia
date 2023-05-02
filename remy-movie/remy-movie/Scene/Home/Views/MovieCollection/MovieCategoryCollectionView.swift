@@ -49,6 +49,14 @@ final class MovieCategoryCollectionView: UICollectionView {
     
     private var viewModel: MovieCategoryCollectionViewModel?
     
+    var category: ListCategory? {
+        didSet {
+            if let category {
+                viewModel?.category = category
+            }
+        }
+    }
+    
     // MARK: Initializer(s)
     
     convenience init(viewModel: MovieCategoryCollectionViewModel) {

@@ -35,4 +35,13 @@ extension ListCategory: CaseIterable {
         let allCases = ListCategory.allCases
         return allCases.map { $0.name }
     }
+    
+    static func category(of index: Int) -> Self {
+        switch index {
+        case 1: return .topRated
+        case 2: return .nowPlaying
+        case 3: return .upcoming
+        default: return .popular
+        }
+    }
 }
