@@ -17,12 +17,12 @@ final class HomeViewController: UIViewController {
         return categorySelector
     }()
     
-    private let movieCategoryCollectionView: MovieCategoryCollectionView = {
+    private let movieCategoryCollectionView: MovieInfoCollectionView = {
         let manager = NetworkManager(session: .init(configuration: .default))
         let service = MovieService(manger: manager)
         let useCase = MovieInfoUseCase(service: service)
-        let viewModel = MovieCategoryCollectionViewModel(useCase: useCase)
-        let collection = MovieCategoryCollectionView(viewModel: viewModel)
+        let viewModel = MovieInfoCollectionViewModel(useCase: useCase)
+        let collection = MovieInfoCollectionView(viewModel: viewModel)
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
@@ -56,7 +56,8 @@ final class HomeViewController: UIViewController {
         NSLayoutConstraint.activate([
             categorySelector.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             categorySelector.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            categorySelector.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+            categorySelector.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            categorySelector.heightAnchor.constraint(equalToConstant: 25)
         ])
     }
     

@@ -9,7 +9,7 @@ import Foundation
 typealias MovieList = [Movie]
 typealias VideoList = [Video]
 
-final class MovieCategoryCollectionViewModel {
+final class MovieInfoCollectionViewModel {
     
     private let useCase: MovieInfoUseCaseType
     
@@ -42,7 +42,7 @@ final class MovieCategoryCollectionViewModel {
     }
 }
 
-extension MovieCategoryCollectionViewModel {
+extension MovieInfoCollectionViewModel {
     struct Output {
         let categoryMovieList: MovieList
     }

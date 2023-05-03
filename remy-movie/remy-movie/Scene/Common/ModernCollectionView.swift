@@ -11,7 +11,6 @@ protocol ModernCollectionView: UICollectionView {
     associatedtype Section: Sendable, Hashable
     associatedtype SectionItem: Sendable, Hashable
     associatedtype DiffableDatatSource = UICollectionViewDiffableDataSource<Section, SectionItem>
-    associatedtype LayoutConstants
     
     var diffableDataSource: DiffableDatatSource { get }
 }
