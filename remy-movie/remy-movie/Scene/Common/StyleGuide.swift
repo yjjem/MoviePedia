@@ -10,6 +10,7 @@ import UIKit
 private extension CGFloat {
     static let mainTitleTextSize: CGFloat = 36.0
     static let subTitleTextSize: CGFloat = 28.0
+    static let headerTitleTextSize: CGFloat = 24.0
 }
 
 extension UILabel {
@@ -20,6 +21,10 @@ extension UILabel {
     
     func configureAsCellInfo() {
         configure(size: .subTitleTextSize, alignment: .left, lines: 1, weight: .regular)
+    }
+    
+    func configureAsHeaderTitle() {
+        configure(size: .headerTitleTextSize, alignment: .left, lines: 1, weight: .semibold)
     }
     
     private func configure(

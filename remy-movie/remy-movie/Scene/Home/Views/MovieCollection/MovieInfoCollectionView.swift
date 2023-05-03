@@ -25,6 +25,20 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
             case .trending: return 1
             }
         }
+        
+        var name: String {
+            switch self {
+            case .categoryCollection: return "Category"
+            case .trending: return "Trending"
+            }
+        }
+        
+        static func sectionFor(indexPath: IndexPath) -> Self {
+            switch indexPath.section {
+            case Self.trending.index: return .trending
+            default: return .categoryCollection
+            }
+        }
     }
     
     // MARK: Variable(s)
@@ -48,7 +62,7 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         self.viewModel = viewModel
         
         configureCollectionDataSource()
-        applyCollectionViewLayout()
+        configureCompositionalLayout()
         bindViewModel()
     }
     
@@ -57,11 +71,15 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
     private func bindViewModel() {
         guard let viewModel else { return }
         
-        viewModel.handler = { output in
-            self.applyCategoryCollectionSnapshot(using: output.categoryMovieList)
+        viewModel.loadedCategoryMovieList = { list in
+            self.applySnapshot(to: .categoryCollection, appending: list)
         }
         
-        viewModel.bind()
+        viewModel.loadedTrendingMovieList = { list in
+            self.applySnapshot(to: .trending, appending: list)
+        }
+        
+        viewModel.initialBind()
     }
     
     private func makeMovieInfoCellRegistration() -> CellRegistration {
@@ -74,10 +92,10 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         }
     }
     
-    private func applyCategoryCollectionSnapshot(using movieList: MovieList) {
+    private func applySnapshot(to section: Section, appending movieList: MovieList) {
         var snapshot = NSDiffableDataSourceSectionSnapshot<SectionItem>()
         snapshot.append(movieList)
-        self.diffableDataSource?.apply(snapshot, to: .categoryCollection)
+        self.diffableDataSource?.apply(snapshot, to: section)
     }
     
     private func makeDiffableDataSource() -> DiffableDataSource {
@@ -97,20 +115,51 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         return diffableDataSource
     }
     
+    private func registerHeaderView() {
+        register(
+            MovieInfoCollectionHeaderView.self,
+            forSupplementaryViewOfKind: MovieInfoCollectionHeaderView.supplementaryKind,
+            withReuseIdentifier: MovieInfoCollectionHeaderView.identifier
+        )
+    }
+    
     private func configureCollectionDataSource() {
         
+        registerHeaderView()
+        
         diffableDataSource = makeDiffableDataSource()
+        
+        diffableDataSource?.supplementaryViewProvider = {
+            collectionView, kind, indexPath in
+            
+            let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: MovieInfoCollectionHeaderView.identifier,
+                for: indexPath
+            ) as? MovieInfoCollectionHeaderView
+            
+            let section = Section.sectionFor(indexPath: indexPath)
+            let sectionTitle = section.name
+            header?.set(title: sectionTitle)
+            
+            return header
+        }
+        
         dataSource = diffableDataSource
     }
     
-    private func applyCollectionViewLayout() {
+    private func makeCategoryMovieSection() -> NSCollectionLayoutSection {
         
-        let item = makeItem(width: .absolute(200), height: .absolute(300))
+        let ration: CGFloat = 2/3
+        let width: CGFloat = 200
+        let height: CGFloat = width / ration
+        
+        let item = makeItem(width: .absolute(width), height: .absolute(height))
         item.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
         
         let group = makeHorizontalGroup(
-            width: .absolute(200),
-            height: .fractionalWidth(1.0),
+            width: .absolute(width),
+            height: .absolute(height),
             repeatingItem: item,
             count: 1
         )
@@ -119,8 +168,60 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPagingCentered
         
-        let layout = UICollectionViewCompositionalLayout(section: section)
+        return section
+    }
+    
+    private func makeHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         
-        self.setCollectionViewLayout(layout, animated: true)
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: MovieInfoCollectionHeaderView.supplementaryKind,
+            alignment: .top
+        )
+        
+        return header
+    }
+    
+    private func makeMovieInfoWithHeaderSection() -> NSCollectionLayoutSection {
+        
+        let header = makeHeader()
+        
+        let ration: CGFloat = 2/3
+        let width: CGFloat = 120
+        let height: CGFloat = width / ration
+        
+        let item = makeItem(width: .absolute(width), height: .absolute(height))
+        item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
+        
+        let group = makeHorizontalGroup(
+            width: .absolute(120),
+            height: .fractionalWidth(1.0),
+            repeatingItem: item,
+            count: 1
+        )
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
+        section.orthogonalScrollingBehavior = .continuous
+        section.boundarySupplementaryItems = [header]
+        
+        return section
+    }
+    
+    private func configureCompositionalLayout() {
+        
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
+            
+            let categoryMovieCollectionSection = self.makeCategoryMovieSection()
+            let movieInfoWithHeaderSection = self.makeMovieInfoWithHeaderSection()
+            
+            switch sectionIndex {
+            case Section.categoryCollection.index: return categoryMovieCollectionSection
+            default: return movieInfoWithHeaderSection
+            }
+        }
+        
+        setCollectionViewLayout(layout, animated: true)
     }
 }

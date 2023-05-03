@@ -15,11 +15,13 @@ final class MovieInfoCollectionViewModel {
     
     var category: ListCategory = .popular {
         didSet {
-            bind()
+            loadMovieList(of: category)
         }
     }
     
-    var handler: ((Output) -> Void)?
+    let pageToLoad: Int = 1
+    var loadedCategoryMovieList: ((MovieList) -> Void)?
+    var loadedTrendingMovieList: ((MovieList) -> Void)?
     
     init(useCase: MovieInfoUseCaseType) {
         self.useCase = useCase
@@ -27,23 +29,29 @@ final class MovieInfoCollectionViewModel {
     
     // MARK: Function(s)
     
-    func bind() {
+    func initialBind() {
+        loadMovieList(of: category)
+        loadTrendingMovieList()
+    }
+    
+    private func loadMovieList(of category: ListCategory) {
         
-        let pageToLoad: Int = 1
-        
-        self.useCase.loadMovieList(page: pageToLoad, of: category) { [weak self] response in
+        useCase.loadMovieList(page: pageToLoad, of: category) { [weak self] response in
             
             if case let .success(item) = response,
                let item {
-                let loadedItem = Output(categoryMovieList: item)
-                self?.handler?(loadedItem)
+                self?.loadedCategoryMovieList?(item)
             }
         }
     }
-}
-
-extension MovieInfoCollectionViewModel {
-    struct Output {
-        let categoryMovieList: MovieList
+    
+    private func loadTrendingMovieList() {
+        
+        useCase.loadDailyTrending(page: pageToLoad) { [weak self] response in
+            if case let .success(item) = response,
+               let item {
+                self?.loadedTrendingMovieList?(item)
+            }
+        }
     }
 }
