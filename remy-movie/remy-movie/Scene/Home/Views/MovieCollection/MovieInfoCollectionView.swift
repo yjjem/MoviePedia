@@ -51,6 +51,7 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         didSet {
             if let category {
                 viewModel?.category = category
+                resetCategoryMovieCollectionScrollPosition()
             }
         }
     }
@@ -223,5 +224,9 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         }
         
         setCollectionViewLayout(layout, animated: true)
+    }
+    
+    private func resetCategoryMovieCollectionScrollPosition() {
+        scrollToItem(at: .init(item: 0, section: 0), at: .left, animated: true)
     }
 }
