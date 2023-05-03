@@ -17,25 +17,29 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
     
     enum Section: CaseIterable {
         case categoryCollection
-        case trending
+        case dailyTrending
+        case weeklyTrending
         
         var index: Int {
             switch self {
             case .categoryCollection: return 0
-            case .trending: return 1
+            case .dailyTrending: return 1
+            case .weeklyTrending: return 2
             }
         }
         
         var name: String {
             switch self {
             case .categoryCollection: return "Category"
-            case .trending: return "Trending"
+            case .dailyTrending: return "Daily Trending"
+            case .weeklyTrending: return "Weekly Trending"
             }
         }
         
         static func sectionFor(indexPath: IndexPath) -> Self {
             switch indexPath.section {
-            case Self.trending.index: return .trending
+            case Self.dailyTrending.index: return .dailyTrending
+            case Self.weeklyTrending.index: return .weeklyTrending
             default: return .categoryCollection
             }
         }
@@ -76,8 +80,12 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
             self.applySnapshot(to: .categoryCollection, appending: list)
         }
         
-        viewModel.loadedTrendingMovieList = { list in
-            self.applySnapshot(to: .trending, appending: list)
+        viewModel.loadedDailyTrendingMovieList = { list in
+            self.applySnapshot(to: .dailyTrending, appending: list)
+        }
+        
+        viewModel.loadedWeeklyTrendingMovieList = { list in
+            self.applySnapshot(to: .weeklyTrending, appending: list)
         }
         
         viewModel.initialBind()
@@ -164,7 +172,6 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
             repeatingItem: item,
             count: 1
         )
-        group.interItemSpacing = .fixed(20)
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPagingCentered
@@ -196,8 +203,8 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
         
         let group = makeHorizontalGroup(
-            width: .absolute(120),
-            height: .fractionalWidth(1.0),
+            width: .absolute(width),
+            height: .absolute(height),
             repeatingItem: item,
             count: 1
         )

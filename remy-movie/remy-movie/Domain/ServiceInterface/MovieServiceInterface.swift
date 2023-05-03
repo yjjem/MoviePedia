@@ -19,8 +19,9 @@ protocol MovieServiceInterface {
         completion: @escaping (Result<MovieList?, NetworkError>) -> Void
     )
     
-    func loadDailyTrending(
+    func loadTrending(
         page: Int,
+        category type: TrendingType,
         completion: @escaping (Result<MovieList?, NetworkError>) -> Void
     )
 }
@@ -32,6 +33,18 @@ extension ListCategory {
         case .topRated:  return "/top_rated"
         case .nowPlaying:  return "/now_playing"
         case .upcoming:  return "/upcoming"
+        }
+    }
+}
+
+enum TrendingType {
+    case daily
+    case weekly
+    
+    var path: String {
+        switch self {
+        case .daily: return "/day"
+        case .weekly: return "/week"
         }
     }
 }

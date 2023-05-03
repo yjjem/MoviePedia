@@ -17,6 +17,11 @@ protocol MovieInfoUseCaseType {
         page: Int,
         completion: @escaping (Result<MovieList?, NetworkError>) -> Void
     )
+    
+    func loadWeeklyTrending(
+        page: Int,
+        completion: @escaping (Result<MovieList?, NetworkError>) -> Void
+    )
 }
 
 final class MovieInfoUseCase: MovieInfoUseCaseType {
@@ -39,6 +44,13 @@ final class MovieInfoUseCase: MovieInfoUseCaseType {
         page: Int,
         completion: @escaping (Result<MovieList?, NetworkError>) -> Void
     ) {
-        service?.loadDailyTrending(page: page, completion: completion)
+        service?.loadTrending(page: page, category: .daily, completion: completion)
+    }
+    
+    func loadWeeklyTrending(
+        page: Int,
+        completion: @escaping (Result<MovieList?, NetworkError>) -> Void
+    ) {
+        service?.loadTrending(page: page, category: .weekly, completion: completion)
     }
 }

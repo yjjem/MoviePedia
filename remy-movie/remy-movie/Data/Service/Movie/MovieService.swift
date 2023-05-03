@@ -43,12 +43,13 @@ final class MovieService: MovieServiceInterface {
         }
     }
     
-    func loadDailyTrending(
+    func loadTrending(
         page: Int,
+        category type: TrendingType,
         completion: @escaping (Result<MovieList?, NetworkError>) -> Void
     ) {
         
-        let endPoint = makeEndPoint(path: .trending(.weekly), queryItems: [.page: String(page)])
+        let endPoint = makeEndPoint(path: .trending(type), queryItems: [.page: String(page)])
         
         let task = manager.load(url: endPoint.url, method: .get) { [weak self] response in
             guard let self = self else { return }
@@ -101,18 +102,6 @@ extension MovieService {
             switch self {
             case .movieList(let category): return mainPath + category.path
             case .trending(let type): return trendingPath + type.path
-            }
-        }
-    }
-    
-    enum TrendingType {
-        case daily
-        case weekly
-        
-        var path: String {
-            switch self {
-            case .daily: return "/day"
-            case .weekly: return "/week"
             }
         }
     }

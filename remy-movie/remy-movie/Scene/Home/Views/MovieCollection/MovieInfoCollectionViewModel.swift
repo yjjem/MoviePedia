@@ -21,7 +21,8 @@ final class MovieInfoCollectionViewModel {
     
     let pageToLoad: Int = 1
     var loadedCategoryMovieList: ((MovieList) -> Void)?
-    var loadedTrendingMovieList: ((MovieList) -> Void)?
+    var loadedDailyTrendingMovieList: ((MovieList) -> Void)?
+    var loadedWeeklyTrendingMovieList: ((MovieList) -> Void)?
     
     init(useCase: MovieInfoUseCaseType) {
         self.useCase = useCase
@@ -31,7 +32,8 @@ final class MovieInfoCollectionViewModel {
     
     func initialBind() {
         loadMovieList(of: category)
-        loadTrendingMovieList()
+        loadDailyTrendingMovieList()
+        loadWeeklyTrendingMovieList()
     }
     
     private func loadMovieList(of category: ListCategory) {
@@ -45,12 +47,22 @@ final class MovieInfoCollectionViewModel {
         }
     }
     
-    private func loadTrendingMovieList() {
+    private func loadDailyTrendingMovieList() {
         
         useCase.loadDailyTrending(page: pageToLoad) { [weak self] response in
             if case let .success(item) = response,
                let item {
-                self?.loadedTrendingMovieList?(item)
+                self?.loadedDailyTrendingMovieList?(item)
+            }
+        }
+    }
+    
+    private func loadWeeklyTrendingMovieList() {
+        
+        useCase.loadWeeklyTrending(page: pageToLoad) { [weak self] response in
+            if case let .success(item) = response,
+               let item {
+                self?.loadedWeeklyTrendingMovieList?(item)
             }
         }
     }
