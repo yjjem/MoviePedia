@@ -37,13 +37,11 @@ final class MovieInfoCollectionHeaderView: UICollectionReusableView {
         
         addSubview(headerTitleLabel)
         
-        let inset: CGFloat = 10
-        
         NSLayoutConstraint.activate([
-            headerTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: inset),
-            headerTitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset),
-            headerTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
-            headerTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset)
+            headerTitleLabel.topAnchor.constraint(equalTo: topAnchor),
+            headerTitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            headerTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            headerTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 }
