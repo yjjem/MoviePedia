@@ -5,6 +5,9 @@
 //  Copyright (c) 2023 Jeremy All rights reserved.
 
 
+typealias MovieList = [Movie]
+typealias VideoList = [Video]
+
 protocol MovieServiceInterface {
     
     // MARK: Type(s)

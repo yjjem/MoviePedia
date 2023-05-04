@@ -13,7 +13,7 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
     
     typealias DiffableDataSource = UICollectionViewDiffableDataSource<Section, SectionItem>
     typealias CellRegistration = UICollectionView.CellRegistration<MovieInfoCell, SectionItem>
-    typealias SectionItem = Movie
+    typealias SectionItem = MovieWrapper
     
     enum Section: CaseIterable {
         case categoryCollection
@@ -93,17 +93,17 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
     
     private func makeMovieInfoCellRegistration() -> CellRegistration {
         
-        return CellRegistration { cell, indexPath, itemIdentifier in
+        return CellRegistration { cell, indexPath, movieWrapper in
             
-            let viewModel = MovieInfoViewModel(movie: itemIdentifier)
+            let viewModel = MovieInfoViewModel(movie: movieWrapper.movie)
             let infoView = MovieInfoView(viewModel: viewModel, infoStyle: .poster)
             cell.content = infoView
         }
     }
-    
-    private func applySnapshot(to section: Section, appending movieList: MovieList) {
+
+    private func applySnapshot(to section: Section, appending wrappedMovies: [MovieWrapper]) {
         var snapshot = NSDiffableDataSourceSectionSnapshot<SectionItem>()
-        snapshot.append(movieList)
+        snapshot.append(wrappedMovies)
         self.diffableDataSource?.apply(snapshot, to: section)
     }
     

@@ -4,14 +4,8 @@
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
 
-import Foundation
-
-typealias MovieList = [Movie]
-typealias VideoList = [Video]
 
 final class MovieInfoCollectionViewModel {
-    
-    private let useCase: MovieInfoUseCaseType
     
     var category: ListCategory = .popular {
         didSet {
@@ -19,10 +13,12 @@ final class MovieInfoCollectionViewModel {
         }
     }
     
-    let pageToLoad: Int = 1
-    var loadedCategoryMovieList: ((MovieList) -> Void)?
-    var loadedDailyTrendingMovieList: ((MovieList) -> Void)?
-    var loadedWeeklyTrendingMovieList: ((MovieList) -> Void)?
+    var loadedCategoryMovieList: (([MovieWrapper]) -> Void)?
+    var loadedDailyTrendingMovieList: (([MovieWrapper]) -> Void)?
+    var loadedWeeklyTrendingMovieList: (([MovieWrapper]) -> Void)?
+    
+    private let pageToLoad: Int = 1
+    private let useCase: MovieInfoUseCaseType
     
     init(useCase: MovieInfoUseCaseType) {
         self.useCase = useCase
@@ -42,7 +38,8 @@ final class MovieInfoCollectionViewModel {
             
             if case let .success(item) = response,
                let item {
-                self?.loadedCategoryMovieList?(item)
+                let categoryWrappedMovieList = item.map { MovieWrapper.category($0) }
+                self?.loadedCategoryMovieList?(categoryWrappedMovieList)
             }
         }
     }
@@ -52,7 +49,8 @@ final class MovieInfoCollectionViewModel {
         useCase.loadDailyTrending(page: pageToLoad) { [weak self] response in
             if case let .success(item) = response,
                let item {
-                self?.loadedDailyTrendingMovieList?(item)
+                let dailyWrappedMovieList = item.map { MovieWrapper.daily($0) }
+                self?.loadedDailyTrendingMovieList?(dailyWrappedMovieList)
             }
         }
     }
@@ -62,7 +60,8 @@ final class MovieInfoCollectionViewModel {
         useCase.loadWeeklyTrending(page: pageToLoad) { [weak self] response in
             if case let .success(item) = response,
                let item {
-                self?.loadedWeeklyTrendingMovieList?(item)
+                let weeklyWrappedMovieList = item.map { MovieWrapper.weekly($0) }
+                self?.loadedWeeklyTrendingMovieList?(weeklyWrappedMovieList)
             }
         }
     }
