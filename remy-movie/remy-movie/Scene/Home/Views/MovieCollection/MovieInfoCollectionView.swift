@@ -73,65 +73,6 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
     
     // MARK: Private Function(s)
     
-    private func bindViewModel() {
-        guard let viewModel else { return }
-        
-        viewModel.loadedCategoryMovieList = { list in
-            self.applySnapshot(to: .categoryCollection, appending: list)
-        }
-        
-        viewModel.loadedDailyTrendingMovieList = { list in
-            self.applySnapshot(to: .dailyTrending, appending: list)
-        }
-        
-        viewModel.loadedWeeklyTrendingMovieList = { list in
-            self.applySnapshot(to: .weeklyTrending, appending: list)
-        }
-        
-        viewModel.initialBind()
-    }
-    
-    private func makeMovieInfoCellRegistration() -> CellRegistration {
-        
-        return CellRegistration { cell, indexPath, movieWrapper in
-            
-            let viewModel = MovieInfoViewModel(movie: movieWrapper.movie)
-            let infoView = MovieInfoView(viewModel: viewModel, infoStyle: .poster)
-            cell.content = infoView
-        }
-    }
-
-    private func applySnapshot(to section: Section, appending wrappedMovies: [MovieWrapper]) {
-        var snapshot = NSDiffableDataSourceSectionSnapshot<SectionItem>()
-        snapshot.append(wrappedMovies)
-        self.diffableDataSource?.apply(snapshot, to: section)
-    }
-    
-    private func makeDiffableDataSource() -> DiffableDataSource {
-        
-        let registration = makeMovieInfoCellRegistration()
-        
-        let diffableDataSource: DiffableDataSource = .init(collectionView: self) {
-            collectionView, indexPath, itemIdentifier in
-            
-            return collectionView.dequeueConfiguredReusableCell(
-                using: registration,
-                for: indexPath,
-                item: itemIdentifier
-            )
-        }
-        
-        return diffableDataSource
-    }
-    
-    private func registerHeaderView() {
-        register(
-            MovieInfoCollectionHeaderView.self,
-            forSupplementaryViewOfKind: MovieInfoCollectionHeaderView.supplementaryKind,
-            withReuseIdentifier: MovieInfoCollectionHeaderView.identifier
-        )
-    }
-    
     private func configureCollectionDataSource() {
         
         registerHeaderView()
@@ -157,6 +98,93 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         dataSource = diffableDataSource
     }
     
+    private func registerHeaderView() {
+        register(
+            MovieInfoCollectionHeaderView.self,
+            forSupplementaryViewOfKind: MovieInfoCollectionHeaderView.supplementaryKind,
+            withReuseIdentifier: MovieInfoCollectionHeaderView.identifier
+        )
+    }
+    
+    private func makeDiffableDataSource() -> DiffableDataSource {
+        
+        let registration = makeMovieInfoCellRegistration()
+        
+        let diffableDataSource: DiffableDataSource = .init(collectionView: self) {
+            collectionView, indexPath, itemIdentifier in
+            
+            return collectionView.dequeueConfiguredReusableCell(
+                using: registration,
+                for: indexPath,
+                item: itemIdentifier
+            )
+        }
+        
+        return diffableDataSource
+    }
+    
+    private func makeMovieInfoCellRegistration() -> CellRegistration {
+        
+        return CellRegistration { cell, indexPath, movieWrapper in
+            
+            let viewModel = MovieInfoViewModel(movie: movieWrapper.movie)
+            let infoView = MovieInfoView(viewModel: viewModel, infoStyle: .poster)
+            cell.content = infoView
+        }
+    }
+    
+    private func applySnapshot(to section: Section, appending wrappedMovies: [MovieWrapper]) {
+        var snapshot = NSDiffableDataSourceSectionSnapshot<SectionItem>()
+        snapshot.append(wrappedMovies)
+        self.diffableDataSource?.apply(snapshot, to: section)
+    }
+    
+    private func bindViewModel() {
+        guard let viewModel else { return }
+        
+        viewModel.loadedCategoryMovieList = { list in
+            self.applySnapshot(to: .categoryCollection, appending: list)
+        }
+        
+        viewModel.loadedDailyTrendingMovieList = { list in
+            self.applySnapshot(to: .dailyTrending, appending: list)
+        }
+        
+        viewModel.loadedWeeklyTrendingMovieList = { list in
+            self.applySnapshot(to: .weeklyTrending, appending: list)
+        }
+        
+        viewModel.initialBind()
+    }
+    
+    private func configureCompositionalLayout() {
+        
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
+            
+            let categoryMovieCollectionSection = self.makeCategoryMovieSection()
+            let movieInfoWithHeaderSection = self.makeMovieInfoWithHeaderSection()
+            
+            switch sectionIndex {
+            case Section.categoryCollection.index: return categoryMovieCollectionSection
+            default: return movieInfoWithHeaderSection
+            }
+        }
+        
+        setCollectionViewLayout(layout, animated: true)
+    }
+    
+    private func makeHeaderSupplementaryItem() -> NSCollectionLayoutBoundarySupplementaryItem {
+        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: MovieInfoCollectionHeaderView.supplementaryKind,
+            alignment: .top
+        )
+        
+        return header
+    }
+    
     private func makeCategoryMovieSection() -> NSCollectionLayoutSection {
         
         let ration: CGFloat = 2/3
@@ -179,21 +207,9 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         return section
     }
     
-    private func makeHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: MovieInfoCollectionHeaderView.supplementaryKind,
-            alignment: .top
-        )
-        
-        return header
-    }
-    
     private func makeMovieInfoWithHeaderSection() -> NSCollectionLayoutSection {
         
-        let header = makeHeader()
+        let header = makeHeaderSupplementaryItem()
         
         let ration: CGFloat = 2/3
         let width: CGFloat = 120
@@ -215,22 +231,6 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         section.boundarySupplementaryItems = [header]
         
         return section
-    }
-    
-    private func configureCompositionalLayout() {
-        
-        let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
-            
-            let categoryMovieCollectionSection = self.makeCategoryMovieSection()
-            let movieInfoWithHeaderSection = self.makeMovieInfoWithHeaderSection()
-            
-            switch sectionIndex {
-            case Section.categoryCollection.index: return categoryMovieCollectionSection
-            default: return movieInfoWithHeaderSection
-            }
-        }
-        
-        setCollectionViewLayout(layout, animated: true)
     }
     
     private func resetCategoryMovieCollectionScrollPosition() {

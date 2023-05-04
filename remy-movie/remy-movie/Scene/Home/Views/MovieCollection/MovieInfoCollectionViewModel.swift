@@ -7,6 +7,8 @@
 
 final class MovieInfoCollectionViewModel {
     
+    // MARK: Variable(s)
+    
     var category: ListCategory = .popular {
         didSet {
             loadMovieList(of: category)
@@ -31,6 +33,8 @@ final class MovieInfoCollectionViewModel {
         loadDailyTrendingMovieList()
         loadWeeklyTrendingMovieList()
     }
+    
+    // MARK: Private Function(s)
     
     private func loadMovieList(of category: ListCategory) {
         

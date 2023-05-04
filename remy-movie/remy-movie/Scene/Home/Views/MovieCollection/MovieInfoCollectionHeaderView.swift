@@ -19,6 +19,8 @@ final class MovieInfoCollectionHeaderView: UICollectionReusableView {
         return label
     }()
     
+    // MARK: Override(s)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -29,9 +31,13 @@ final class MovieInfoCollectionHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Function(s)
+    
     func set(title: String) {
         headerTitleLabel.text = title
     }
+    
+    // MARK: Private Function(s)
     
     private func addHeaderTitleLabel() {
         
