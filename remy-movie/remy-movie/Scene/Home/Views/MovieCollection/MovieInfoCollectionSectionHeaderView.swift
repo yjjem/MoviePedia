@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class MovieInfoCollectionHeaderView: UICollectionReusableView {
+final class MovieInfoCollectionSectionHeaderView: UICollectionReusableView {
     
     static let identifier: String = "header"
-    static let supplementaryKind: String = "title-header"
+    static let supplementaryKind: String = "section-header"
     
     private let headerTitleLabel: UILabel = {
         let label = UILabel()

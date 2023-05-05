@@ -38,7 +38,7 @@ final class MovieInfoUseCaseTest: XCTestCase {
         
         sut?.loadMovieList(page: page, of: category) { _ in }
         
-        mockMovieService?.verityLoadMovieList(
+        mockMovieService?.verify(
             callCount: expectedCallCount,
             page: page,
             category: category

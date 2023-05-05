@@ -13,11 +13,18 @@ final class MockMovieService: MovieServiceInterface {
     var loadMovieListCallCount: Int = 0
     var loadMovieListPage: Int?
     var loadMovieListCategory: ListCategory?
+    
+    var loadTrendingListCallCount: Int = 0
+    var loadTrendingListPage: Int?
+    var loadTrendingListCategory: TrendingType?
+    
+    var expectedError: NetworkError?
+    
     let expectedMovie: Movie = .init(
         posterPath: "/e1mjopzAS2KNsvpbpahQ1a6SkSn.jpg",
         adult: false,
         overview: "From DC Comics...",
-        releaseData: "2016-08-03",
+        releaseDate: "2016-08-03",
         genreIds: [14, 28, 80],
         id: 297761,
         originalTitle: "Suicide Squad",
@@ -29,22 +36,6 @@ final class MockMovieService: MovieServiceInterface {
         video: false,
         voteAverage: 5.91
     )
-    
-    var loadVideoListCallCount: Int = 0
-    var loadVideoListMovieId: Int?
-    let expectedVideo: Video = .init(
-        iso6391: "en",
-        iso31661: "US",
-        name: "Fight Club - Theatrical Trailer Remastered in HD",
-        key: "6JnN1DmbqoU",
-        size: 1080,
-        type: "Trailer",
-        official: false,
-        publishedAt: "2015-02-26T03:19:25.000Z",
-        id: "5e382d1b4ca676001453826d"
-    )
-    
-    var expectedError: NetworkError?
     
     func loadMovieList(
         page: Int,
@@ -62,21 +53,23 @@ final class MockMovieService: MovieServiceInterface {
         }
     }
     
-    func loadVideoList(
-        movieId: Int,
-        completion: @escaping (Result<[Video]?, NetworkError>) -> Void
+    func loadTrending(
+        page: Int,
+        category type: TrendingType,
+        completion: @escaping (Result<MovieList?, NetworkError>) -> Void
     ) {
-        loadVideoListCallCount += 1
-        loadVideoListMovieId = movieId
+        loadTrendingListCallCount += 1
+        loadTrendingListPage = page
+        loadTrendingListCategory = category
         
         if let expectedError {
             completion(.failure(expectedError))
         } else {
-            completion(.success([expectedVideo, expectedVideo]))
+            completion(.success([expectedMovie]))
         }
     }
     
-    func verityLoadMovieList(
+    func verify(
         callCount: Int,
         page: Int,
         category: ListCategory,
@@ -86,15 +79,5 @@ final class MockMovieService: MovieServiceInterface {
         XCTAssertEqual(loadMovieListCallCount, 1, "call count", file: file, line: line)
         XCTAssertEqual(loadMovieListPage, page, "page", file: file, line: line)
         XCTAssertEqual(loadMovieListCategory, category, "page", file: file, line: line)
-    }
-    
-    func verifyLoadVideoList(
-        callCount: Int,
-        movieId: Int,
-        file: StaticString = #file,
-        line: UInt = #line
-    ) {
-        XCTAssertEqual(loadVideoListCallCount, 1, "call count", file: file, line: line)
-        XCTAssertEqual(loadVideoListMovieId, movieId, "movie id", file: file, line: line)
     }
 }

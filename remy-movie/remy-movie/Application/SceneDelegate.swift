@@ -22,8 +22,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let sceneList: [UIViewController] = [home]
         
         let rootViewController = UITabBarController()
-        rootViewController.modalPresentationStyle = .fullScreen
-        rootViewController.tabBar.backgroundColor = .white
         rootViewController.setViewControllers(sceneList, animated: true)
         
         window = UIWindow(windowScene: windowScene)

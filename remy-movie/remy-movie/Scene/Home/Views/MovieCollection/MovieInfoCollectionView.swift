@@ -19,35 +19,9 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         case categoryCollection
         case dailyTrending
         case weeklyTrending
-        
-        var index: Int {
-            switch self {
-            case .categoryCollection: return 0
-            case .dailyTrending: return 1
-            case .weeklyTrending: return 2
-            }
-        }
-        
-        var name: String {
-            switch self {
-            case .categoryCollection: return "Category"
-            case .dailyTrending: return "Daily Trending"
-            case .weeklyTrending: return "Weekly Trending"
-            }
-        }
-        
-        static func sectionFor(indexPath: IndexPath) -> Self {
-            switch indexPath.section {
-            case Self.dailyTrending.index: return .dailyTrending
-            case Self.weeklyTrending.index: return .weeklyTrending
-            default: return .categoryCollection
-            }
-        }
     }
     
     // MARK: Variable(s)
-    
-    private var viewModel: MovieInfoCollectionViewModel?
     
     var diffableDataSource: DiffableDataSource?
     
@@ -59,6 +33,8 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
             }
         }
     }
+    
+    private var viewModel: MovieInfoCollectionViewModel?
     
     // MARK: Initializer(s)
     
@@ -75,34 +51,87 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
     
     private func configureCollectionDataSource() {
         
-        registerHeaderView()
+        registerSectionHeaderView()
+        registerMovieInfoCellFooterView()
         
         diffableDataSource = makeDiffableDataSource()
         
-        diffableDataSource?.supplementaryViewProvider = {
+        guard let diffableDataSource else { return }
+        
+        diffableDataSource.supplementaryViewProvider = {
             collectionView, kind, indexPath in
             
-            let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: MovieInfoCollectionHeaderView.identifier,
-                for: indexPath
-            ) as? MovieInfoCollectionHeaderView
-            
-            let section = Section.sectionFor(indexPath: indexPath)
-            let sectionTitle = section.name
-            header?.set(title: sectionTitle)
-            
-            return header
+            return self.dequeueSupplementaryViewFor(
+                collectionView: collectionView,
+                kind: kind,
+                indexPath: indexPath
+            )
         }
         
         dataSource = diffableDataSource
     }
     
-    private func registerHeaderView() {
+    private func dequeueSupplementaryViewFor(
+        collectionView: UICollectionView,
+        kind: String,
+        indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        switch kind {
+            
+        case MovieInfoCollectionSectionHeaderView.supplementaryKind:
+            
+            guard let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: MovieInfoCollectionSectionHeaderView.identifier,
+                for: indexPath
+            ) as? MovieInfoCollectionSectionHeaderView
+            else {
+                fatalError("Failed to deque section header")
+            }
+            
+            let section = Section.sectionFor(indexPath: indexPath)
+            let sectionTitle = section.name
+            header.set(title: sectionTitle)
+            
+            return header
+            
+        case MovieInfoFooterView.supplementaryKind:
+            
+            guard let footer = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: MovieInfoFooterView.identifier,
+                for: indexPath
+            ) as? MovieInfoFooterView
+            else {
+                fatalError("Failed to deque item footer")
+            }
+            
+            if let sectionItem = diffableDataSource?.itemIdentifier(for: indexPath) {
+                let movie = sectionItem.movie
+                footer.set(title: movie.title, rating: movie.voteAverage)
+            }
+            
+            return footer
+            
+        default:
+            fatalError("Unrecognized supplementary view kind ")
+        }
+        
+    }
+    
+    private func registerSectionHeaderView() {
         register(
-            MovieInfoCollectionHeaderView.self,
-            forSupplementaryViewOfKind: MovieInfoCollectionHeaderView.supplementaryKind,
-            withReuseIdentifier: MovieInfoCollectionHeaderView.identifier
+            MovieInfoCollectionSectionHeaderView.self,
+            forSupplementaryViewOfKind: MovieInfoCollectionSectionHeaderView.supplementaryKind,
+            withReuseIdentifier: MovieInfoCollectionSectionHeaderView.identifier
+        )
+    }
+    
+    private func registerMovieInfoCellFooterView() {
+        register(
+            MovieInfoFooterView.self,
+            forSupplementaryViewOfKind: MovieInfoFooterView.supplementaryKind,
+            withReuseIdentifier: MovieInfoFooterView.identifier
         )
     }
     
@@ -157,12 +186,14 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         viewModel.initialBind()
     }
     
+    // MARK: Layout
+    
     private func configureCompositionalLayout() {
         
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             
-            let categoryMovieCollectionSection = self.makeCategoryMovieSection()
-            let movieInfoWithHeaderSection = self.makeMovieInfoWithHeaderSection()
+            let categoryMovieCollectionSection = self.makeSelectableCategorySection()
+            let movieInfoWithHeaderSection = self.makePosterInfoSection()
             
             switch sectionIndex {
             case Section.categoryCollection.index: return categoryMovieCollectionSection
@@ -173,67 +204,144 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         setCollectionViewLayout(layout, animated: true)
     }
     
-    private func makeHeaderSupplementaryItem() -> NSCollectionLayoutBoundarySupplementaryItem {
+    private func makeSectionHeaderItem() -> NSCollectionLayoutBoundarySupplementaryItem {
         
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(50)
+        )
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
-            elementKind: MovieInfoCollectionHeaderView.supplementaryKind,
+            elementKind: MovieInfoCollectionSectionHeaderView.supplementaryKind,
             alignment: .top
         )
         
         return header
     }
     
-    private func makeCategoryMovieSection() -> NSCollectionLayoutSection {
+    private func makeMovieFooterItem() -> NSCollectionLayoutBoundarySupplementaryItem {
         
-        let ration: CGFloat = 2/3
-        let width: CGFloat = 200
-        let height: CGFloat = width / ration
+        let footerWidth: CGFloat = 120
+        let footerHeight: CGFloat = 50
         
-        let item = makeItem(width: .absolute(width), height: .absolute(height))
-        item.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
+        let footerSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(footerWidth),
+            heightDimension: .estimated(footerHeight)
+        )
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: footerSize,
+            elementKind: MovieInfoFooterView.supplementaryKind,
+            alignment: .bottom
+        )
         
-        let group = makeHorizontalGroup(
-            width: .absolute(width),
-            height: .absolute(height),
-            repeatingItem: item,
+        return footer
+    }
+    
+    private func makeSelectableCategorySection() -> NSCollectionLayoutSection {
+        
+        let posterRatio: CGFloat = 2/3
+        let posterWidth: CGFloat = 200
+        let posterHeight: CGFloat = posterWidth / posterRatio
+        
+        let posterItem: NSCollectionLayoutItem = makeItem(
+            width: .absolute(posterWidth),
+            height: .absolute(posterHeight)
+        )
+        
+        let group: NSCollectionLayoutGroup = makeHorizontalGroup(
+            width: .absolute(posterWidth),
+            height: .absolute(posterHeight),
+            repeatingItem: posterItem,
             count: 1
         )
         
+        let sectionInset = NSDirectionalEdgeInsets(
+            top: 40,
+            leading: .zero,
+            bottom: 40,
+            trailing: .zero
+        )
+        
         let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = sectionInset
         section.orthogonalScrollingBehavior = .groupPagingCentered
+        section.interGroupSpacing = 20
         
         return section
     }
     
-    private func makeMovieInfoWithHeaderSection() -> NSCollectionLayoutSection {
+    private func makePosterInfoSection() -> NSCollectionLayoutSection {
         
-        let header = makeHeaderSupplementaryItem()
+        let posterRatio: CGFloat = 2/3
+        let posterWidth: CGFloat = 120
+        let posterHeight: CGFloat = posterWidth / posterRatio
         
-        let ration: CGFloat = 2/3
-        let width: CGFloat = 120
-        let height: CGFloat = width / ration
+        let sectionHeader = makeSectionHeaderItem()
+        let posterFooter = makeMovieFooterItem()
         
-        let item = makeItem(width: .absolute(width), height: .absolute(height))
-        item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
+        let posterFooterHeight: CGFloat = posterFooter.layoutSize.heightDimension.dimension
+        let groupInnerSpacing: CGFloat = 8
+        let groupHeight: CGFloat = posterHeight + groupInnerSpacing + posterFooterHeight
         
-        let group = makeHorizontalGroup(
-            width: .absolute(width),
-            height: .absolute(height),
+        let item: NSCollectionLayoutItem = makeItem(
+            width: .absolute(posterWidth),
+            height: .absolute(posterHeight)
+        )
+        
+        let group: NSCollectionLayoutGroup = makeHorizontalGroup(
+            width: .absolute(posterWidth),
+            height: .absolute(groupHeight),
             repeatingItem: item,
             count: 1
         )
+        group.supplementaryItems = [posterFooter]
+        
+        let sectionInset = NSDirectionalEdgeInsets(
+            top: .zero,
+            leading: 20,
+            bottom: .zero,
+            trailing: 20
+        )
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
+        section.contentInsets = sectionInset
         section.orthogonalScrollingBehavior = .continuous
-        section.boundarySupplementaryItems = [header]
+        section.boundarySupplementaryItems = [sectionHeader]
+        section.interGroupSpacing = 20
         
         return section
     }
     
     private func resetCategoryMovieCollectionScrollPosition() {
-        scrollToItem(at: .init(item: 0, section: 0), at: .left, animated: true)
+        let startPosition = IndexPath(item: 0, section: 0)
+        scrollToItem(at: startPosition, at: .left, animated: true)
+    }
+}
+
+// MARK: Extension(s)
+
+extension MovieInfoCollectionView.Section {
+    var index: Int {
+        switch self {
+        case .categoryCollection: return 0
+        case .dailyTrending: return 1
+        case .weeklyTrending: return 2
+        }
+    }
+    
+    var name: String {
+        switch self {
+        case .categoryCollection: return "Category"
+        case .dailyTrending: return "Daily Trending"
+        case .weeklyTrending: return "Weekly Trending"
+        }
+    }
+    
+    static func sectionFor(indexPath: IndexPath) -> Self {
+        switch indexPath.section {
+        case Self.dailyTrending.index: return .dailyTrending
+        case Self.weeklyTrending.index: return .weeklyTrending
+        default: return .categoryCollection
+        }
     }
 }
