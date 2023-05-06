@@ -232,7 +232,7 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(30)
+            heightDimension: .absolute(50)
         )
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -394,5 +394,14 @@ extension MovieInfoCollectionView: CategorySelectorDelegate {
     
     func didSelectCategory(_ category: ListCategory) {
         viewModel?.category = category
+        
+        let initialOffset = CGPoint(x: 0, y: 0)
+        let firstSectionFirstItem = IndexPath(row: 0, section: 0)
+        
+        if contentOffset != initialOffset {
+            setContentOffset(.init(x: 0, y: 0), animated: true)
+        }
+        
+        scrollToItem(at: firstSectionFirstItem, at: .top, animated: true)
     }
 }

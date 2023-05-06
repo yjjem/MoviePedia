@@ -21,6 +21,7 @@ final class MovieInfoCategorySectionHeaderView: UICollectionReusableView {
         let categorySelector = UISegmentedControl(items: ListCategory.allNames)
         categorySelector.translatesAutoresizingMaskIntoConstraints = false
         categorySelector.selectedSegmentIndex = ListCategory.popular.index
+        categorySelector.backgroundColor = .systemBackground
         return categorySelector
     }()
     
@@ -43,13 +44,15 @@ final class MovieInfoCategorySectionHeaderView: UICollectionReusableView {
     
     private func addCategorySelector() {
         
+        let inset: CGFloat = 10
+        
         addSubview(categorySelector)
         
         NSLayoutConstraint.activate([
-            categorySelector.topAnchor.constraint(equalTo: topAnchor),
-            categorySelector.bottomAnchor.constraint(equalTo: bottomAnchor),
-            categorySelector.leadingAnchor.constraint(equalTo: leadingAnchor),
-            categorySelector.trailingAnchor.constraint(equalTo: trailingAnchor)
+            categorySelector.topAnchor.constraint(equalTo: topAnchor, constant: inset),
+            categorySelector.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset),
+            categorySelector.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
+            categorySelector.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset)
         ])
     }
     
