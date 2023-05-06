@@ -9,11 +9,6 @@ import UIKit
 
 final class MovieInfoView: RoundableView {
     
-    enum InfoStyle {
-        case backdrop
-        case poster
-    }
-    
     // MARK: View(s)
     
     private let movieTitleLabel: UILabel = {
@@ -35,17 +30,14 @@ final class MovieInfoView: RoundableView {
     }()
     
     private var viewModel: MovieInfoViewModel?
-    private var infoStyle: InfoStyle = .backdrop
     
     // MARK: Initializer(s)
     
-    convenience init(viewModel: MovieInfoViewModel, infoStyle: InfoStyle) {
+    convenience init(viewModel: MovieInfoViewModel) {
         self.init(frame: .zero)
-        self.infoStyle = infoStyle
         self.viewModel = viewModel
         
-        makeLayoutGuide()
-        configureViews()
+        addBackgroundImageView()
         applyCornerStyle()
         bindViewModel()
     }
@@ -56,46 +48,9 @@ final class MovieInfoView: RoundableView {
         guard let viewModel else { return }
         movieTitleLabel.text = viewModel.title
         
-        switch infoStyle {
-        case .backdrop:
-            backgroundImageView.setImage(from: viewModel.backdropPath!)
-        case .poster:
-            backgroundImageView.setImage(from: viewModel.posterPath!)
+        if let posterPath = viewModel.posterPath {
+            backgroundImageView.setImage(from: posterPath)
         }
-    }
-    
-    private func makeLayoutGuide() {
-        
-        let guideInset: CGFloat = 20
-        
-        addLayoutGuide(layoutGuide)
-        
-        NSLayoutConstraint.activate([
-            layoutGuide.topAnchor.constraint(equalTo: topAnchor, constant: guideInset),
-            layoutGuide.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -guideInset),
-            layoutGuide.leadingAnchor.constraint(equalTo: leadingAnchor, constant: guideInset),
-            layoutGuide.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -guideInset)
-        ])
-    }
-    
-    private func configureViews() {
-        
-        if infoStyle == .backdrop {
-            configureAsBackdropInfo()
-        }
-        
-        if infoStyle == .poster {
-            configureAsPosterInfo()
-        }
-    }
-    
-    private func configureAsBackdropInfo() {
-        addBackgroundImageView()
-        addMovieTitleLabelView()
-    }
-    
-    private func configureAsPosterInfo() {
-        addBackgroundImageView()
     }
     
     private func addBackgroundImageView() {
@@ -107,17 +62,6 @@ final class MovieInfoView: RoundableView {
             backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-        ])
-    }
-    
-    private func addMovieTitleLabelView() {
-        
-        addSubview(movieTitleLabel)
-        
-        NSLayoutConstraint.activate([
-            movieTitleLabel.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor),
-            movieTitleLabel.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor),
-            movieTitleLabel.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor)
         ])
     }
 }

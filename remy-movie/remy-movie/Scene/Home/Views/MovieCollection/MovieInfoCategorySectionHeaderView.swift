@@ -21,7 +21,6 @@ final class MovieInfoCategorySectionHeaderView: UICollectionReusableView {
         let categorySelector = UISegmentedControl(items: ListCategory.allNames)
         categorySelector.translatesAutoresizingMaskIntoConstraints = false
         categorySelector.selectedSegmentIndex = ListCategory.popular.index
-        categorySelector.backgroundColor = .systemBackground
         return categorySelector
     }()
     

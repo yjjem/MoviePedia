@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol MovieInfoCollectionCategorySectionPagingDelegate {
+    
+    func didPageTo(page: Int, with item: Movie)
+}
+
 final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
     
     // MARK: Type(s)
@@ -34,7 +39,7 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         }
     }
     
-    private var sectionPaginationDelegate: SectionPaginationDelegate?
+    private var sectionPaginationDelegate: MovieInfoCollectionCategorySectionPagingDelegate?
     private var viewModel: MovieInfoCollectionViewModel?
     
     // MARK: Initializer(s)
@@ -219,7 +224,7 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         return CellRegistration { cell, indexPath, movieWrapper in
             
             let viewModel = MovieInfoViewModel(movie: movieWrapper.movie)
-            let infoView = MovieInfoView(viewModel: viewModel, infoStyle: .poster)
+            let infoView = MovieInfoView(viewModel: viewModel)
             cell.content = infoView
         }
     }
@@ -305,6 +310,7 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .absolute(50)
         )
+        
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: MovieInfoCollectionSectionHeaderView.supplementaryKind,
@@ -370,7 +376,7 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
             
             let leadingOffset: CGFloat = 95
             let pageWidth = posterWidth + groupSpacing
-            let page = Int((offset.x + leadingOffset) / pageWidth)
+            let page = Int(((offset.x + leadingOffset) / pageWidth).rounded(.toNearestOrAwayFromZero))
             
             let currentItemIndexPath = IndexPath(row: page, section: 0)
             if let item = self.diffableDataSource?.itemIdentifier(for: currentItemIndexPath)?.movie {
@@ -471,9 +477,4 @@ extension MovieInfoCollectionView: CategorySelectorDelegate {
         
         scrollToItem(at: firstSectionFirstItem, at: .top, animated: true)
     }
-}
-
-protocol SectionPaginationDelegate {
-    
-    func didPageTo(page: Int, with item: Movie)
 }

@@ -23,7 +23,8 @@ final class MovieInfoCategorySectionFooterView: UICollectionReusableView {
     private let pageControl: UIPageControl = {
         let control = UIPageControl()
         control.translatesAutoresizingMaskIntoConstraints = false
-        control.isUserInteractionEnabled = true
+        control.pageIndicatorTintColor = .systemFill
+        control.currentPageIndicatorTintColor = .systemBlue
         return control
     }()
     
@@ -32,7 +33,7 @@ final class MovieInfoCategorySectionFooterView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addMovieTitleLabel()
+        configureViews()
     }
     
     required init?(coder: NSCoder) {
@@ -51,7 +52,7 @@ final class MovieInfoCategorySectionFooterView: UICollectionReusableView {
     
     // MARK: Private Function(s)
     
-    private func addMovieTitleLabel() {
+    private func configureViews() {
         
         let inset: CGFloat = 10
 
@@ -74,7 +75,7 @@ final class MovieInfoCategorySectionFooterView: UICollectionReusableView {
     }
 }
 
-extension MovieInfoCategorySectionFooterView: SectionPaginationDelegate {
+extension MovieInfoCategorySectionFooterView: MovieInfoCollectionCategorySectionPagingDelegate {
     
     func didPageTo(page: Int, with item: Movie) {
         pageControl.currentPage = page
