@@ -11,12 +11,6 @@ final class HomeViewController: UIViewController {
     
     // MARK: View(s)
     
-    private let categorySelector: UISegmentedControl = {
-        let categorySelector = UISegmentedControl(items: ListCategory.allNames)
-        categorySelector.translatesAutoresizingMaskIntoConstraints = false
-        return categorySelector
-    }()
-    
     private let movieCategoryCollectionView: MovieInfoCollectionView = {
         let manager = NetworkManager(session: .init(configuration: .default))
         let service = MovieService(manger: manager)
@@ -33,33 +27,15 @@ final class HomeViewController: UIViewController {
         super.loadView()
         
         configureTabBarItem()
-        addCategorySelector()
         addMovieCategoryCollectionView()
-        addCategorySelector()
     }
     
     // MARK: Private Function(s)
     
     private func configureTabBarItem() {
-        
-        title = "Home"
         tabBarItem.image = UIImage(systemName: "house")
     }
     
-    private func addCategorySelector() {
-        
-        categorySelector.addTarget(self, action: #selector(updateMovieCategory), for: .valueChanged)
-        categorySelector.selectedSegmentIndex = ListCategory.popular.index
-        
-        view.addSubview(categorySelector)
-        
-        NSLayoutConstraint.activate([
-            categorySelector.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            categorySelector.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            categorySelector.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            categorySelector.heightAnchor.constraint(equalToConstant: 25)
-        ])
-    }
     
     private func addMovieCategoryCollectionView() {
         
@@ -68,7 +44,10 @@ final class HomeViewController: UIViewController {
         view.addSubview(movieCategoryCollectionView)
         
         NSLayoutConstraint.activate([
-            movieCategoryCollectionView.topAnchor.constraint(equalTo: categorySelector.bottomAnchor, constant: 10),
+            movieCategoryCollectionView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 10
+            ),
             movieCategoryCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             movieCategoryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             movieCategoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
