@@ -34,6 +34,7 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         }
     }
     
+    private var sectionPaginationDelegate: SectionPaginationDelegate?
     private var viewModel: MovieInfoCollectionViewModel?
     
     // MARK: Initializer(s)
@@ -45,6 +46,8 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         configureCollectionDataSource()
         configureCompositionalLayout()
         bindViewModel()
+        
+        backgroundColor = .clear
     }
     
     // MARK: Private Function(s)
@@ -54,6 +57,7 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         registerSectionHeaderView()
         registerMovieInfoCellFooterView()
         registerMovieCategorySelectorHeaderView()
+        registerMovieInfoCategorySectionFooterView()
         
         diffableDataSource = makeDiffableDataSource()
         
@@ -93,6 +97,32 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
             selectorHeader.delegate = self
             
             return selectorHeader
+            
+        case MovieInfoCategorySectionFooterView.supplementaryKind:
+            
+            guard let categoryFooter = collectionView.dequeueReusableSupplementaryView(
+                ofKind: MovieInfoCategorySectionFooterView.supplementaryKind,
+                withReuseIdentifier: MovieInfoCategorySectionFooterView.identifier,
+                for: indexPath
+            ) as? MovieInfoCategorySectionFooterView
+            else {
+                fatalError("Failed to dequeue category footer")
+            }
+            
+            sectionPaginationDelegate = categoryFooter
+            
+            if let diffableDataSource,
+               let sectionItem = diffableDataSource.itemIdentifier(for: indexPath) {
+                
+                let sectionSnapshot = diffableDataSource.snapshot(for: .categoryCollection)
+                let sectionItemsCount = sectionSnapshot.items.count
+                let movie = sectionItem.movie
+                
+                categoryFooter.set(pageControlPageCount: sectionItemsCount)
+                categoryFooter.set(title: movie.title)
+            }
+            
+            return categoryFooter
             
         case MovieInfoCollectionSectionHeaderView.supplementaryKind:
             
@@ -156,6 +186,14 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
             MovieInfoCategorySectionHeaderView.self,
             forSupplementaryViewOfKind: MovieInfoCategorySectionHeaderView.supplementaryKind,
             withReuseIdentifier: MovieInfoCategorySectionHeaderView.identifier
+        )
+    }
+    
+    private func registerMovieInfoCategorySectionFooterView() {
+        register(
+            MovieInfoCategorySectionFooterView.self,
+            forSupplementaryViewOfKind: MovieInfoCategorySectionFooterView.supplementaryKind,
+            withReuseIdentifier: MovieInfoCategorySectionFooterView.identifier
         )
     }
     
@@ -245,6 +283,22 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         return header
     }
     
+    private func makeCategorySectionFooterItem() -> NSCollectionLayoutBoundarySupplementaryItem {
+        
+        let footerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(120)
+        )
+        
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: footerSize,
+            elementKind: MovieInfoCategorySectionFooterView.supplementaryKind,
+            alignment: .bottom
+        )
+        
+        return footer
+    }
+    
     private func makeCollectionSectionHeaderItem() -> NSCollectionLayoutBoundarySupplementaryItem {
         
         let headerSize = NSCollectionLayoutSize(
@@ -283,8 +337,10 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         let posterRatio: CGFloat = 2/3
         let posterWidth: CGFloat = 200
         let posterHeight: CGFloat = posterWidth / posterRatio
+        let groupSpacing: CGFloat = 20
         
         let categorySelectableHeader = makeCategorySectionHeaderItem()
+        let categoryFooter = makeCategorySectionFooterItem()
         
         let posterItem: NSCollectionLayoutItem = makeItem(
             width: .absolute(posterWidth),
@@ -308,8 +364,19 @@ final class MovieInfoCollectionView: UICollectionView, ModernCollectionView {
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = sectionInset
         section.orthogonalScrollingBehavior = .groupPagingCentered
-        section.interGroupSpacing = 20
-        section.boundarySupplementaryItems = [categorySelectableHeader]
+        section.interGroupSpacing = groupSpacing
+        section.boundarySupplementaryItems = [categorySelectableHeader, categoryFooter]
+        section.visibleItemsInvalidationHandler = { items, offset, environment in
+            
+            let leadingOffset: CGFloat = 95
+            let pageWidth = posterWidth + groupSpacing
+            let page = Int((offset.x + leadingOffset) / pageWidth)
+            
+            let currentItemIndexPath = IndexPath(row: page, section: 0)
+            if let item = self.diffableDataSource?.itemIdentifier(for: currentItemIndexPath)?.movie {
+                self.sectionPaginationDelegate?.didPageTo(page: page, with: item)
+            }
+        }
         
         return section
     }
@@ -404,4 +471,9 @@ extension MovieInfoCollectionView: CategorySelectorDelegate {
         
         scrollToItem(at: firstSectionFirstItem, at: .top, animated: true)
     }
+}
+
+protocol SectionPaginationDelegate {
+    
+    func didPageTo(page: Int, with item: Movie)
 }

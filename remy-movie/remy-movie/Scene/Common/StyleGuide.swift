@@ -8,7 +8,7 @@
 import UIKit
 
 private extension CGFloat {
-    static let mainTitleTextSize: CGFloat = 36.0
+    static let mainTitleTextSize: CGFloat = 32.0
     static let subTitleTextSize: CGFloat = 28.0
     static let headerTitleTextSize: CGFloat = 24.0
     static let posterInfoTitleTextSize: CGFloat = 14.0
