@@ -1,81 +1,30 @@
-# MoviePedia 기획
 
-- **브랜치 전략 :** git-flow
-- **코드 컨벤션 -** [Style Share Guide](https://github.com/StyleShare/swift-style-guide)
-- **구조 :** MVVM + CleanArchitecture
-- **UI 구현 -** 코드 베이스
+<img src="https://user-images.githubusercontent.com/88357373/236659649-c7d0a639-b792-4d78-99c0-9fdce3fbdbf2.png" width="120"/>
 
+# TMDB Wiki
+<img src="https://img.shields.io/badge/swift-5.0-orange"/> <img src="https://img.shields.io/badge/No_ThirdParty-green"/> <img src="https://img.shields.io/badge/Clean%20Architecture-blue"/> <img src="https://img.shields.io/badge/MVVM-blueviolet"/>
 
-## Features
->총 5개의 Main Feature를 구현해보려고 합니다. 각 Main Feature는 몇가지 sub feature들을 가집니다
-main, sub feature는 각 1 개의 PR을 의미합니다.
+Movie Wiki application made using [***TMDB API v3***](https://www.themoviedb.org/).
 
+TMDB API를 활용해 구현한 영화 정보 앱입니다.
 
+</br>
+</br>
 
-| Feature | 구현 내용 |
-| -------- | -------- |
-| [F1] Network     |  [F1.1] Network Model 구현 </br> [F1.2] Network Model 테스트     |
-|[F2] Home| [F2.1] Movie Service 구현 </br> [F2.2] Home Scene 구현|
-|[F3] Search| [F3.1] Search Service 구현 </br> [F3.2] Search Scene 구현|
-|[F4] User| [F4.1] Auth(User) Service 구현 + 테스트 </br> [F4.2] 로그인 Scene 구현</br>  [F4.3] Personal Info Scene 구현 </br> [F4.4] 좋아요, 저장, 즐겨찾기, 리스트 기능 구현|
-|[F5] Review| [F5.1] Review Service 구현 </br> [F5.2] Movie Review List Scene 구현|
+## UI Elements
+### 🔳 Dark mode support
+|Light|Dark|
+|-|-|
+|<img src="https://user-images.githubusercontent.com/88357373/236660380-e344556e-7fce-4f6f-ba32-a5323d98f69b.png" width="120"/>|<img src="https://user-images.githubusercontent.com/88357373/236660392-f21c307b-a643-4c70-a3e7-e13a2b32f114.png" width="120"/>|
 
+### ⚙️ Functions
+|Image Loading Shimmer Effect|Page Control|Section Scroll|
+|:-:|:-:|:-:|
+|<img src="https://user-images.githubusercontent.com/88357373/236661164-cffd8c54-5323-48c1-9c6e-c9f37fc1910c.gif" width="200"/>|<img src="https://media.giphy.com/media/XhbQq2uMRVlj64VUSq/giphy.gif" width="200"/>|<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWNmOGQyYzYxNGU1YjZlZGMyNDU0NWQzZTA5ZWRhNDdmNWJjNmRmYiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/zsBkwlIXbgWnTloCtn/giphy.gif" width="200"/>|
 
-## Feature - 자세한 구현 사항
-
-#### [F1] Network
-- [F1.1] Network Model 구현
-
-    > Servie 구현을 위한 네트워크 모델
-- [F1.2] Network Model 테스트
-
-#### [F2] Home
-- [F2.1] Movie Service 구현 ( + Entity 생성 )
-
-    > tmdb에서 제공하는 인기, 추천, 랭킹, 현재 상영중, 곧 개봉, 최신 카테고리들을 제공하는 서비스 구현
-- [F2.2] Home Scene 구현
-    - UI 구현 ( UICollectionview, DiffableDataSource, Compositional layout)
-        - Single Movie Cell
-        - List Cell
-        - Video Cell
-        - 등 ...
-    > 카테고리별 컨텐츠 구현
-- [F2.3] Movie Detail Scene 구현
-    - Movie Image Info View
-    - Movie Rating View ( + Animation )
-    - Video List (Collectionview, Cell)
-    - Review List (Collectionview, Cell)
-    - Keyword List (CollectionView, Cell)
-    - People List (Collectionview, Cell)
-    - Similar Movie List 
-    > 영화 정보, 예고편, 키워드, 출연, 비슷한 영화등을 담는 뷰 구현
-    
-- [F2.4] 컨텐츠 Cell Detail Scene
-    > 특정 카테고리 안내 cell 터치시 보여줄 리스트 형태의 뷰 구현
-
-#### [F3] Search
-- [F3.1] Search Service 구현
-- [F3.2] Search Scene 구현
-    - Search View 구현
-    - filter category View 구현
-    > 서치 기능 구현 및 필터 기능 
-
-#### [F4] Auth
-- [F4.1] Auth Service 구현 + 테스트
-- [F4.2] 로그인 Scene 구현
-- [F4.3] Personal Info Scene 구현
-- [F4.4] 좋아요, 저장, 즐겨찾기, 리스트 기능 구현
-
-#### [F5] Review
-- [F5.1] Review Service 구현
-- [F5.2] Movie Review List Scene 구현
-
-
-## 대략적인 컨셉 스크린샷
-
-> 앱 스토어 UI를 참고했습니다.
-
-| Home | Home Cell Detail | Movie Detail |
-| -------- | -------- | -------- |
-| <img src="https://i.imgur.com/SwUk7LY.png" width="300px"/>     |  <img src="https://i.imgur.com/m9fQXKO.jpg" width="300px"/>  |   <img src="https://i.imgur.com/ooWsjiv.png" width="300px"/>  |
-
+</br></br></br>
+---
+### Powered By 
+<a href="https://www.themoviedb.org/">
+<img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg" width="300"/>
+</a>
