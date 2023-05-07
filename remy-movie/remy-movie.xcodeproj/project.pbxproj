@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF056ADF2A076D0400705606 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = DF056ADE2A076D0400705606 /* Secrets.xcconfig */; };
 		DF06677729E3EC2700DFF788 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06677629E3EC2700DFF788 /* EndPoint.swift */; };
 		DF06677B29E3FD9B00DFF788 /* ProvidersInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06677A29E3FD9B00DFF788 /* ProvidersInfo.swift */; };
 		DF06677D29E4036200DFF788 /* MovieServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06677C29E4036200DFF788 /* MovieServiceTest.swift */; };
@@ -67,12 +68,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DF056ADE2A076D0400705606 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		DF06677629E3EC2700DFF788 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		DF06677A29E3FD9B00DFF788 /* ProvidersInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersInfo.swift; sourceTree = "<group>"; };
 		DF06677C29E4036200DFF788 /* MovieServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieServiceTest.swift; sourceTree = "<group>"; };
 		DF06678229E4315D00DFF788 /* StubJsons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubJsons.swift; sourceTree = "<group>"; };
 		DF06678729E563CA00DFF788 /* ProvidersByCountryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersByCountryResponse.swift; sourceTree = "<group>"; };
-		DF06678A29E5A1AD00DFF788 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		DF06678B29E5A34E00DFF788 /* Bundle + apiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle + apiKey.swift"; sourceTree = "<group>"; };
 		DF06678E29E695B100DFF788 /* TmdbAPIDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmdbAPIDetails.swift; sourceTree = "<group>"; };
 		DF5BA80829DA989C00C96823 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -316,10 +317,10 @@
 		DF82077429D1637E00E6854A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DF056ADE2A076D0400705606 /* Secrets.xcconfig */,
 				DF82076829D1635300E6854A /* Assets.xcassets */,
 				DF82076A29D1635300E6854A /* LaunchScreen.storyboard */,
 				DF82076D29D1635300E6854A /* Info.plist */,
-				DF06678A29E5A1AD00DFF788 /* Secrets.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -469,6 +470,7 @@
 			files = (
 				DF82076C29D1635300E6854A /* LaunchScreen.storyboard in Resources */,
 				DF82076929D1635300E6854A /* Assets.xcassets in Resources */,
+				DF056ADF2A076D0400705606 /* Secrets.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +560,7 @@
 /* Begin XCBuildConfiguration section */
 		DF62498E29DC7800002C82A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF056ADE2A076D0400705606 /* Secrets.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -580,6 +583,7 @@
 		};
 		DF62498F29DC7800002C82A8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF056ADE2A076D0400705606 /* Secrets.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -716,7 +720,7 @@
 		};
 		DF82077129D1635300E6854A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DF06678A29E5A1AD00DFF788 /* Secrets.xcconfig */;
+			baseConfigurationReference = DF056ADE2A076D0400705606 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -747,7 +751,7 @@
 		};
 		DF82077229D1635300E6854A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DF06678A29E5A1AD00DFF788 /* Secrets.xcconfig */;
+			baseConfigurationReference = DF056ADE2A076D0400705606 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
