@@ -23,7 +23,7 @@ final class MovieInfoCategorySectionFooterView: UICollectionReusableView {
     private let pageControl: UIPageControl = {
         let control = UIPageControl()
         control.translatesAutoresizingMaskIntoConstraints = false
-        control.pageIndicatorTintColor = .systemFill
+        control.pageIndicatorTintColor = .systemGray
         control.currentPageIndicatorTintColor = .systemBlue
         return control
     }()
