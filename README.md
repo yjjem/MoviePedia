@@ -3,6 +3,7 @@
 
 # TMDB Wiki
 <img src="https://img.shields.io/badge/swift-5.0-orange"/> <img src="https://img.shields.io/badge/No_ThirdParty-green"/> <img src="https://img.shields.io/badge/Clean%20Architecture-blue"/> <img src="https://img.shields.io/badge/MVVM-blueviolet"/>
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fyjjem%2FTMDB-Wiki&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
 Movie Wiki application made using [***TMDB API v3***](https://www.themoviedb.org/).
 
